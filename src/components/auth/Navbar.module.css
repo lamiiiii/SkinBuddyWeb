@@ -102,11 +102,12 @@
     color: #706969;
     font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgba(255, 255, 255, 0.95); /* 투명도 조절 가능 */
+    background-color: rgb(255, 255, 255, 0.9);
+    /* background-color: rgb(248, 250, 251, 0.9); */
     display: flex;
     align-items: center;
     padding: 1%;
-    border-top: 1px solid #EBF1FD;
+    /* border-top: 1px solid #EBF1FD; */
 }
 
 .overlay {

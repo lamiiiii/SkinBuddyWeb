@@ -70,7 +70,7 @@ function UserManagePage() {
     }
     return (
         <div className={styles.userManageWrapper}>
-            <Navbar selectedPage={"사용자 관리"}></Navbar>
+            <Navbar selectedPage={"사용자 정보 관리"}></Navbar>
             <div className={styles.userManageContainer}>
                 <p className={styles.mainText}>사용자 정보 조회</p>
                 <div className={styles.searchDiv}>
