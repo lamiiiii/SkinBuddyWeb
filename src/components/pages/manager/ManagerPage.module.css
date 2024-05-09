@@ -23,7 +23,8 @@
 .mainText {
     /* 제목 텍스트 (관리자 조회) */
     font-size: 35px;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     margin-bottom: 0%;
     margin-top: 5%;
 }
@@ -47,13 +48,17 @@
 
 .searchButton {
     /* 검색 버튼 */
-    border: 0.5px solid black;
-    border-radius: 10%;
+    border: 0px;
     margin: 1%;
-    color: white;
-    background-color: #9D9797;
-    font-family: 'NanumSquareRoundEB';
+    color: black;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
     cursor: pointer;
+
+    &:hover {
+        font-weight: bold;
+    }
 }
 
 .managerTable {
@@ -70,7 +75,7 @@
     /* 관리자 목록 테이블 "목록" */
     text-align: center;
     font-size: 20px;
-    font-family: 'NanumSquareRoundB';
+    font-family: Arial, Helvetica, sans-serif;
     border-right: 0.5px solid black;
     border-bottom: 0.5px solid black;
     padding: 1%;
@@ -80,7 +85,7 @@
     /* 관리자 목록 테이블 Th */
     text-align: center;
     font-size: 20px;
-    font-family: 'NanumSquareRoundB';
+    font-family: Arial, Helvetica, sans-serif;
     border-bottom: 0.5px solid black;
     padding: 1%;
 }
@@ -97,7 +102,7 @@
 .tableTdNum {
     /* 관리자 목록 테이블 "목록 - 번호" */
     text-align: center;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
     border-bottom: 0.5px solid grey;
     border-right: 0.5px solid black;
     margin: 0px;
@@ -107,7 +112,7 @@
 .tableTd {
     /* 관리자 목록 테이블 Td */
     text-align: center;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
     border-bottom: 0.5px solid grey;
     margin: 0px;
     padding: 0.5%;
@@ -124,12 +129,15 @@
     /* 관리자 추가 버튼 */
     margin-top: 3%;
     font-size: 15px;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     background-color: white;
-    color: black;
+    color: #9ABBF3;
     border-radius: 3px;
-    border: 0.5px solid black;
+    border: 0.5px solid #9ABBF3;
     cursor: pointer;
+    padding: 0.7%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
 
     &:hover {
         background-color: #9D9797;

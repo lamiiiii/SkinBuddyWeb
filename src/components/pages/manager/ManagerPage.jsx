@@ -72,7 +72,7 @@ function ManagerPage() {
             <div className={styles.managerContainer}>
                 <p className={styles.mainText}>관리자 조회</p>
                 <div className={styles.searchDiv}>
-                    <input className={styles.searchInput} type="text" name="searchName" value={form.searchName} onChange={onChange} placeholder="이름 검색"></input>
+                    <input className={styles.searchInput} type="search" name="searchName" value={form.searchName} onChange={onChange} placeholder="이름 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
                 </div>
                 <table className={styles.managerTable}>

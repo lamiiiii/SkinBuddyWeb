@@ -13,22 +13,33 @@
     align-items: center;
     padding-top: 1%;
 }
-.mainText{ /* 제목 텍스트 (로그인) */
-    font-size: 40px;
-    font-family: 'NanumSquareRoundB';
+.mainText{ /* 제목 텍스트 (비밀번호 변경) */
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     margin-bottom: 2%;
-    margin-top: 6%;
+    margin-top: 5%;
+}
+.noticeText{ /* 알림 메세지 */
+    width: 350px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: red;
+    margin: 0;
+    margin-top: 3%;
+    padding: 0;
 }
 .contentBox{ /* 내용 박스 (input들과 button들) */
-    width: 50%;
-    height: 50%;
-    background-color: #EBF1FD;
-    /* border: 1.5px solid #EBF1FD;
-    border-radius: 3%; */
+    width: 600px;
+    height: 450px;
+    border: 1px solid #9ABBF3;
+    border-radius: 7px;
     flex-direction: column; /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 }
 .startContent{
     width: 100%;
@@ -38,36 +49,55 @@
     justify-self: start;
     margin-top: 4%;
     margin-bottom: 0;
-    font-size: 20px;
-    font-family: 'NanumSquareRoundB';
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
 }
 .inputBox{ /* 입력창 박스 */
     background-color: white;
     border: 0.1px solid #9D9797;
     border-radius: 7px;
-    width: 57%;
-    height: 10%;
+    width: 330px;
+    height: 45px;
     padding-left: 3%;
     margin-top: 1%;
     /* margin-bottom: 2%; */
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
 }
 .changePwdButton{
-    width: 60%;
-    height: 12%;
+    width: 360px;
+    height: 50px;
     background-color: #9ABBF3;
     border: 0px;
     border-radius: 7px;
-    font-family: 'NanumSquareRoundB';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
     font-size: 23px;
     color: black;
     margin-top: 5%;
     margin-bottom: 3%;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 
     &:hover {
         background-color: #9D9797;
         color: white;
     }
+}
+.changePwdButtonH{
+    width: 360px;
+    height: 50px;
+    background-color: #9D9797;
+    border: 0px;
+    border-radius: 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 23px;
+    color: white;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+
 }
