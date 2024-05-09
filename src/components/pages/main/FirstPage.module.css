@@ -20,19 +20,17 @@
     width: 440px;
     height: 60px;
     color: white;
-    font-size: 30px;
+    font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    background-color: #9ABBF3;
-    border-radius: 10px;
-    border: 1px solid lightgrey;
-    border-top: 0;
-    border-left: 0;
+    font-weight: bold;
+    background-color: #9D9797;
+    border: 0px;
+
     cursor: pointer;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 
     &:hover {
-        background-color: #9D9797;
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+        background-color: #9ABBF3;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
     }
 }
