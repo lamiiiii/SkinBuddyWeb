@@ -1,0 +1,138 @@
+/* IdFindPage의 css파일 */
+
+.idFindWrapper {
+    /* 화면 전체 감싸기 */
+    width: calc(100%);
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    height: 100vh;
+    /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+}
+
+.idFindContainer {
+    /* 상단바 부분 빼고 화면 컨테이너 */
+    width: calc(100%);
+    height: 100vh;
+    /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+    flex-direction: column;
+    /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+}
+
+.mainText {
+    /* 제목 텍스트 (아이디 찾기) */
+    font-size: 40px;
+    font-family: 'NanumSquareRoundB';
+    margin-bottom: 2%;
+    margin-top: 10%;
+}
+
+.contentBox {
+    /* 내용 박스 (input & button) */
+    width: 50%;
+    height: 35%;
+    background-color: #EBF1FD;
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.telContent {
+    /* 전화번호 내용 부분 div*/
+    flex-direction: row; /* 요소 가로 정렬*/
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.telText {
+    /* 전화번호 텍스트 */
+    font-family: 'NanumSquareRoundB';
+    font-size: 20px;
+}
+
+.telInput {
+    /* 전화번호 입력 input */
+    background-color: white;
+    border: 0.1px solid #9D9797;
+    border-radius: 7px;
+    width: 50%;
+    height: 80%;
+    padding-left: 3%;
+    margin-left: 3%;
+    font-family: 'NanumSquareRoundR';
+    font-size: 17px;
+}
+
+.checkButton {
+    /* 확인 버튼 - 서버에 정보 전송 */
+    width: 30%;
+    height: 17%;
+    background-color: #9ABBF3;
+    border: 0px;
+    border-radius: 7px;
+    font-family: 'NanumSquareRoundB';
+    font-size: 25px;
+    color: black;
+    margin-top: 3%;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
+    }
+}
+
+.informText {
+    /* 참고 정보 알림 메세지 */
+    font-size: 13px;
+    font-family: 'NanumSquareRoundL';
+    color: blue;
+    align-self: flex-end;
+    /* 얘만 예외로 end 정렬 */
+    margin-right: 3%;
+    margin-top: 5%;
+}
+
+.modalContainer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
+}
+
+.modalContent {
+    background-color: #ffffff;
+    width: 40%;
+    height: 30%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* 요소 가로 정렬*/
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-family: 'NanumSquareRoundR';
+}
+
+.modalCloseButton{
+    border: 0px;
+    background-color: #9ABBF3;
+    color: white;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundB';
+    cursor: pointer;
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
+    }
+}

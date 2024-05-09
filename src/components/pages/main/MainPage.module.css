@@ -1,0 +1,93 @@
+/* MainPage의 css 파일 */
+.mainWrapper {
+    /* 화면 전체 감싸기 */
+    width: calc(100%);
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    height: 100vh;
+    /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+}
+
+.mainContainer {
+    /* 상단바 부분 빼고 화면 컨테이너 */
+    width: calc(100%);
+    height: 100vh;
+    /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+
+}
+
+.mainText {
+    /* 제목 텍스트 (현재 가입자 수) */
+    font-size: 30px;
+    font-family: 'NanumSquareRoundEB';
+    margin-bottom: 1%;
+    margin-top: 7%;
+}
+
+.mainText2 {
+    /* 제목 텍스트 (현재 진행 중인 광고, 사용자 유형 분포도) */
+    font-size: 30px;
+    font-family: 'NanumSquareRoundEB';
+    margin-bottom: 1%;
+    margin-top: 10%;
+    margin-left: 60px;
+    /* 왼쪽 여백 */
+    margin-right: 60px;
+    /* 오른쪽 여백 */
+}
+
+.contentBox {
+    /* 내용 박스 */
+    width: 40%;
+    height: 12%;
+    margin-bottom: 1%;
+    background-color: #F8FAFB;
+    color: black;
+    font-family: 'NanumSquareRoundEB';
+    font-size: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentBox2 {
+    /* 내용 박스 가로 정렬 */
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.adBox {
+    /* 현재 진행 중인 광고 박스 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 300px;
+}
+
+.adContentBox {
+    /* 현재 진행 중인 광고 내용 박스 */
+    width: 100%;
+    height: 300px;
+    background-color: red;
+}
+
+.graphBox {
+    /* 유형 분포도 박스 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 100px;
+}
+.graphContentBox{
+    /* 유형 분포도 내용 박스 */
+    width: 600px;
+    height: 300px;
+    background-color: #F8FAFB;
+}

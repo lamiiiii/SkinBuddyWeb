@@ -1,0 +1,33 @@
+/* FirstPage의 css 파일 */
+.firstWrapper{ /* 화면 전체 감싸기 */
+    width: calc(100%);
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+}
+.firstContainer{ /* 상단바 부분 빼고 화면 컨테이너 */
+    width: calc(100%);
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    padding-top: 10%;
+}
+.centerLogo{ /* 단순 로고 이미지 */
+    width: calc(40%);
+    height: auto;
+}
+.loginButton{ /* 첫화면의 주기능인 로그인하러 가기 버튼 */
+    width: 440px;
+    height: 60px;
+    color: white;
+    font-size: 30px;
+    font-family: 'NanumSquareRoundB';
+    background-color: #9ABBF3;
+    border-radius: 10px;
+    border: 0px solid #9ABBF3;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #9D9797;
+    }
+}

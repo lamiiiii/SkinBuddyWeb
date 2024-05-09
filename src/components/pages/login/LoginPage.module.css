@@ -1,0 +1,88 @@
+/* LoginPage의 css파일 */
+
+.loginWrapper{ /* 화면 전체 감싸기 */
+    width: calc(100%);
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+}
+.loginContainer{ /* 상단바 부분 빼고 화면 컨테이너 */
+    width: calc(100%);
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    padding-top: 1%;
+}
+.mainText{ /* 제목 텍스트 (로그인) */
+    font-size: 50px;
+    font-family: 'NanumSquareRoundB';
+    margin-bottom: 2%;
+    margin-top:8%;
+}
+.contentBox{ /* 내용 박스 (input들과 button들) */
+    width: 50%;
+    height: 45%;
+    background-color: #EBF1FD;
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputBox{ /* 아이디 입력 input */
+    background-color: white;
+    border: 0.1px solid #9D9797;
+    border-radius: 7px;
+    width: 53%;
+    height: 14%;
+    padding-left: 3%;
+    margin-top: 3%;
+    margin-bottom: 2%;
+    font-family: 'NanumSquareRoundR';
+    font-size: 17px;
+}
+.loginCheckButton{ /* 로그인 확인 버튼 (로그인 정보 서버에 확인) */
+    width: 57%;
+    height: 16%;
+    background-color: #9ABBF3;
+    border: 0px;
+    border-radius: 7px;
+    font-family: 'NanumSquareRoundB';
+    font-size: 25px;
+    color: black;
+    margin-top: 3%;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
+    }
+}
+.findDiv{ /* 아이디 or 비밀번호 찾기 버튼 고르기 */
+    margin-top: 5%;
+    flex-direction: row; /* 요소 세로 정렬*/
+    display: flex;
+}
+.idFindButton{ /* 아이디 찾기 버튼 */
+    border: 0px;
+    background-color: transparent; /* 배경 투명 */
+    font-size: 18px;
+    font-family: 'NanumSquareRoundB';
+    margin-right: 40px;
+    cursor: pointer;
+
+    &:hover {
+        color: #9D9797;
+    }
+}
+.pwFindButton{ /* 비밀번호 찾기 버튼 */
+    border: 0px;
+    background-color: transparent; /* 배경 투명 */
+    font-size: 18px;
+    font-family: 'NanumSquareRoundB';
+    margin-left: 40px;
+    cursor: pointer;
+
+    &:hover {
+        color: #9D9797;
+    }
+}

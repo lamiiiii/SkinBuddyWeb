@@ -1,0 +1,101 @@
+.navbarWrapper{ /* 상단바 전체 감싸기 */
+    height: 80px;
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #EBF1FD; */
+    background-color: white;
+    border-bottom: 1px solid #EBF1FD;
+    position: sticky; /* 위치 고정 (스크롤해도 사라지지 않도록) */
+    top: 0; /* 위치 상단 지정 (스크롤해도 사라지지 않도록) */
+    z-index: 9999; /* 다른 요소보다 항상 위에 있도록 (스크롤해도 사라지지 않도록) */
+}
+
+.logoImage{ /* 상단바 로고 버튼 - 로그인 전 클릭 시 첫화면으로 이동 & 로그인 후 클릭 시 메인페이지 이동*/
+    width: auto; /* 이미지의 너비를 100px로 설정 */
+    height: 100px; /* 높이를 자동으로 설정하여 가로세로 비율을 유지 */
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.link{ /* 모든 링크 태그에 공통 적용*/
+    text-decoration: none; /* 하이퍼링크 밑줄 없애기 */
+}
+
+.managerLoginButton{ /* 상단바 로그인 버튼 */
+    height: 100%;
+    justify-content: center;
+    color: #9ABBF3;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundEB';
+    padding-right: 30px;
+    cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
+
+    &:hover {
+        color: #9D9797;
+    }
+}
+.logoutButton{ /* 로그아웃 버튼 div */
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-right: 30px;
+    cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
+    color: #9ABBF3;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundEB';
+    &:hover {
+        color: #9D9797;
+    }
+}
+
+.menuMainText{ /* 메뉴바 주 메뉴 Text */
+    color: #706969;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundB';
+    cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+
+    &:hover {
+        color: black;
+    }
+}
+
+.menuMainTextChoose{ /* 메뉴바 주 메뉴 Text 선택된 것*/
+    color: black;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundEB';
+    cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
+    text-align: center;
+}
+
+.ul{
+    list-style-type: none; /* 목록 표시 점 없애기 */
+    padding:0%;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+
+.dropDownMenu{
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    color: #706969;
+    font-size: 17px;
+    font-family: 'NanumSquareRoundB';
+    background-color: #EBF1FD;
+    border: 0px solid white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1%;
+    margin-top: 0.5%;
+    
+    /* border: 1px solid #EBF1FD;
+    border-top: 0px; */
+}

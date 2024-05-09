@@ -1,0 +1,21 @@
+/* AdManagePage의 css파일 */
+
+.AdManageWrapper{ /* 화면 전체 감싸기 */
+    width: calc(100%);
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+}
+.AdManageContainer{ /* 상단바 부분 빼고 화면 컨테이너 */
+    width: calc(100%);
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    padding-top: 1%;
+}
+.mainText{ /* 제목 텍스트 (광고 관리) */
+    font-size: 40px;
+    font-family: 'NanumSquareRoundB';
+    margin-bottom: 2%;
+    margin-top:4%;
+}

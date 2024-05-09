@@ -1,0 +1,72 @@
+/* TermsManagePage의 css 파일 */
+
+.termsWrapper{ /* 화면 전체 감싸기 */
+    width: calc(100%);
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+}
+.termsContainer{ /* 상단바 부분 빼고 화면 컨테이너 */
+    width: calc(100%);
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    padding-top: 1%;
+}
+.mainText{ /* 제목 텍스트 (이용약관 관리) */
+    font-size: 40px;
+    font-family: 'NanumSquareRoundB';
+    margin-bottom: 2%;
+    margin-top:4%;
+}
+.contentBox{ /* 내용 박스 (input들과 button들) */
+    width: 70%;
+    height: 55%;
+    background-color: #F8FAFB;
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.startContent{
+    width: 100%;
+}
+.contentText{ /* 박스 안에 소제목들 */
+    margin-left: 21%;
+    justify-self: start;
+    margin-top: 3%;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundB';
+}
+.textBox{ /* 이용약관 내용 textarea 박스 */
+    background-color: #F8FAFB;
+    border: 0px solid #9D9797;
+    width: 90%;
+    height: 90%;
+    padding-left: 3%;
+    margin-top: 1%;
+    /* margin-bottom: 2%; */
+    font-family: 'NanumSquareRoundR';
+    font-size: 20px;
+}
+.updateDiv{
+    /* 수정 완료 버튼 Div */
+    width: 70%;
+    display: flex;
+    justify-content: end;
+}
+.updateButton{
+    margin-top: 3%;
+    font-size: 15px;
+    font-family: 'NanumSquareRoundR';
+    background-color: white;
+    color: black;
+    border-radius: 3px;
+    border: 0.5px solid black;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
+    }
+}

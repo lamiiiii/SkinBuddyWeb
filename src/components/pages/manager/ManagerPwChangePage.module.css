@@ -1,0 +1,73 @@
+/* ManagerPwChangePage의 css파일 */
+
+.managerPwChangeWrapper{ /* 화면 전체 감싸기 */
+    width: calc(100%);
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+}
+.managerPwChangeContainer{ /* 상단바 부분 빼고 화면 컨테이너 */
+    width: calc(100%);
+    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    padding-top: 1%;
+}
+.mainText{ /* 제목 텍스트 (로그인) */
+    font-size: 40px;
+    font-family: 'NanumSquareRoundB';
+    margin-bottom: 2%;
+    margin-top: 6%;
+}
+.contentBox{ /* 내용 박스 (input들과 button들) */
+    width: 50%;
+    height: 50%;
+    background-color: #EBF1FD;
+    /* border: 1.5px solid #EBF1FD;
+    border-radius: 3%; */
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.startContent{
+    width: 100%;
+}
+.contentText{ /* 박스 안에 소제목들 */
+    margin-left: 21%;
+    justify-self: start;
+    margin-top: 4%;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundB';
+}
+.inputBox{ /* 입력창 박스 */
+    background-color: white;
+    border: 0.1px solid #9D9797;
+    border-radius: 7px;
+    width: 57%;
+    height: 10%;
+    padding-left: 3%;
+    margin-top: 1%;
+    /* margin-bottom: 2%; */
+    font-family: 'NanumSquareRoundR';
+    font-size: 17px;
+}
+.changePwdButton{
+    width: 60%;
+    height: 12%;
+    background-color: #9ABBF3;
+    border: 0px;
+    border-radius: 7px;
+    font-family: 'NanumSquareRoundB';
+    font-size: 23px;
+    color: black;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
+    }
+}
