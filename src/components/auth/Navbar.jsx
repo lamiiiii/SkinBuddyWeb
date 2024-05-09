@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from './Navbar.module.css';
 import Dropdown from "./DropDown";
 
-function Navbar() {
+function Navbar({selectedPage}) {
     const navigate = useNavigate();
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const [selectedMenu, setSelectedMenu] = useState('');
@@ -36,6 +36,9 @@ function Navbar() {
             navigate('/');
         }
     }
+    useEffect(()=>{
+        console.log(selectedPage)
+    })
 
     return (
         <div className={styles.navbarWrapper}>
@@ -53,7 +56,7 @@ function Navbar() {
                             onMouseEnter={() => onClickMenu(item)}
                         // onMouseLeave={closeDropdown}
                         >
-                            <p className={selectedMenu === item.name ? styles.menuMainTextChoose : styles.menuMainText}>
+                            <p className={selectedMenu === item.name ? styles.menuMainTextCursor : (selectedPage === item.name ? styles.menuMainTextChoose : styles.menuMainText)}>
                                 {item.name}
                             </p>
                             {selectedMenu === item.name && isDropdownOpen && (

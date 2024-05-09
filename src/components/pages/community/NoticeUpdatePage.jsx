@@ -142,7 +142,7 @@ function NoticeUpdatePage() {
 
     return (
         <div className={styles.noticeUpdateWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.noticeUpdateContainer}>
                 <p className={styles.mainText}>공지사항 상세 내용</p>
                 <div className={styles.contentBox}>

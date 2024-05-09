@@ -12,7 +12,7 @@ function AdManagePage() {
     const navigate = useNavigate();
     return(
         <div className={styles.AdManageWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"광고 관리"}></Navbar>
             <div className={styles.AdManageContainer}>
                 <p className={styles.mainText}>광고 관리</p>
             </div>

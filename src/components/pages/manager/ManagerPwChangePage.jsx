@@ -73,7 +73,7 @@ function ManagerPwChangePage() {
     }
     return (
         <div className={styles.managerPwChangeWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerPwChangeContainer}>
                 <p className={styles.mainText}>비밀번호 변경</p>
                 <div className={styles.contentBox}>

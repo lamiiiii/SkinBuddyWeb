@@ -14,6 +14,18 @@
     z-index: 9999; /* 다른 요소보다 항상 위에 표시되도록 */
 }
 
+.AlertModal {
+    position: fixed;
+    top: 0;
+    width: 500px;
+    height: 100px;
+    background-color: #F8FAFB;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black; /* 알람 메시지 텍스트 색상 */
+    text-align: center;
+    z-index: 9999; /* 다른 요소보다 항상 위에 표시되도록 */
+}
+
 .message {
     margin: 0;
     padding: 0;

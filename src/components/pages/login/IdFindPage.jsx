@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../auth/Navbar";
 import styles from "./IdFindPage.module.css";
 import axios from "axios";
-import WarningModal from "../../auth/WarningModal";
+import WarningModal from "../../auth/WarningModal"; // 경고 메세지 모달
+import AlertModal from "../../auth/AlertModal"; // 알림 메세지 모달
 
 function IdFindPage() {
     const navigate = useNavigate();

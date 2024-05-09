@@ -65,7 +65,7 @@ function NoticeAddPage() {
     }
     return (
         <div className={styles.noticeAddWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"커뮤니티 관리"} ></Navbar>
             <div className={styles.noticeAddContainer}>
                 <p className={styles.mainText}>공지사항 상세</p>
                 <div className={styles.contentBox}>

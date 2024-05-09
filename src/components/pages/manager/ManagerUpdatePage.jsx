@@ -92,7 +92,7 @@ function ManagerUpdatePage() {
 
     return (
         <div className={styles.managerUpdateWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerUpdateContainer}>
                 <p className={styles.mainText}>관리자 정보 수정</p>
                 <div className={styles.contentBox}>

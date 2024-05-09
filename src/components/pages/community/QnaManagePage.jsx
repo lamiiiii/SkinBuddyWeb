@@ -35,7 +35,7 @@ function QnaManagePage() {
 
     return (
         <div className={styles.qnaManageWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.qnaManageContainer}>
                 <p className={styles.mainText}>Q&A 관리</p>
                 <table className={styles.qnaTable}>

@@ -58,7 +58,7 @@ function UserRecordManagePage() {
 
     return (
         <div className={styles.userRecordWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"진단 기록 관리"}></Navbar>
             <div className={styles.userRecordContainer}>
                 <p className={styles.mainText}>사용자 진단 기록 조회</p>
                 <div className={styles.searchDiv}>

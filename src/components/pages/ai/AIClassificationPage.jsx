@@ -34,7 +34,7 @@ function AIClassificationPage() {
 
     return (
         <div className={styles.AIClassWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"AI 모델"}></Navbar>
             <div className={styles.AIClassContainer}>
                 <p className={styles.mainText}>여드름 분류 모델 관리</p>
             </div>

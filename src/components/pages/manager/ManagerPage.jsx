@@ -68,7 +68,7 @@ function ManagerPage() {
     }
     return (
         <div className={styles.managerWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerContainer}>
                 <p className={styles.mainText}>관리자 조회</p>
                 <div className={styles.searchDiv}>

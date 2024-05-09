@@ -60,7 +60,7 @@ function ManagerAddPage() {
 
     return (
         <div className={styles.managerAddWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerAddContainer}>
                 <p className={styles.mainText}>관리자 추가</p>
                 <div className={styles.contentBox}>

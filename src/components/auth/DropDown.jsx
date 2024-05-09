@@ -5,10 +5,9 @@ import {
 } from "react-router-dom";
 import styles from './Dropdown.module.css';
 
-function Dropdown(props) {
+function Dropdown({ cursorMenu }) {
     const navigate = useNavigate();
-    const { cursorMenu } = props;
-
+    
     return (
         <>
             <div className={styles.dropdownWrapper}>

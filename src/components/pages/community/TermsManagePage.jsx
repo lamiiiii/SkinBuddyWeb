@@ -89,7 +89,7 @@ function TermsManagePage() {
 
     return (
         <div className={styles.termsWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.termsContainer}>
                 <p className={styles.mainText}>이용약관 관리</p>
                 <div className={styles.contentBox}>

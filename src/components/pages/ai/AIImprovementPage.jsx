@@ -41,7 +41,7 @@ function AIImprovementPage() {
 
     return (
         <div className={styles.AIImproveWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"AI 모델"}></Navbar>
             <div className={styles.AIImproveContainer}>
                 <p className={styles.mainText}>여드름 호전도 개선 모델 관리</p>
             </div>

@@ -67,12 +67,19 @@
         color: black;
     }
 }
-
-.menuMainTextChoose{ /* 메뉴바 주 메뉴 Text 선택된 것*/
+.menuMainTextCursor{ /* 메뉴바 주 메뉴 커서 올린 것*/
     color: #9ABBF3;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
+    text-align: center;
+}
+.menuMainTextChoose{ /* 메뉴바 주 메뉴 Text 선택된 것*/
+    color: black;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 650;
     cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
     text-align: center;
 }
@@ -95,7 +102,7 @@
     color: #706969;
     font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgba(255, 255, 255, 0.9); /* 투명도 조절 가능 */
+    background-color: rgba(255, 255, 255, 0.95); /* 투명도 조절 가능 */
     display: flex;
     align-items: center;
     padding: 1%;

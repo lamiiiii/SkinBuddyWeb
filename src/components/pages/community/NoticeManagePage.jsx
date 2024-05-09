@@ -35,7 +35,7 @@ function NoticeManagePage() {
 
     return (
         <div className={styles.noticeWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.noticeContainer}>
                 <p className={styles.mainText}>공지사항 관리</p>
                 <table className={styles.noticeTable}>

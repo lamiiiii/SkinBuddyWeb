@@ -89,7 +89,7 @@ function QnaAnswerPage() {
 
         return (
             <div className={styles.qnaAnswerWrapper}>
-                <Navbar></Navbar>
+            <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
                 <div className={styles.qnaAnswerContainer}>
                     <p className={styles.mainText}>Q&A 상세 내용</p>
                     <div className={styles.contentBox}>

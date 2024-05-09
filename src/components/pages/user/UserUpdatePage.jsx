@@ -141,7 +141,7 @@ function UserUpdatePage() {
 
     return (
         <div className={styles.userUpdateWrapper}>
-            <Navbar></Navbar>
+            <Navbar selectedPage={"사용자 관리"}></Navbar>
             <div className={styles.userUpdateContainer}>
                 <p className={styles.mainText}>사용자 정보 수정</p>
                 <div className={styles.contentBox}>
