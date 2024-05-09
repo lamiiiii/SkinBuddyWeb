@@ -7,7 +7,7 @@
     justify-content: space-between;
     /* background-color: #EBF1FD; */
     background-color: white;
-    border-bottom: 1px solid #EBF1FD;
+    /* border-bottom: 1px solid #EBF1FD; */
     position: sticky; /* 위치 고정 (스크롤해도 사라지지 않도록) */
     top: 0; /* 위치 상단 지정 (스크롤해도 사라지지 않도록) */
     z-index: 9999; /* 다른 요소보다 항상 위에 있도록 (스크롤해도 사라지지 않도록) */
@@ -17,6 +17,7 @@
     width: auto; /* 이미지의 너비를 100px로 설정 */
     height: 100px; /* 높이를 자동으로 설정하여 가로세로 비율을 유지 */
     padding-left: 5px;
+    padding-top: 5px;
     cursor: pointer;
 }
 
@@ -28,8 +29,9 @@
     height: 100%;
     justify-content: center;
     color: #9ABBF3;
-    font-size: 20px;
-    font-family: 'NanumSquareRoundEB';
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     padding-right: 30px;
     cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
 
@@ -52,9 +54,10 @@
 }
 
 .menuMainText{ /* 메뉴바 주 메뉴 Text */
-    color: #706969;
+    color: #585555;
     font-size: 20px;
-    font-family: 'NanumSquareRoundB';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
     cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
     margin-left: 0;
     margin-right: 0;
@@ -66,9 +69,10 @@
 }
 
 .menuMainTextChoose{ /* 메뉴바 주 메뉴 Text 선택된 것*/
-    color: black;
+    color: #9ABBF3;
     font-size: 20px;
-    font-family: 'NanumSquareRoundEB';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
     text-align: center;
 }
@@ -83,19 +87,27 @@
 
 .dropDownMenu{
     position: absolute;
-    width: 100px;
-    height: 80px;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    height: 60px;
     color: #706969;
     font-size: 17px;
-    font-family: 'NanumSquareRoundB';
-    background-color: #EBF1FD;
-    border: 0px solid white;
-    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(255, 255, 255, 0.9); /* 투명도 조절 가능 */
+    display: flex;
     align-items: center;
-    justify-content: center;
     padding: 1%;
-    margin-top: 0.5%;
-    
-    /* border: 1px solid #EBF1FD;
-    border-top: 0px; */
+    border-top: 1px solid #EBF1FD;
+}
+
+.overlay {
+    position: fixed;
+    top: 170px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 투명도 조절 가능 */
+    z-index: 999; /* 다른 요소보다 위에 표시 */
 }

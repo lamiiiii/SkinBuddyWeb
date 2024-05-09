@@ -1,21 +1,39 @@
 /* 드롭다운 메뉴 공통 css */
-
+.dropdownWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    align-items: center;
+    padding-left: 200px;
+}
+.menuName{
+    width: 150px;
+    font-size: 20px;
+    font-family: 'NanumSquareRoundB';
+    font-weight: 400;
+    padding-left: 20px;
+    color: #9ABBF3;
+    opacity: 0.7;
+}
 .menuText{
     cursor: pointer; /* 커서 올리면 클릭 가능 표시 */
-    width: 100%;
+    width: 190px;
     /* border-bottom: 1px solid black; */
-    margin-bottom: 5%;
     text-align: center;
-    font-family: 'NanumSquareRoundR';
-    color: #706969;
+    font-size: 19px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    color: black;
     /* margin-top: 10%; */
 
     &:hover {
         color: black;
+        font-weight: 700;
     }
 }
-
-.menu1{
+.menu{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
 }

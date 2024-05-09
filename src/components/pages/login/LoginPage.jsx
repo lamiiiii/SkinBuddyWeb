@@ -85,14 +85,21 @@ function LoginPage() {
             })
     }
 
+    // 엔터키 누르면 버튼 눌림
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            onClickLogin();
+        }
+    };
+
     return (
         <div className={styles.loginWrapper}>
             <Navbar></Navbar>
             <div className={styles.loginContainer}>
                 <p className={styles.mainText}>로그인</p>
                 <div className={styles.contentBox}>
-                    <input className={styles.inputBox} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디를 입력해주세요" ></input>
-                    <input className={styles.inputBox} type="password" name="managerPw" value={form.managerPw} onChange={onChange} placeholder="비밀번호를 입력해주세요" ></input>
+                    <input className={styles.inputBox} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디를 입력해주세요" onKeyDown={handleKeyDown}></input>
+                    <input className={styles.inputBox} type="password" name="managerPw" value={form.managerPw} onChange={onChange} placeholder="비밀번호를 입력해주세요" onKeyDown={handleKeyDown}></input>
                     <button className={styles.loginCheckButton} onClick={onClickLogin}>로그인</button>
                     <div className={styles.findDiv}>
                         <Link to="/IdFindPage"><button className={styles.idFindButton}>아이디 찾기</button></Link>
