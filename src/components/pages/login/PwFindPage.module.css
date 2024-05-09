@@ -22,21 +22,25 @@
 .mainText {
     /* 제목 텍스트 (아이디 찾기) */
     font-size: 40px;
-    font-family: 'NanumSquareRoundB';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     margin-bottom: 2%;
     margin-top: 10%;
 }
 
 .contentBox {
     /* 내용 박스 (input & button) */
-    width: 50%;
-    height: 35%;
-    background-color: #EBF1FD;
+    width: 650px;
+    height: 350px;
+    background-color: #F8FAFB;
+    border: 0.5px solid #9ABBF3;
+    border-radius: 7px;
     flex-direction: column;
     /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
 }
 
 .telContent {
@@ -46,13 +50,15 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .telText {
-    /* 전화번호 텍스트 */
-    font-family: 'NanumSquareRoundB';
+    /* 휴대폰 번호 텍스트 */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
     font-size: 20px;
+    width: 100px;
 }
 
 .telInput {
@@ -64,38 +70,66 @@
     height: 80%;
     padding-left: 3%;
     margin-left: 3%;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
 }
 
 .checkButton {
     /* 확인 버튼 - 서버에 정보 전송 */
-    width: 30%;
-    height: 17%;
+    width: 200px;
+    height: 50px;
     background-color: #9ABBF3;
     border: 0px;
     border-radius: 7px;
-    font-family: 'NanumSquareRoundB';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
     font-size: 25px;
     color: black;
-    margin-top: 3%;
+    margin-top: 5%;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 
     &:hover {
         background-color: #9D9797;
         color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4); /* 그림자 추가 */
     }
+}
+
+.noticeText{ /* 알림 메세지 */
+    width: 230px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: red;
+    margin: 0;
+    margin-top: 1%;
+    padding: 0;
 }
 
 .informText {
     /* 참고 정보 알림 메세지 */
     font-size: 13px;
-    font-family: 'NanumSquareRoundL';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
     color: blue;
     align-self: flex-end;
     /* 얘만 예외로 end 정렬 */
     margin-right: 3%;
     margin-top: 5%;
+}
+
+.smallText{
+    /* 편의를 위한 아이디 찾기 버튼 */
+    margin-left: 460px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #9D9797;
+    cursor: pointer;
+    &:hover {
+        color: #9ABBF3;
+    }
 }
 
 .modalContainer {
@@ -113,24 +147,31 @@
 
 .modalContent {
     background-color: #ffffff;
-    width: 40%;
-    height: 30%;
+    width: 33%;
+    height: 17%;
     padding: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* 그림자 추가 */
     display: flex;
     flex-direction: column; /* 요소 가로 정렬*/
     align-items: center;
     justify-content: center;
     font-size: 23px;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .modalCloseButton{
+    width: 150px;
+    height: 30px;
     border: 0px;
     background-color: #9ABBF3;
-    color: white;
-    font-size: 20px;
-    font-family: 'NanumSquareRoundB';
+    color: black;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    margin-top: 5%;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+
 
     &:hover {
         background-color: #9D9797;

@@ -85,10 +85,12 @@
     color: black;
     margin-top: 5%;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 
     &:hover {
         background-color: #9D9797;
         color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4); /* 그림자 추가 */
     }
 }
 
@@ -115,6 +117,31 @@
     margin-top: 5%;
 }
 
+.smallText{
+    /* 편의를 위한 비밀번호 찾기 버튼 */
+    margin-left: 400px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #9D9797;
+    cursor: pointer;
+    &:hover {
+        color: #9ABBF3;
+    }
+}
+.smallText2{
+    /* 편의를 위한 비밀번호 찾기 버튼 */
+    margin-left: 550px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #9D9797;
+    cursor: pointer;
+    &:hover {
+        color: #9ABBF3;
+    }
+}
+
 .modalContainer {
     width: 100%;
     height: 100%;
@@ -130,8 +157,8 @@
 
 .modalContent {
     background-color: #ffffff;
-    width: 35%;
-    height: 20%;
+    width: 33%;
+    height: 17%;
     padding: 15px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* 그림자 추가 */
     display: flex;

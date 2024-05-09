@@ -11,7 +11,7 @@ function PwFindPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ managerId: "", telNumber: "" }); // 전화번호 입력 정보
     const [findPwd, setFindPwd] = useState(); // 임시 비밀번호
-
+    const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [modalOpen, setModalOpen] = useState(false); // 모달창 오픈을 위함
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
 
@@ -25,36 +25,49 @@ function PwFindPage() {
     };
 
     const onClickPwFind = () => {
-        const requestData = { // 전송할 데이터
-            managerId: form.managerId,
-            tel: form.telNumber
-        };
+        if (form.managerId && form.telNumber) {
+            setNoticeMessage("");
+            const requestData = { // 전송할 데이터
+                managerId: form.managerId,
+                tel: form.telNumber
+            };
 
-        // API URL 설정
-        // const apiUrl = 'https://r9sesoym3l.execute-api.ap-northeast-2.amazonaws.com/default/manager_findPW';
-        const apiUrl = 'http://52.79.237.164:3000/manager/find/psword'; // 비밀번호 찾기 API URL
+            // API URL 설정
+            // const apiUrl = 'https://r9sesoym3l.execute-api.ap-northeast-2.amazonaws.com/default/manager_findPW';
+            const apiUrl = 'http://52.79.237.164:3000/manager/find/psword'; // 비밀번호 찾기 API URL
 
 
-        // axios를 이용하여 POST 요청 보내기
-        axios.post(apiUrl, requestData)
-            .then(response => {
-                // 요청이 성공한 경우 응답한 데이터 처리
-                if (response.data["property"] === 200) {
-                    console.log('전송 성공: ', response.data);
-                    console.log("아이디:", form.managerId, " 전화번호:", form.telNumber);
-                    setFindPwd(response.data.psword);
-                    setModalOpen(true); // 모달창에 임시 비밀번호 정보 띄우기
-                } else {
-                    console.log('전송 성공 (정보 없음): ', response.data);
-                    alert(response.data.message);
-                }
-            })
-            .catch(error => {
-                // 요청이 실패한 경우 에러 처리
-                console.error('전송 실패: ', error);
-                alert('비밀번호 찾기 실패~~~~~~~~~');
-            })
+            // axios를 이용하여 POST 요청 보내기
+            axios.post(apiUrl, requestData)
+                .then(response => {
+                    // 요청이 성공한 경우 응답한 데이터 처리
+                    if (response.data["property"] === 200) {
+                        console.log('전송 성공: ', response.data);
+                        console.log("아이디:", form.managerId, " 전화번호:", form.telNumber);
+                        setFindPwd(response.data.psword);
+                        setModalOpen(true); // 모달창에 임시 비밀번호 정보 띄우기
+                    } else {
+                        alert(response.data.message);
+                        window.location.reload(); // 페이지 새로 고침
+                    }
+                })
+                .catch(error => {
+                    // 요청이 실패한 경우 에러 처리
+                    console.error('전송 실패: ', error);
+                    alert('비밀번호 찾기에 실패하였습니다. 관리자에게 문의하여주세요.');
+                })
+        } else if (!form.managerId) {
+            setNoticeMessage("아이디를 입력하세요.");
+        } else {
+            setNoticeMessage("휴대폰 번호를 입력하세요.");
+        }
     }
+
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            onClickPwFind();
+        }
+    };
 
     return (
         <>
@@ -65,29 +78,33 @@ function PwFindPage() {
                     <div className={styles.contentBox}>
                         <div className={styles.telContent}>
                             <p className={styles.telText}>아이디</p>
-                            <input className={styles.telInput} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디" ></input>
+                            <input className={styles.telInput} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디 입력" onKeyDown={handleKeyDown}  autoFocus ></input>
                         </div>
                         <div className={styles.telContent}>
                             <p className={styles.telText}>휴대폰 번호</p>
-                            <input className={styles.telInput} type="text" name="telNumber" value={form.telNumber} onChange={onChange} placeholder="'-'빼고 숫자만 입력" ></input>
+                            <input className={styles.telInput} type="text" name="telNumber" value={form.telNumber} onChange={onChange} placeholder="'-'빼고 숫자만 입력" onKeyDown={handleKeyDown} ></input>
                         </div>
+                        <p className={styles.noticeText}>{noticeMessage}</p>
                         <button className={styles.checkButton} onClick={() => onClickPwFind()}>확인</button>
                         {/* <button className={styles.checkButton} onClick={onClickPwFind}>확인</button> 모달 창으로 임시 비밀번호 알려주기 */}
                         {
-                            modalOpen &&
+                            findPwd && modalOpen &&
                             <div className={styles.modalContainer} ref={modalBackground} onClick={e => {
                                 if (e.target === modalBackground.current) {
                                     setModalOpen(false);
                                 }
                             }}>
                                 <div className={styles.modalContent}>
-                                    <p>관리자님의 임시 비밀번호는 {findPwd} 입니다.</p>
+                                    <p>관리자님의 임시 비밀번호는 <span style={{ fontWeight: '600', color: 'blue' }}>{findPwd}</span>입니다.</p>
                                     <Link to="/LoginPage"><button className={styles.modalCloseButton} onClick={() => setModalOpen(false)}>로그인하러 가기</button></Link>
-                                    <p className={styles.informText}>* 로그인 후 새로운 비밀번호로 변경하여 사용해주세요.</p>
+                                    <p className={styles.informText}>!! 로그인 후 새로운 비밀번호로 변경하여 사용해주세요!!</p>
                                 </div>
                             </div>
                         }
+                        <p className={styles.informText}>비밀번호를 찾고자 하는 아이디와 휴대폰 번호를 입력해주세요.</p>
+
                     </div>
+                    <p className={styles.smallText} onClick={() => navigate('/IdFindPage')}>아이디가 기억나지 않는다면?</p>
                 </div>
             </div>
         </>

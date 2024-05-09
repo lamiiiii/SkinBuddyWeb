@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from './Navbar.module.css';
 import Dropdown from "./DropDown";
 
-function Navbar({selectedPage}) {
+function Navbar({ selectedPage }) {
     const navigate = useNavigate();
+    const currentId = localStorage.getItem("ID");
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const [selectedMenu, setSelectedMenu] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -23,6 +24,7 @@ function Navbar({selectedPage}) {
         setIsDropdownOpen(true);
     };
 
+
     const closeDropdown = () => {
         setSelectedMenu();
         setIsDropdownOpen(false);
@@ -32,11 +34,10 @@ function Navbar({selectedPage}) {
         const isConfirmed = window.confirm("로그아웃 하시겠습니까?");
         if (isConfirmed) {
             localStorage.clear();
-            alert("로그아웃되었습니다.");
             navigate('/');
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
         console.log(selectedPage)
     })
 
@@ -52,7 +53,7 @@ function Navbar({selectedPage}) {
                         <ul
                             key={item.name}
                             className={styles.ul}
-                            onClick={() => { navigate(item.path); window.location.reload(); }}
+                            // onClick={() => {}}  // 클릭하면 그냥 바로 메뉴로 이동하는 것도 넣고 싶은데 일단 보류
                             onMouseEnter={() => onClickMenu(item)}
                         // onMouseLeave={closeDropdown}
                         >
@@ -64,8 +65,8 @@ function Navbar({selectedPage}) {
                             )}
                         </ul>
                     ))}
-
                     <div className={styles.logoutButton} onClick={onClickLogout}>로그아웃</div>
+
                 </>
 
             ) : (
@@ -78,7 +79,7 @@ function Navbar({selectedPage}) {
                         <ul
                             key={item.name}
                             className={styles.ul}
-                            onClick={() => alert("로그인이 필요합니다.")}
+                            onClick={() => { alert("로그인이 필요합니다."); navigate('/LoginPage') }}
                         >
                             <p className={styles.menuMainText}>{item.name}</p>
                         </ul>

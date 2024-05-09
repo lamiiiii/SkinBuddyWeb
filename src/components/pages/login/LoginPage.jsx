@@ -87,7 +87,7 @@ function LoginPage() {
             <div className={styles.loginContainer}>
                 <p className={styles.mainText}>관리자 로그인</p>
                 <div className={styles.contentBox}>
-                    <input className={styles.inputBox} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디를 입력해주세요" onKeyDown={handleKeyDown}></input>
+                    <input className={styles.inputBox} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디를 입력해주세요" onKeyDown={handleKeyDown}  autoFocus ></input>
                     <input className={styles.inputBox} type="password" name="managerPw" value={form.managerPw} onChange={onChange} placeholder="비밀번호를 입력해주세요" onKeyDown={handleKeyDown}></input>
                     <p className={styles.noticeText}>{noticeMessage}</p>
                     <button className={styles.loginCheckButton} onClick={onClickLogin}>로그인</button>
