@@ -14,6 +14,7 @@ function ManagerPwChangePage() {
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [button, setButton] = useState(false);
+    
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
         if (!isLoggedIn) {

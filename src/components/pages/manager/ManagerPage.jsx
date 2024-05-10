@@ -66,6 +66,7 @@ function ManagerPage() {
                 window.location.reload(); // 페이지 새로고침
             }
     }
+    
     return (
         <div className={styles.managerWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
