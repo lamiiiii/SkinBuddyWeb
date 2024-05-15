@@ -24,8 +24,18 @@ function UserUpdatePage() {
         axios.post(apiUrl, { userId: search })
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                console.log('특정 사용자 세부 정보 반환 응답: ', response.data.list[userNum]);
-                setData(response.data.list[userNum]);
+                if(search === "all"){
+                    setData(response.data.list);
+                } else {
+                    // 검색해서 결과가 1개만 나오면 지가 알아서 배열을 풀어서 각각 저장하는 이슈 때문에 배열로 다시 저장해줌 (뭔가 단단히 이상함)
+                    const userList = [{
+                        nickname: response.data.list[0],
+                        userId: response.data.list[1],
+                        tel: response.data.list[2],
+                        skinType: response.data.list[3]
+                    }]
+                    setData(userList[0]);
+                }
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리
@@ -35,7 +45,7 @@ function UserUpdatePage() {
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
         if (isLoggedIn) {
-            returnUserInfo("all");
+            returnUserInfo(userNum);
         } else {
             alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
             navigate('/');
@@ -57,14 +67,12 @@ function UserUpdatePage() {
         // 수정 사항이 있는지 확인
         if (!form.nickname && !form.tel) {
             alert("수정 사항이 없습니다.");
-            console.log("수정 사항 없음");
         } else {
             const requestData = {
                 userId: data.userId,
                 nickname: form.nickname || data.nickname, // 수정한 부분 없으면 기존 값 불러옴
                 tel: form.tel || data.tel, // 수정한 부분 없으면 기존 값 불러옴
             };
-            console.log("수정 요청 보낼 사용자 정보: ", requestData);
     
             // 수정 완료 실행 이중 확인
             const isConfirmed = window.confirm(`사용자 "${data.userId}" 님의 정보를 정말로 수정하시겠습니까?`);
@@ -77,7 +85,6 @@ function UserUpdatePage() {
                 axios.put(apiUrl, requestData)
                     .then(response => {
                         // 요청이 성공한 경우 응답한 데이터 처리
-                        console.log('전송 성공: ', response.data);
                         if (response.data["property"] === 200) { // 전송 성공 && 수정 완료
                             alert(`사용자 "${data.userId}" 님의 정보 수정 성공`);
                             navigate("/UserManagePage");
@@ -106,10 +113,9 @@ function UserUpdatePage() {
                 userId: data.userId
             }
         };
-        console.log("삭제 요청 할 사용자 정보: ", requestData);
 
         // 삭제 실행 이중 확인
-        const isConfirmed = window.confirm(`사용자 "${data.userId}" 님의 정보를 정말로 삭제하시겠습니까?`);
+        const isConfirmed = window.confirm(`사용자 [${data.nickname}] 님의 정보를 정말로 삭제하시겠습니까?`);
 
         if (isConfirmed) {
             // API URL 설정
@@ -119,7 +125,6 @@ function UserUpdatePage() {
             axios.delete(apiUrl, requestData)
                 .then(response => {
                     // 요청이 성공한 경우 응답한 데이터 처리
-                    console.log('전송 성공: ', response.data);
                     // 서버 응답 처리
                     if (response.data["property"] === 200) {
                         alert(`사용자 "${data.userId}" 님의 계정이 삭제되었습니다.`);
@@ -145,22 +150,21 @@ function UserUpdatePage() {
             <div className={styles.userUpdateContainer}>
                 <p className={styles.mainText}>사용자 정보 수정</p>
                 <div className={styles.contentBox}>
-                    <div className={styles.userNameBox}>
-                        <p className={styles.miniText}>닉네임</p>
-                        <input className={styles.inputBox} type="text" name="nickname" value={form.nickname} onChange={onChange} placeholder={data.nickname}></input>
-                    </div>
-                    <p className={styles.sideText}>회원정보</p>
-                    <div className={styles.userIdBox}>
+                <div className={styles.divBox}>
                         <p className={styles.miniText}>아이디</p>
                         <p className={styles.idText}>{data.userId}</p>
                     </div>
-                    <div className={styles.userTelBox}>
+                    <div className={styles.divBox}>
+                        <p className={styles.miniText}>닉네임</p>
+                        <input className={styles.inputBox} type="text" name="nickname" value={form.nickname} onChange={onChange} placeholder={data.nickname}></input>
+                    </div>
+                    <div className={styles.divBox}>
                         <p className={styles.miniText}>전화번호</p>
                         <input className={styles.inputBox} type="text" name="tel" value={form.tel} onChange={onChange} placeholder={data.tel}></input>
                     </div>
-                    <div className={styles.userIdBox}>
+                    <div className={styles.divBox}>
                         <p className={styles.miniText}>피부 MBTI</p>
-                        <p className={styles.mbtiText}>{data.skinType ? data.skinType : '검사 정보 없음'}</p>
+                        <p className={styles.idText}>{data.skinType ? data.skinType : '검사 정보 없음'}</p>
                     </div>
                 </div>
                 <div className={styles.buttonDiv}>

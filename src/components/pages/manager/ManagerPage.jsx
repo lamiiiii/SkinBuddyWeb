@@ -24,7 +24,6 @@ function ManagerPage() {
         axios.post(apiUrl, { name: search })
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                console.log('관리자 목록 반환 응답: ', response.data);
                 setData(response.data.list);
             })
             .catch(error => {
@@ -100,12 +99,14 @@ function ManagerPage() {
                     <tbody>
                         {currentItems.length > 0 ? (
                             currentItems.map((item, index) => (
+                                (currentId === "root" || item.managerId !== "root") && (
                                 <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}`)}>
                                     <td className={styles.tableTdNum}>{index + 1}</td>
                                     <td className={styles.tableTd}>{item.name}</td>
                                     <td className={styles.tableTd}>{item.managerId}</td>
                                     <td className={styles.tableTd}>{item.tel}</td>
                                 </tr>
+                                )
                             ))
                         ) : (
                             <tr>

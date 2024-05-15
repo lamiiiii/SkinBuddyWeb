@@ -113,7 +113,6 @@ function ManagerUpdatePage() {
                 // API URL 설정
                 const apiUrl = 'http://52.79.237.164:3000/manager/delete'
                 // axios를 이용하여 DELETE 요청 보내기
-                console.log(apiUrl, requestData);
                 axios.delete(apiUrl, requestData)
                     .then(response => {
                         // 요청이 성공한 경우 응답한 데이터 처리
