@@ -1,4 +1,5 @@
 /* AIClassificationPage의 css 파일 */
+
 .AIClassWrapper {
     /* 화면 전체 감싸기 */
     width: calc(100%);
@@ -17,46 +18,77 @@
     align-items: center;
 
 }
-
+.noticeText{ /* 알림 메세지 */
+    width: 350px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: red;
+    margin: 0;
+    margin-top: 3%;
+    padding: 0;
+}
 .mainText {
     /* 제목 텍스트 (여드름 분류 모델 관리) */
     font-size: 35px;
-    font-family: 'NanumSquareRoundR';
-    margin-bottom: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-bottom: 3%;
     margin-top: 5%;
 }
 
-.AIClassText2 {
-    /* 제목 텍스트 (현재 진행 중인 광고, 사용자 유형 분포도) */
-    font-size: 30px;
-    font-family: 'NanumSquareRoundEB';
-    margin-bottom: 1%;
-    margin-top: 10%;
-    margin-left: 60px;
-    /* 왼쪽 여백 */
-    margin-right: 60px;
-    /* 오른쪽 여백 */
-}
-
-.contentBox {
-    /* 내용 박스 */
-    width: 40%;
-    height: 12%;
-    margin-bottom: 1%;
-    background-color: #F8FAFB;
-    color: black;
-    font-family: 'NanumSquareRoundEB';
-    font-size: 40px;
-    text-align: center;
+.contentBox{ /* 내용 박스 (input들과 button들) */
+    width: 600px;
+    height: 450px;
+    border: 0px solid #9ABBF3;
+    border-radius: 7px;
+    flex-direction: column; /* 요소 세로 정렬*/
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 }
-
-.contentBox2 {
-    /* 내용 박스 가로 정렬 */
-    flex-direction: row;
-    display: flex;
+.contentText{ /* 박스 안에 소제목들 */
+    margin-left: 21%;
+    justify-self: start;
+    margin-top: 4%;
+    margin-bottom: 0;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+.inputBox{ /* 입력창 박스 */
+    background-color: white;
+    border: 0.1px solid #9D9797;
+    border-radius: 7px;
+    width: 330px;
+    height: 45px;
+    padding-left: 3%;
+    margin-top: 1%;
+    /* margin-bottom: 2%; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+}
+.startContent{
     width: 100%;
-    justify-content: space-between;
+}
+.modelButton{
+    width: 360px;
+    height: 50px;
+    background-color: #9ABBF3;
+    border: 0px;
+    border-radius: 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 23px;
+    color: black;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
+    }
 }

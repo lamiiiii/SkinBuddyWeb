@@ -17,11 +17,77 @@
     align-items: center;
 
 }
-
+.noticeText{ /* 알림 메세지 */
+    width: 350px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: red;
+    margin: 0;
+    margin-top: 3%;
+    padding: 0;
+}
 .mainText {
-    /* 제목 텍스트 (여드름 호전도 개선 모델 관리) */
+    /* 제목 텍스트 (여드름 분류 모델 관리) */
     font-size: 35px;
-    font-family: 'NanumSquareRoundR';
-    margin-bottom: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-bottom: 3%;
     margin-top: 5%;
+}
+
+.contentBox{ /* 내용 박스 (input들과 button들) */
+    width: 600px;
+    height: 450px;
+    border: 0px solid #9ABBF3;
+    border-radius: 7px;
+    flex-direction: column; /* 요소 세로 정렬*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+}
+.contentText{ /* 박스 안에 소제목들 */
+    margin-left: 21%;
+    justify-self: start;
+    margin-top: 4%;
+    margin-bottom: 0;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+.inputBox{ /* 입력창 박스 */
+    background-color: white;
+    border: 0.1px solid #9D9797;
+    border-radius: 7px;
+    width: 330px;
+    height: 45px;
+    padding-left: 3%;
+    margin-top: 1%;
+    /* margin-bottom: 2%; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+}
+.startContent{
+    width: 100%;
+}
+.modelButton{
+    width: 360px;
+    height: 50px;
+    background-color: #9ABBF3;
+    border: 0px;
+    border-radius: 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 23px;
+    color: black;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
+    }
 }

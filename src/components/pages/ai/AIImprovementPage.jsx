@@ -10,16 +10,10 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 
 function AIImprovementPage() {
     const navigate = useNavigate();
-    const [form, setForm] = useState();
+    const [form, setForm] = useState({ learningRate: "", weightDecay: "", epochs: "", patience: "" });
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
-
-    // const requestData = { // AI 호전도 재학습에서 보내야 할 데이터
-    //     learningRate,
-    //     weightDecay,
-    //     Epochs,
-    //     Patience,
-    // }
+    const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
 
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
@@ -39,12 +33,47 @@ function AIImprovementPage() {
         });
     };
 
+    const onClickImproveModel = () => {
+        const isConfirmed = window.confirm("여드름 호전도 개선 모델을 재학습하시겠습니까?");
+        if (isConfirmed) {
+            // 확인 받았을 경우
+            const requestData = {
+                "learningRate": form.learningRate,
+                weightDecay: form.weightDecay,
+                "Epochs": form.epochs,
+                "Patience": form.patience,
+            }
+
+
+
+        }
+    }
+
+        // 엔터키 누르면 버튼 눌림
+        const handleKeyDown = (event) => {
+            if (event.keyCode === 13) {
+                onClickImproveModel();
+            }
+        };
+        
     return (
         <div className={styles.AIImproveWrapper}>
             <Navbar selectedPage={"AI 모델"}></Navbar>
             <div className={styles.AIImproveContainer}>
                 <p className={styles.mainText}>여드름 호전도 개선 모델 관리</p>
-            </div>
+                <div className={styles.contentBox}>
+                    <div className={styles.startContent}><p className={styles.contentText}>Learning Rate (학습률)</p></div>
+                    <input className={styles.inputBox} type="search" name="learningRate" value={form.learningRate} placeholder="Learning Rate" onChange={onChange} onKeyDown={handleKeyDown}></input>
+                    <div className={styles.startContent}><p className={styles.contentText}>Weight Decay (가중치 감쇠)</p></div>
+                    <input className={styles.inputBox} type="search" name="weightDecay" value={form.weightDecay} placeholder="Weight Decay" onChange={onChange} onKeyDown={handleKeyDown}></input>
+                    <div className={styles.startContent}><p className={styles.contentText}>Epochs (에포크)</p></div>
+                    <input className={styles.inputBox} type="search" name="epochs" value={form.epochs} placeholder="Epochs" onChange={onChange} onKeyDown={handleKeyDown}></input>
+                    <div className={styles.startContent}><p className={styles.contentText}>Patience</p></div>
+                    <input className={styles.inputBox} type="search" name="patience" value={form.patience} placeholder="Patience" onChange={onChange} onKeyDown={handleKeyDown}></input>
+                    <p className={styles.noticeText}>{noticeMessage}</p>
+                    <button className={styles.modelButton} onClick={onClickImproveModel}>모델 재학습</button>
+                </div>
+                </div>
         </div>
     );
 }

@@ -10,9 +10,10 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 
 function AIClassificationPage() {
     const navigate = useNavigate();
-    const [form, setForm] = useState();
+    const [form, setForm] = useState({ learningRate: "", epochs: "", patience: "" });
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
 
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
@@ -32,11 +33,45 @@ function AIClassificationPage() {
         });
     };
 
+    const onClickClassModel = () => {
+        const isConfirmed = window.confirm("여드름 분류 모델을 재학습하시겠습니까?");
+        if (isConfirmed) {
+            // 확인 받았을 경우
+            const requestData = {
+                "learningRate": form.learningRate,
+                "Epochs": form.epochs,
+                "Patience": form.patience,
+            }
+
+            // API URL 설정
+            const apiUrl = 'http://ceprj.gachon.ac.kr:60017/classification_train';
+
+
+        }
+    }
+
+    // 엔터키 누르면 버튼 눌림
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            onClickClassModel();
+        }
+    };
+
     return (
         <div className={styles.AIClassWrapper}>
             <Navbar selectedPage={"AI 모델"}></Navbar>
             <div className={styles.AIClassContainer}>
                 <p className={styles.mainText}>여드름 분류 모델 관리</p>
+                <div className={styles.contentBox}>
+                    <div className={styles.startContent}><p className={styles.contentText}>Learning Rate (학습률)</p></div>
+                    <input className={styles.inputBox} type="search" name="learningRate" value={form.learningRate} placeholder="Learning Rate" onChange={onChange} onKeyDown={handleKeyDown}></input>
+                    <div className={styles.startContent}><p className={styles.contentText}>Epochs (에포크)</p></div>
+                    <input className={styles.inputBox} type="search" name="epochs" value={form.epochs} placeholder="Epochs" onChange={onChange} onKeyDown={handleKeyDown}></input>
+                    <div className={styles.startContent}><p className={styles.contentText}>Patience</p></div>
+                    <input className={styles.inputBox} type="search" name="patience" value={form.patience} placeholder="Patience" onChange={onChange} onKeyDown={handleKeyDown}></input>
+                    <p className={styles.noticeText}>{noticeMessage}</p>
+                    <button className={styles.modelButton} onClick={onClickClassModel}>모델 재학습</button>
+                </div>
             </div>
         </div>
     );
