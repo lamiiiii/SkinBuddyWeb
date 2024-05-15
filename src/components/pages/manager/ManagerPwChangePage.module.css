@@ -16,7 +16,7 @@
 .mainText{ /* 제목 텍스트 (비밀번호 변경) */
     font-size: 35px;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 2%;
     margin-top: 5%;
 }
@@ -33,7 +33,7 @@
 .contentBox{ /* 내용 박스 (input들과 button들) */
     width: 600px;
     height: 450px;
-    border: 1px solid #9ABBF3;
+    border: 0px solid #9ABBF3;
     border-radius: 7px;
     flex-direction: column; /* 요소 세로 정렬*/
     display: flex;

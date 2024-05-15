@@ -26,7 +26,6 @@ function NoticeUpdatePage() {
                 setNoticeData(response.data.list[noticeNum]);
                 const noticeData = response.data.list[noticeNum];
                 if (noticeData) {
-                    console.log('특정 공지사항 내용 반환 응답: ', noticeData);
                     setData(noticeData.content);
                     setForm(noticeData.content);
                     // // : 뒤에 내용만 파싱
@@ -107,7 +106,6 @@ function NoticeUpdatePage() {
                 noticeId: noticeData.noticeId
             }
         };
-        console.log("삭제 요청 할 공지사항 정보: ", requestData);
 
         // 삭제 실행 이중 확인
         const isConfirmed = window.confirm(`${noticeData.noticeId}번 공지사항을 정말로 삭제하시겠습니까?`);
@@ -119,7 +117,6 @@ function NoticeUpdatePage() {
             axios.delete(apiUrl, requestData)
                 .then(response => {
                     // 요청이 성공한 경우 응답한 데이터 처리
-                    console.log('전송 성공: ', response.data);
                     // 서버 응답 처리
                     if (response.data["property"] === 200) {
                         alert(`${noticeData.noticeId}번 공지사항이 삭제되었습니다`);

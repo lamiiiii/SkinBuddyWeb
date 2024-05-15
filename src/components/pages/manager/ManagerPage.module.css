@@ -24,14 +24,14 @@
     /* 제목 텍스트 (관리자 조회) */
     font-size: 35px;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 0%;
     margin-top: 5%;
 }
 
 .searchDiv {
     /* 검색 박스 & 버튼 Div */
-    width: 50%;
+    width: 55%;
     display: flex;
     justify-content: end;
 }
@@ -39,7 +39,7 @@
 .searchInput {
     /* 검색 form 입력 칸 */
     width: 20%;
-    height: 40px;
+    height: 30px;
     border: 0.5px solid black;
     border-radius: 5px;
     margin: 1%;
@@ -55,9 +55,10 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
 
     &:hover {
-        font-weight: bold;
+        font-weight: bolder;
     }
 }
 
@@ -66,9 +67,10 @@
     margin-top: 1%;
     background-color: #F8FAFB;
     border: 0px solid black;
-    width: 50%;
+    border-radius: 10px;
+    width: 55%;
     border-collapse: collapse;
-    /* height: 50%; */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
 
 .tableThNum {
@@ -120,7 +122,7 @@
 
 .addDiv {
     /* 관리자 추가 버튼 Div */
-    width: 50%;
+    width: 55%;
     display: flex;
     justify-content: end;
 }

@@ -22,115 +22,81 @@
 .mainText {
     /* 제목 텍스트 (관리자 정보 수정) */
     font-size: 35px;
-    font-family: 'NanumSquareRoundR';
-    margin-bottom: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    margin-bottom: 3%;
     margin-top: 5%;
 }
 
-.contentBox {
-    /* 내용 박스 (input들) */
-    width: 50%;
-    height: 45%;
+.contentBox{ /* 내용 박스 (input들과 button들) */
+    width: 500px;
+    height: 450px;
+    border: 0px solid #9ABBF3;
+    border-radius: 7px;
     background-color: #F8FAFB;
-    flex-direction: column;
-    /* 요소 세로 정렬*/
+    flex-direction: column; /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 3%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 }
-
-.nameInputBox {
-    /* 관리자명 input */
-    background-color: white;
-    border: 0.1px solid #9D9797;
-    border-radius: 5px;
-    width: 53%;
-    height: 43%;
-    padding-left: 3%;
-    margin-left: 10%;
-    font-family: 'NanumSquareRoundR';
-    font-size: 17px;
+.divBox {
+    /* input과 input이름 Div */
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 80px;
 }
 .inputBox {
-    /* 아이디 입력 input */
+    /* input */
+    width: 350px;
+    height: 45px;
     background-color: white;
     border: 0.1px solid #9D9797;
-    border-radius: 5px;
-    width: 53%;
-    height: 43%;
+    border-radius: 7px;
+    margin-top: 1%;
     padding-left: 3%;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.miniText{ /* 박스 안에 소제목들 */
+    margin-left: 1%;
+    justify-self: start;
+    margin-top: 2%;
+    margin-bottom: 0;
     font-size: 17px;
-}
-
-.managerNameBox {
-    /* 관리자명 Div */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.managerIdBox {
-    /* 관리자 ID Div */
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    width: 70%;
-}
-
-.managerTelBox {
-    /* 관리자 전화번호 Div */
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    width: 70%;
-}
-.sideText{
-    /* '회원정보' Text */
-    width: 72%;
-    font-family: 'NanumSquareRoundEB';
-    font-size: 18px;
-    margin-top: 3%;
-}
-.nameText{
-    /* 세부 Text */
-    font-family: 'NanumSquareRoundB';
-    font-size: 16px;
-}
-.miniText{
-    /* 세부 Text */
-    font-family: 'NanumSquareRoundB';
-    font-size: 16px;
-    margin-bottom: 1%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
 }
 .idText{
     /* 수정 불가한 아이디 Text */
-    font-family: 'NanumSquareRoundEB';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     color: blue;
+    font-size: 16px;
     margin-left: 1.5%;
     margin-top: 0;
 }
 .buttonDiv{
     /* 버튼 가로 정렬 Div */
-    width: 50%;
+    width: 500px;
     display: flex;
     flex-direction: row;
     justify-content: end;
 }
 .button{
     /* 버튼 스타일 */
-    margin: 1%;
-    font-size: 15px;
-    font-family: 'NanumSquareRoundR';
-    background-color: white;
+    /* 검색 버튼 */
+    border: 0px;
+    margin: 2%;
     color: black;
-    border-radius: 3px;
-    border: 0.5px solid black;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 
     &:hover {
-        background-color: #9D9797;
-        color: white;
+        font-weight: bolder;
     }
 }

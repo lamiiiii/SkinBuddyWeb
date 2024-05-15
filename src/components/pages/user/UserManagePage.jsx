@@ -11,6 +11,8 @@ function UserManagePage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ searchId: "" }); // 검색 입력 정보
     const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
@@ -68,6 +70,17 @@ function UserManagePage() {
         console.log(form.searchId);
         returnUserList(form.searchId);
     }
+
+    const lastItemIndex = currentPage * pageSize;
+    const firstItemIndex = lastItemIndex - pageSize;
+    const currentItems = data.slice(firstItemIndex, lastItemIndex);
+
+    const totalPages = Math.ceil(data.length / pageSize);
+
+    const changePage = (number) => {
+        setCurrentPage(number);
+    };
+
     return (
         <div className={styles.userManageWrapper}>
             <Navbar selectedPage={"사용자 정보 관리"}></Navbar>
@@ -88,23 +101,28 @@ function UserManagePage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length > 0 ? (
-                            data.map((item, index) => (
-                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserUpdatePage/${index}`)}>
+                        {currentItems.length > 0 ? currentItems.map((item, index) => (
+                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserUpdatePage/${item.userId}`)}>
                                     <td className={styles.tableTdNum}>{index + 1}</td>
                                     <td className={styles.tableTd}>{item.nickname ? item.nickname : '정보 없음'}</td>
                                     <td className={styles.tableTd}>{item.userId ? item.userId : '정보 없음'}</td>
                                     <td className={styles.tableTd}>{item.tel ? item.tel : '정보 없음'}</td>
                                     <td className={styles.tableTd}>{item.skinType ? item.skinType : '검사 정보 없음'}</td>
                                 </tr>
-                            ))
-                        ) : (
+                            )) : (
                             <tr>
-                                <td colSpan="5" style={{ textAlign: 'center', fontFamily: 'NanumSquareRoundB' }}>검색 결과 없음</td>
+                                <td colSpan="5" style={{ textAlign: 'center' }}>검색 결과 없음</td>
                             </tr>
                         )}
                     </tbody>
                 </table>
+                <div className={styles.pagination}>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                        <button className={styles.paginationButton} key={page} onClick={() => changePage(page)} disabled={page === currentPage}>
+                            {page}
+                        </button>
+                    ))}
+                </div>
             </div>
         </div>
     );

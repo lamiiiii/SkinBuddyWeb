@@ -20,13 +20,14 @@
 .mainText {
     /* 제목 텍스트 (사용자 진단 기록 조회) */
     font-size: 35px;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
     margin-bottom: 2%;
     margin-top: 3%;
 }
 .searchDiv{
     /* 검색 박스 & 버튼 Div */
-    width: 50%;
+    width: 55%;
     display: flex;
     justify-content: end;
 }
@@ -35,28 +36,35 @@
     width: 20%;
     height: 30px;
     border: 0.5px solid black;
-    border-radius: 8px;
+    border-radius: 5px;
     margin: 1%;
     padding-left: 1%;
 }
 .searchButton{
     /* 검색 버튼 */
-    border: 0.5px solid black;
-    border-radius: 10%;
+    border: 0px;
     margin: 1%;
-    color: white;
-    background-color: #9D9797;
-    font-family: 'NanumSquareRoundEB';
+    color: black;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
+
+    &:hover {
+        font-weight: bolder;
+    }
 }
 .recordTable{
     /* 사용자 진단 기록 목록 테이블 */
     margin-top: 1%;
     background-color: #F8FAFB;
     border: 0px solid black;
-    width: 50%;
+    border-radius: 10px;
+    width: 55%;
     border-collapse: collapse;
-    /* height: 50%; */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+
 }
 .tableThNum{
     /* 사용자 진단 기록 목록 테이블 "목록" */
@@ -87,7 +95,7 @@
     text-align: center;
     font-family: 'NanumSquareRoundR';
     border-bottom: 0.5px solid grey;
-    border-right: 1px solid black;
+    border-right: 0.5px solid black;
     margin: 0px;
     padding: 0.5%;
 }
@@ -98,4 +106,15 @@
     border-bottom: 0.5px solid grey;
     margin: 0px;
     padding: 0.5%;
+}
+.pagination{
+    /* 페이징 */
+    margin: 1%;
+    display: flex;
+    flex-direction: row;
+}
+.paginationButton{
+    /* 페이징 버튼 */
+    border: 0px;
+    background-color: white;
 }

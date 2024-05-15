@@ -3,6 +3,7 @@
 .noticeAddWrapper {
     /* 화면 전체 감싸기 */
     width: calc(100%);
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
     height: 100vh;
     /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
 }

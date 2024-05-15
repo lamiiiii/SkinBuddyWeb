@@ -66,7 +66,7 @@ function ManagerPage() {
                 window.location.reload(); // 페이지 새로고침
             }
     }
-    
+
     return (
         <div className={styles.managerWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
@@ -88,7 +88,7 @@ function ManagerPage() {
                     <tbody>
                         {data.length > 0 ? (
                             data.map((item, index) => (
-                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${index}`)}>
+                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}`)}>
                                     <td className={styles.tableTdNum}>{index + 1}</td>
                                     <td className={styles.tableTd}>{item.name}</td>
                                     <td className={styles.tableTd}>{item.managerId}</td>
@@ -97,7 +97,7 @@ function ManagerPage() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4" style={{ textAlign: 'center', fontFamily: 'NanumSquareRoundB'}}>검색 결과 없음</td>
+                                <td colSpan="4" style={{ textAlign: 'center', fontFamily: 'Arial, Helvetica, sans-serif'}}>검색 결과 없음</td>
                             </tr>
                         )}
                     </tbody>

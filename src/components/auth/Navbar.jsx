@@ -37,9 +37,6 @@ function Navbar({ selectedPage }) {
             navigate('/');
         }
     }
-    useEffect(() => {
-        console.log(selectedPage)
-    })
 
     return (
         <div className={styles.navbarWrapper}>

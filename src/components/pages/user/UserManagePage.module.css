@@ -100,3 +100,14 @@
     margin: 0px;
     padding: 0.5%;
 }
+.pagination{
+    /* 페이징 */
+    margin: 1%;
+    display: flex;
+    flex-direction: row;
+}
+.paginationButton{
+    /* 페이징 버튼 */
+    border: 0px;
+    background-color: white;
+}
