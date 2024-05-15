@@ -25,7 +25,6 @@ function ManagerAddPage() {
     }, [isLoggedIn, navigate]
     );
 
-
     const onChange = (e) => { // 폼에 입력한 정보 전달
         const name = e.target.name;
         const value = e.target.value;

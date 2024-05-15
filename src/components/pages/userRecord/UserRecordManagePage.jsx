@@ -59,7 +59,7 @@ function UserRecordManagePage() {
     }
 
     const lastItemIndex = currentPage * pageSize;
-    const firstItemIndex = lastItemIndex - pageSize;
+    const firstItemIndex = lastItemIndex - pageSize; 
     const currentItems = data.slice(firstItemIndex, lastItemIndex);
 
     const totalPages = Math.ceil(data.length / pageSize);

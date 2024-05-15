@@ -11,6 +11,8 @@ function ManagerPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ searchName: "" }); // 검색 입력 정보
     const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
@@ -56,6 +58,16 @@ function ManagerPage() {
         returnManagerList(form.searchName);
     }
 
+    const lastItemIndex = currentPage * pageSize;
+    const firstItemIndex = lastItemIndex - pageSize;
+    const currentItems = data.slice(firstItemIndex, lastItemIndex);
+
+    const totalPages = Math.ceil(data.length / pageSize);
+
+    const changePage = (number) => {
+        setCurrentPage(number);
+    };
+
     // 관리자 추가 버튼 클릭시 실행 함수
     const onClickAdd = () => {
             // 관리자 추가 이중 확인
@@ -86,8 +98,8 @@ function ManagerPage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length > 0 ? (
-                            data.map((item, index) => (
+                        {currentItems.length > 0 ? (
+                            currentItems.map((item, index) => (
                                 <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}`)}>
                                     <td className={styles.tableTdNum}>{index + 1}</td>
                                     <td className={styles.tableTd}>{item.name}</td>
@@ -102,6 +114,13 @@ function ManagerPage() {
                         )}
                     </tbody>
                 </table>
+                <div className={styles.pagination}>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                        <button className={styles.paginationButton} key={page} onClick={() => changePage(page)} disabled={page === currentPage}>
+                            {page}
+                        </button>
+                    ))}
+                </div>
                 <div className={styles.addDiv}><button className={styles.addButton} onClick={(onClickAdd)}>관리자 추가</button></div>
             </div>
         </div>

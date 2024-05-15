@@ -146,7 +146,7 @@ function ManagerUpdatePage() {
         <div className={styles.managerUpdateWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerUpdateContainer}>
-                <p className={styles.mainText}>관리자 정보 수정</p>
+                <p className={styles.mainText}>{((currentId) === "root")?"관리자 정보 수정" : "관리자 정보"}</p>
                 <div className={styles.contentBox}>
                     <div className={styles.divBox}>
                         <p className={styles.miniText}>아이디</p>
