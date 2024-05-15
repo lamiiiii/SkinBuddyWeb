@@ -4,6 +4,7 @@
 .qnaManageWrapper {
     /* 화면 전체 감싸기 */
     width: calc(100%);
+    min-width: 1000px;
     height: 100vh;
     /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
 }
@@ -14,50 +15,40 @@
     height: 100vh;
     /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
     flex-direction: column;
+    /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
-
 }
 
 .mainText {
     /* 제목 텍스트 (QnA 관리) */
     font-size: 35px;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     margin-bottom: 0%;
     margin-top: 5%;
 }
 
-.contentBox {
-    /* 내용 박스 */
-    width: 40%;
-    height: 20%;
-    margin-bottom: 1%;
-    background-color: #F8FAFB;
-}
-
-.contentBox2 {
-    /* 내용 박스 가로 정렬 */
-    flex-direction: row;
-    display: flex;
-}
-
 .qnaTable {
     /* QnA 목록 테이블 */
-    margin-top: 3%;
+    margin-top: 1%;
     background-color: #F8FAFB;
     border: 0px solid black;
-    width: 50%;
+    border-radius: 10px;
+    width: 55%;
     border-collapse: collapse;
-    /* height: 50%; */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* 그림자 추가 */
 }
+
 
 .tableThNum {
     /* QnA 목록 테이블 "목록" */
     text-align: center;
     font-size: 20px;
-    font-family: 'NanumSquareRoundB';
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    border-right: 0.5px solid black;
+    border-bottom: 0.5px solid black;
     padding: 1%;
 }
 
@@ -65,8 +56,8 @@
     /* QnA 목록 테이블 Th */
     text-align: center;
     font-size: 20px;
-    font-family: 'NanumSquareRoundB';
-    border-bottom: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 0.5px solid black;
     padding: 1%;
 }
 
@@ -82,9 +73,9 @@
 .tableTdNum {
     /* QnA 목록 테이블 "목록 - 번호" */
     text-align: center;
-    font-family: 'NanumSquareRoundR';
-    border-bottom: 0.5px solid black;
-    border-right: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 0.5px solid grey;
+    border-right: 0.5px solid black;
     margin: 0px;
     padding: 0.5%;
 }
@@ -92,50 +83,41 @@
 .tableTd {
     /* QnA 목록 테이블 Td */
     text-align: center;
-    font-family: 'NanumSquareRoundR';
-    border-bottom: 0.5px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 0.5px solid grey;
     margin: 0px;
     padding: 0.5%;
 }
+
 .tableTdB {
     /* QnA 목록 테이블 Td */
     text-align: center;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
     border-bottom: 0.5px solid black;
     color: blue;
     margin: 0px;
     padding: 0.5%;
 }
+
 .tableTdR {
     /* QnA 목록 테이블 Td */
     text-align: center;
-    font-family: 'NanumSquareRoundR';
+    font-family: Arial, Helvetica, sans-serif;
     border-bottom: 0.5px solid black;
     color: red;
     margin: 0px;
     padding: 0.5%;
 }
 
-.addDiv {
-    /* 작성하기 버튼 Div */
-    width: 50%;
+.pagination {
+    /* 페이징 */
+    margin: 1%;
     display: flex;
-    justify-content: end;
+    flex-direction: row;
 }
 
-.addButton {
-    /* 작성하기 버튼 */
-    margin-top: 3%;
-    font-size: 15px;
-    font-family: 'NanumSquareRoundR';
+.paginationButton {
+    /* 페이징 버튼 */
+    border: 0px;
     background-color: white;
-    color: black;
-    border-radius: 3px;
-    border: 0.5px solid black;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #9D9797;
-        color: white;
-    }
 }

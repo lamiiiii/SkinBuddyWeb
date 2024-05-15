@@ -10,6 +10,8 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 function QnaManagePage() {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
 
     // QnA 목록 반환
     const returnQnAList = () => {
@@ -19,7 +21,6 @@ function QnaManagePage() {
         axios.get(apiUrl)
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                console.log('QnA 목록 반환 응답: ', response.data);
                 setData(response.data.list);
             })
             .catch(error => {
@@ -32,6 +33,27 @@ function QnaManagePage() {
     useEffect(() => {
         returnQnAList();
     }, []);
+
+        // 내용 간략히 보이기
+        const contentCut = (content) => {
+            // item.content에서 ':'를 기준으로 분리
+            const splitContent = content.includes('\n') ? content.split('\n')[0] : content;
+    
+            // 분리된 내용이 일정 길이 이상이면 자르고, 그렇지 않으면 그대로 사용
+            const displayedContent = splitContent.length > 15 ? splitContent.substring(0, 15) + "..." : splitContent;
+    
+            return (displayedContent);
+        }
+    
+        const lastItemIndex = currentPage * pageSize;
+        const firstItemIndex = lastItemIndex - pageSize;
+        const currentItems = data.slice(firstItemIndex, lastItemIndex);
+    
+        const totalPages = Math.ceil(data.length / pageSize);
+    
+        const changePage = (number) => {
+            setCurrentPage(number);
+        };
 
     return (
         <div className={styles.qnaManageWrapper}>
@@ -48,12 +70,12 @@ function QnaManagePage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length > 0 ? (
-                            data.map((item, index) => (
-                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/QnaAnswerPage/${index}`)}>
+                        {currentItems.length > 0 ? (
+                            currentItems.map((item, index) => (
+                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/QnaAnswerPage/${item.questionId}`)}>
                                     <td className={styles.tableTdNum}>{item.questionId}</td>
                                     {/* QnA 내용 중에서 \n으로 나눠서 \n 앞부분만 목록에 띄움 */}
-                                    <td className={styles.tableTd}>{item.question.split("\n")[0]}</td>
+                                    <td className={styles.tableTd}>{contentCut(item.question)}</td>
                                     <td className={styles.tableTd}>{item.createday}</td>
                                     <td className={item.answer ? styles.tableTdB : styles.tableTdR}>{item.answer ? "답변 완료" : "답변 대기"}</td>
                                 </tr>
@@ -65,6 +87,13 @@ function QnaManagePage() {
                         )}
                     </tbody>
                 </table>
+                <div className={styles.pagination}>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                        <button className={styles.paginationButton} key={page} onClick={() => changePage(page)} disabled={page === currentPage}>
+                            {page}
+                        </button>
+                    ))}
+                </div>
             </div>
         </div>
     );

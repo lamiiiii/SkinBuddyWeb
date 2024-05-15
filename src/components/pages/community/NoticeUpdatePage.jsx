@@ -23,17 +23,17 @@ function NoticeUpdatePage() {
         axios.get(apiUrl)
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                setNoticeData(response.data.list[noticeNum]);
-                const noticeData = response.data.list[noticeNum];
-                if (noticeData) {
-                    setData(noticeData.content);
-                    setForm(noticeData.content);
-                    // // : 뒤에 내용만 파싱
-                    // if (noticeData.content) {
-                    //     setForm(`${noticeData.content.split(":")[0]} \n\n ${noticeData.content.split(":")[1]}`);
-                    // }
+                const notice = response.data.list.find(n => n.noticeId.toString() === noticeNum);
+                if (notice) {
+                    setNoticeData(notice);
+                    setData(notice.content);
+                    setForm(notice.content);
                 } else {
-                    console.error(`공지사항 ${noticeNum}이 존재하지 않습니다.`);
+                    // 일치하는 공지사항이 없는 경우
+                    setData("");
+                    setForm("");
+                    console.error(`공지사항 ${search}이 존재하지 않습니다.`);
+                    navigate("/NoticeManagePage");
                 }
             })
             .catch(error => {
@@ -57,13 +57,11 @@ function NoticeUpdatePage() {
         // 공지사항이 기존 내용에서 수정되었는지 확인
         if (form === data) {
             alert("수정 사항이 없습니다.");
-            console.log("수정 사항 없음");
         } else {
             const requestData = {
                 noticeId: noticeData.noticeId,
                 content: form
             };
-            console.log("수정 요청 보낼 공지사항 내용: ", requestData);
 
             // 수정 완료 실행 이중 확인
             const isConfirmed = window.confirm(`${noticeData.noticeId}번 공지사항을 수정하시겠습니까?`);
@@ -76,7 +74,6 @@ function NoticeUpdatePage() {
                 axios.put(apiUrl, requestData)
                     .then(response => {
                         // 요청이 성공한 경우 응답한 데이터 처리
-                        console.log('전송 성공: ', response.data);
                         if (response.data["property"] === 200) { // 전송 성공 && 수정 완료
                             alert(`${noticeData.noticeId}번 공지사항 수정 성공`);
                             navigate("/NoticeManagePage");
@@ -143,9 +140,9 @@ function NoticeUpdatePage() {
             <div className={styles.noticeUpdateContainer}>
                 <p className={styles.mainText}>공지사항 상세 내용</p>
                 <div className={styles.contentBox}>
-                    <p className={styles.sideText}>글 번호</p>
-                    <p className={styles.noticeIdText}>{noticeData.noticeId}</p>
                     <div className={styles.noticeContentBox}>
+                        <p className={styles.sideText}>글 번호</p>
+                        <p className={styles.noticeIdText}>{noticeData.noticeId}</p>
                         <p className={styles.miniText}>내용</p>
                         <textarea className={styles.textareaBox} value={form} onChange={onChange} placeholder={data}></textarea>
                     </div>

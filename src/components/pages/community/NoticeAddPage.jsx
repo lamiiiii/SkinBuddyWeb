@@ -37,7 +37,6 @@ function NoticeAddPage() {
                 axios.post(apiUrl, requestData)
                 .then(response => {
                     // 요청이 성공한 경우 응답한 데이터 처리
-                    console.log('전송 성공: ', response.data);
                     if (response.data["property"] === 200) { // 전송 성공 && 수정 완료
                         alert(`새로운 공지사항이 작성되었습니다.`);
                         navigate("/NoticeManagePage");
@@ -55,28 +54,47 @@ function NoticeAddPage() {
                 alert("새로운 공지사항 작성 완료 취소");
                 window.location.reload(); // 페이지 새로고침
             }
-
-
         } else {
             alert("공지사항 내용이 없습니다.");
-            console.log("내용 없음.");
             window.location.reload(); // 페이지 새로고침
         }
     }
+
+
+    // 엔터키 누르면 입력칸 검사 함수 onClickCheck호출 (다음 버튼과 같은 기능)
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            onClickAdd();
+        }
+    };
+
+        // form에 하나라도 입력한 경우에 목록 버튼 누르면 경고 알림 확인 받음
+        const handleNavigate = () => {
+            // form에 값이 있는지 확인
+            if (Object.values(form).some(value => value.length > 0)) {
+                const confirmNavigate = window.confirm("작성중인 내용이 지워질 수 있습니다. 계속하시겠습니까?");
+                if (confirmNavigate) {
+                    navigate('/NoticeManagePage');
+                }
+            } else {
+                navigate('/NoticeManagePage');
+            }
+        };
+        
     return (
         <div className={styles.noticeAddWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"} ></Navbar>
             <div className={styles.noticeAddContainer}>
-                <p className={styles.mainText}>공지사항 상세</p>
+                <p className={styles.mainText}>공지사항 작성</p>
                 <div className={styles.contentBox}>
                     <div className={styles.noticeContentBox}>
                         <p className={styles.miniText}>내용</p>
-                        <textarea className={styles.textareaBox} value={form.content} onChange={onChange} placeholder="내용을 입력하세요 (제목에 : 를 붙이세요)"></textarea>
+                        <textarea className={styles.textareaBox} value={form.content} onChange={onChange} placeholder="내용을 입력하세요 (제목에 : 를 붙이세요)" onKeyDown={handleKeyDown}></textarea>
                     </div>
                 </div>
                 <div className={styles.buttonDiv}>
-                    <button className={styles.button} onClick={() => navigate('/NoticeManagePage')}>목록</button>
-                    <button className={styles.button} onClick={(onClickAdd)}>작성 완료</button>
+                    <button className={styles.button} onClick={handleNavigate}>목록</button>
+                    <button className={styles.button} onClick={onClickAdd}>작성 완료</button>
                 </div>
             </div>
         </div>

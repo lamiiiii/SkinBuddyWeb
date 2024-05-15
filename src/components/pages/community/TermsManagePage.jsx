@@ -25,7 +25,6 @@ function TermsManagePage() {
         axios.get(apiUrl)
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                console.log('이용약관 내용 반환 응답: ', response.data);
                 if (response.data["property"] === 404) {
                     setData("내용 없음")
                     setForm("내용 없음")
@@ -50,13 +49,10 @@ function TermsManagePage() {
         // 이용약관이 기존 내용에서 수정되었는지 확인
         if (form === data) {
             alert("수정 사항이 없습니다.");
-            console.log("수정 사항 없음");
         } else {
             const requestData = {
                 terms: form
             };
-            console.log("수정 요청 보낼 이용약관 내용: ", requestData);
-
             // 수정 완료 실행 이중 확인
             const isConfirmed = window.confirm(`이용약관을 수정하시겠습니까?`);
 
@@ -68,7 +64,6 @@ function TermsManagePage() {
                 axios.put(apiUrl, requestData)
                     .then(response => {
                         // 요청이 성공한 경우 응답한 데이터 처리
-                        console.log('전송 성공: ', response.data);
                         if (response.data["property"] === 200) { // 전송 성공 && 수정 완료
                             alert(`이용약관 수정 성공`);
                             navigate("/TermsManagePage");
