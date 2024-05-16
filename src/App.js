@@ -51,7 +51,7 @@ function App(props) {
         <Route path="/UserManagePage" element={<UserManagePage/>}/>
         <Route path="/UserUpdatePage/:userNum" element={<UserUpdatePage/>}/>
         <Route path="/UserRecordManagePage" element={<UserRecordManagePage/>}/>
-        <Route path="/UserRecordUpdatePage" element={<UserRecordUpdatePage/>}/>
+        <Route path="/UserRecordUpdatePage/:userId/:recordId/:aiType" element={<UserRecordUpdatePage/>}/>
         <Route path="/AdManagePage" element={<AdManagePage/>}/>
         <Route path="/NoticeAddPage" element={<NoticeAddPage/>}/>
         <Route path="/NoticeManagePage" element={<NoticeManagePage/>}/>
