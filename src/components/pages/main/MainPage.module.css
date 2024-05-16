@@ -89,6 +89,6 @@
 .graphContentBox{
     /* 유형 분포도 내용 박스 */
     width: 700px;
-    height: 400px;
+    height: auto;
     background-color: #F8FAFB;
 }

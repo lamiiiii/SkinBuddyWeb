@@ -31,7 +31,7 @@ function MainPage(props) {
                 console.error('메인페이지 정보 반환 오류 발생: ', error);
             })
     }
-    
+
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
         if (!isLoggedIn) {
@@ -45,7 +45,11 @@ function MainPage(props) {
     // 막대 그래프 그리기
     const drawBarChart = (data) => {
         const ctx = document.getElementById('myChart').getContext('2d');
-        new Chart(ctx, {
+        // 기존 차트가 있으면 제거 - 중복 제거
+        if (window.barChart !== undefined) {
+            window.barChart.destroy();
+        }
+        window.barChart = new Chart(ctx, {
             type: 'bar',
             // type: 'line',
             data: {
@@ -57,8 +61,8 @@ function MainPage(props) {
                         // data.DSNT, data.DSNW, data.DSPT, data.DSPW,
                         // data.ORNT, data.ORNW, data.ORPT, data.ORPW,
                         // data.OSNT, data.OSNW, data.OSPT, data.OSPW
-                        3, 4, 2, 7, 
-                        18, 3, 5, 2, 
+                        3, 4, 2, 7,
+                        18, 3, 5, 2,
                         1, 4, 23, 1,
                         2, 6, 1, 11,
                     ],
@@ -84,9 +88,17 @@ function MainPage(props) {
                 scales: {
                     y: {
                         beginAtZero: true
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                weight: 'bold' // labels 글씨 두껍게 설정
+                            }
+                        }
                     }
                 }
             }
+
         });
     };
 
