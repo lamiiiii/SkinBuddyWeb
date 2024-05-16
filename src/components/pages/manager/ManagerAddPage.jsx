@@ -37,6 +37,7 @@ function ManagerAddPage() {
     const onClickCheck = () => { // 비밀번호 기준 부합한지 확인
         // 정규 표현식을 사용하여 비밀번호의 유효성을 검사합니다.
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
+        const nameRegex = /^[가-힣a-zA-Z]+$/;  // 이름에 특수 문자를 허용하지 않음
 
         if (form.newId.length < 6) {
             setButton(false);
@@ -56,6 +57,9 @@ function ManagerAddPage() {
         } else if (!form.newName) {
             setButton(false);
             setNoticeMessage("이름을 입력해주세요.");
+        } else if (!nameRegex.test(form.newName)) {
+            setButton(false);
+            setNoticeMessage("이름에는 한글 또는 영문자만 사용할 수 있습니다.");
         } else if (!form.newTel) {
             setButton(false);
             setNoticeMessage("전화번호를 입력해주세요.");
@@ -67,7 +71,7 @@ function ManagerAddPage() {
         if (form.newId.length >= 6) { setCheck({ ...check, checkPwd: true }) } // 비밀번호 입력칸 활성화
         if (form.newPwd.length && passwordRegex.test(form.newPwd)) { setCheck({ ...check, checkNewPwd: true }) } // 비밀번호 확인 입력칸 활성화
         if (form.checkNewPwd && (form.newPwd == form.checkNewPwd)) { setCheck({ ...check, checkName: true }) } // 이름 입력칸 활성화
-        if (form.newName) { setCheck({ ...check, checkTel: true }) } // 전화번호 입력칸 활성화
+        if (form.newName && nameRegex.test(form.newName)) { setCheck({ ...check, checkTel: true }) } // 전화번호 입력칸 활성화
     }
 
     const onClickAddManager = () => { // 관리자 추가 완료 버튼 누르면 실행할 함수

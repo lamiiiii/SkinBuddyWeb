@@ -25,19 +25,7 @@ function UserManagePage() {
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
                 console.log('사용자 정보 목록 반환 응답: ', response.data);
-                if(search === "all"){
-                    setData(response.data.list);
-                } else {
-                    // 검색해서 결과가 1개만 나오면 지가 알아서 배열을 풀어서 각각 저장하는 이슈 때문에 배열로 다시 저장해줌
-                    const userList = [{
-                        nickname: response.data.list[0],
-                        userId: response.data.list[1],
-                        tel: response.data.list[2],
-                        skinType: response.data.list[3]
-                    }]
-                    setData(userList);
-                    console.log("user", userList);
-                }
+                setData(response.data.list);
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리

@@ -113,7 +113,6 @@ function NoticeUpdatePage() {
 
         // 삭제 실행 이중 확인
         const isConfirmed = window.confirm(`${noticeData.noticeId}번 공지사항을 정말로 삭제하시겠습니까?`);
-
         if (isConfirmed) {
             // API URL 설정
             const apiUrl = 'http://52.79.237.164:3000/manager/notice/delete'

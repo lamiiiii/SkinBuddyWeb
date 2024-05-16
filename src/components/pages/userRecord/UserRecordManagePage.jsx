@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import {
-    Link,
     useNavigate, /* 페이지 이동을 위해 */
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
@@ -24,7 +23,6 @@ function UserRecordManagePage() {
         axios.post(apiUrl, { userId: search }) // 진단 기록은 아이디로 찾을테니 아마 수정해야함
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                console.log('사용자 진단 기록 반환 응답: ', response.data);
                 setData(response.data.list);
             })
             .catch(error => {

@@ -12,7 +12,7 @@ function ManagerUpdatePage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ loginManagerId: "", managerName: "", managerId: "", managerTel: "", }); // 검색 입력 정보
     const [data, setData] = useState([]);
-    const { managerNum } = useParams(); // manager table 상세 이름 넘겨받기
+    const { managerNum } = useParams(); // manager table 상세 아이디 넘겨받기
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
@@ -24,6 +24,7 @@ function ManagerUpdatePage() {
         axios.post(apiUrl, { name: search })
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
+                console.log(response.data)
                 setData(response.data.list[0]);
             })
             .catch(error => {
@@ -34,8 +35,17 @@ function ManagerUpdatePage() {
 
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
-        returnManagerInfo(managerNum);
-    }, []);
+        if (isLoggedIn) {
+            if (managerNum) {
+                const decodedManagerNum = decodeURIComponent(managerNum);
+                console.log(decodedManagerNum);
+                returnManagerInfo(decodedManagerNum);
+            }
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [managerNum]);
 
     // 폼에 입력한 정보 전달
     const onChange = (e) => {

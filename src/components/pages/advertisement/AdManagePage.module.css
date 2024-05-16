@@ -11,25 +11,27 @@
     flex-direction: column; /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
-    padding-top: 1%;
 }
 .mainText{ /* 제목 텍스트 (광고 관리) */
-    font-size: 40px;
+    font-size: 35px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
     margin-top: 5%;
 }
 .contentBox{ /* 내용 박스 (input들과 button들) */
-    width: 800px;
-    height: auto;
+    width: 90%;
+    max-height: 400px;
+    overflow-x: auto; /* 가로 스크롤 활성화 */
+    overflow-y: hidden; /* 세로 스크롤 비활성화 */
+    white-space: nowrap; /* 자식 요소를 줄바꿈 없이 한 줄로 */
     border: 0px solid #9ABBF3;
     border-radius: 7px;
     background-color: #F8FAFB;
-    flex-direction: column; /* 요소 세로 정렬*/
+    flex-direction: row; /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
-    justify-content: center;
+
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
     padding-top: 3%;
     padding-bottom: 3%;
@@ -40,13 +42,16 @@
     flex-direction: column;
     width: 700px;
     /* height: 70px; */
-    margin-bottom: 2%;
+    /* margin-bottom: 2%; */
+    align-items: center;
+    justify-content: center;
+    margin: 7%;
 }
 .miniText{ /* 박스 안에 소제목들 */
     margin-left: 1%;
     justify-self: start;
     margin-top: 2%;
-    margin-bottom: 1%;
+    margin-bottom: 3%;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -54,7 +59,7 @@
 .idText{
     /* 수정 불가한 아이디 Text */
     font-family: Arial, Helvetica, sans-serif;
-    /* font-weight: bold; */
+    font-weight: bold;
     color: blue;
     font-size: 16px;
     margin-left: 1.5%;
@@ -62,7 +67,7 @@
 }
 .image{
     /* 기록 사진 */
-    width: 300px;
+    width: 400px;
     height: auto;
     margin-bottom: 2%;
 }
@@ -83,16 +88,44 @@
 .button{
     /* 버튼 스타일 */
     /* 검색 버튼 */
-    border: 0px;
+    padding: 1%;
+    border: 0;
     margin: 2%;
     color: black;
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
 
     &:hover {
         font-weight: bolder;
+    }
+}
+
+.addDiv {
+    /* 관리자 추가 버튼 Div */
+    width: 90%;
+    display: flex;
+    justify-content: end;
+}
+
+.addButton {
+    /* 관리자 추가 버튼 */
+    margin-top: 3%;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: white;
+    color: #9ABBF3;
+    border-radius: 3px;
+    border: 0px solid #9ABBF3;
+    cursor: pointer;
+    padding: 0.5%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
+
+    &:hover {
+        background-color: #9D9797;
+        color: white;
     }
 }

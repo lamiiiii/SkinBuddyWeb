@@ -17,6 +17,7 @@ function AIImprovementPage() {
     const [modalOpen, setModalOpen] = useState(false); // 모달창 오픈을 위함
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
     const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
 
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
@@ -40,14 +41,25 @@ function AIImprovementPage() {
         if (form.learningRate && form.epochs && form.weightDecay && form.patience) {
             const isConfirmed = window.confirm("여드름 호전도 개선 모델을 재학습하시겠습니까?");
             if (isConfirmed) {
-                setLoading(true); setModalOpen(true);
+                setLoading(true); setModalOpen(true); setMessage("모델 재학습을 진행 중입니다. 잠시만 기다려주세요.");
+
+                // 진행률 메시지 업데이트를 위한 변수
+                let progress = 0;
+                const updateProgressInterval = setInterval(() => {
+                    const randomProgress = Math.floor(Math.random() * 5); // 0부터 5까지의 난수 생성
+                    progress += randomProgress;
+                    setMessage(`모델 재학습을 진행 중입니다. 잠시만 기다려주세요. 진행률: ${progress}%`);
+                    if (progress >= 99) {
+                        clearInterval(updateProgressInterval);
+                    }
+                }, 1000);
 
                 // 확인 받았을 경우
                 const requestData = {
-                    "learningRate": form.learningRate,
-                    "weightDecay": form.weightDecay,
-                    "Epochs": form.epochs,
-                    "Patience": form.patience,
+                    "learningRate": parseFloat(form.learningRate),
+                    "weightDecay": parseFloat(form.weightDecay),
+                    "Epochs": parseInt(form.epochs),
+                    "Patience": parseInt(form.patience),
                 }
 
                 // API URL 설정
@@ -55,22 +67,16 @@ function AIImprovementPage() {
 
                 axios.post(apiUrl, requestData)
                     .then(response => {
-                        setLoading(false);
-                        setModalOpen(false);
-                        if (response.data["avgPrecision"] && response.data["avgRecall"]) {
-                            setResultData(response.data);
-                            setModalOpen(true); // 모달창에 재학습된 결과값 띄우기
-                        } else {
-                            alert("다시 시도해주세요.");
-                            window.location.reload();
-                        }
+                        clearInterval(updateProgressInterval);
+                        setLoading(false); setModalOpen(false);
+                        console.log(response.data);
+                        setResultData(response.data);
+                        setModalOpen(true); // 모달창에 재학습된 결과값 띄우기
                     })
                     .catch(error => {
-                        setLoading(false);
-                        // 요청이 실패한 경우 에러 처리
-                        console.error('전송 실패: ', error);
-                        alert('여드름 호전도 모델 재학습에 실패하였습니다. 관리자에게 문의해주세요.')
-                    })
+                        clearInterval(updateProgressInterval);
+                        setLoading(true); setModalOpen(true); setMessage("학과 서버의 GPU 메모리가 부족합니다. 잠시후 다시 시도해주세요.");
+                        console.error('전송 실패: ', error);                    })
             }
         } else {
             alert("비어있는 입력값이 존재합니다. 입력해주세요.");
@@ -105,26 +111,24 @@ function AIImprovementPage() {
                             if (e.target === modalBackground.current) {
                                 setModalOpen(false);
                             }
-                        }}>
+                        }}
+                        >
                             <div className={styles.modalContent}>
-                                <p>{resultData}</p>
-                                <button className={styles.modalCloseButton} onClick={() => setModalOpen(false)}>확인</button>
+                                <p className={styles.miniText}>AvgPrecision: {parseFloat(resultData.avgPrecision).toFixed(5)}</p>
+                                <p className={styles.idText}>정밀도(Precision)는 모델이 탐지한 객체 중에서 실제로 올바른 객체의 비율이다.</p>
+                                <p className={styles.miniText}>AvgRecall: {parseFloat(resultData.avgRecall).toFixed(5)}</p>
+                                <p className={styles.idText}>재현율(Recall)은 실제 객체 중에서 모델이 올바르게 탐지한 비율이다.</p>
+                                <button className={styles.modalCloseButton} onClick={() => { setModalOpen(false); window.location.reload(); }}>확인</button>
                             </div>
                         </div>
                     }
-                    {
-                        loading && modalOpen &&
-                        <div className={styles.modalContainer} ref={modalBackground} onClick={e => {
-                            if (e.target === modalBackground.current) {
-                                setModalOpen(false);
-                            }
-                        }}>
+                    {loading && modalOpen && (
+                        <div className={styles.modalContainer} ref={modalBackground}>
                             <div className={styles.modalContent}>
-                                <p>모델 재학습을 진행 중입니다. 잠시만 기다려주세요.</p>
-                                {/* <button className={styles.modalCloseButton} onClick={() => setModalOpen(false)}>확인</button> */}
+                                <p>{message}</p>
                             </div>
                         </div>
-                    }
+                    )}
                 </div>
             </div>
         </div>

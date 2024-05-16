@@ -71,6 +71,26 @@
 .startContent{
     width: 100%;
 }
+.miniText{ /* 박스 안에 소제목들 */
+    margin-left: 1%;
+    justify-self: start;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    white-space: nowrap; /* 자식 요소를 줄바꿈 없이 한 줄로 */
+}
+.idText{
+    /* 수정 불가한 아이디 Text */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: blue;
+    font-size: 15px;
+    margin-left: 1.5%;
+    margin-top: 0;
+    white-space: nowrap; /* 자식 요소를 줄바꿈 없이 한 줄로 */
+}
 .modelButton{
     width: 360px;
     height: 50px;
