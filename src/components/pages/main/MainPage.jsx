@@ -6,15 +6,7 @@ import {
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
 import styles from "./MainPage.module.css"; // MainPage.module.css import
 import axios from "axios"; // api 통신을 위해 axios install & import
-import {
-    BarChart, Bar,
-    Cell, XAxis,
-    YAxis, CartesianGrid,
-    Tooltip, Legend,
-    ResponsiveContainer
-} from 'recharts'; // 그래프를 위해 import
-import { Chart, registerables } from "chart.js"; // 차트 importnpm install react-chartjs-2 chart.js
-import customBarChart from "../../auth/BarChart"; // BarChart 불러오기
+import Chart from 'chart.js/auto'; // Chart.js import
 
 function MainPage(props) {
     const navigate = useNavigate();
@@ -32,6 +24,7 @@ function MainPage(props) {
                 // 요청이 성공한 경우 응답한 데이터 처리
                 console.log('메인페이지 정보 반환 응답: ', response.data);
                 setData(response.data);
+                drawBarChart(response.data); // 데이터를 기반으로 막대 그래프 그리기
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리
@@ -49,27 +42,37 @@ function MainPage(props) {
         }
     }, []);
 
-    const typeData = {
-        DRNT: data.DRNT,
-        DRNW: data.DRNW,
-        DRPT: data.DRPT,
-        DRPW: data.DRPW,
-        DSNT: data.DSNT,
-        DSNW: data.DSNW,
-        DSPT: data.DSPT,
-        DSPW: data.DSPW,
-        ORNT: data.ORNT,
-        ORNW: data.ORNW,
-        ORPT: data.ORPT,
-        ORPW: data.ORPW,
-        OSNT: data.OSNT,
-        OSNW: data.OSNW,
-        OSPT: data.OSPT,
-        OSPW: data.OSPW,
+    // 막대 그래프 그리기
+    const drawBarChart = (data) => {
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['DRNT', 'DRNW', 'DRPT', 'DRPW', 'DSNT', 'DSNW', 'DSPT', 'DSPW', 'ORNT', 'ORNW', 'ORPT', 'ORPW', 'OSNT', 'OSNW', 'OSPT', 'OSPW'],
+                datasets: [{
+                    label: 'Data',
+                    data: [
+                        data.DRNT, data.DRNW, data.DRPT, data.DRPW,
+                        data.DSNT, data.DSNW, data.DSPT, data.DSPW,
+                        data.ORNT, data.ORNW, data.ORPT, data.ORPW,
+                        data.OSNT, data.OSNW, data.OSPT, data.OSPW
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     };
 
     return (
-
         <div className={styles.mainWrapper}>
             <Navbar></Navbar>
             <div className={styles.mainContainer}>
@@ -83,8 +86,7 @@ function MainPage(props) {
                     <div className={styles.graphBox}>
                         <p className={styles.mainText2}>현재 사용자 유형 분포도</p>
                         <div className={styles.graphContentBox}>
-                            <img style={{ width: '100%', height: '100%'}} src="/img/graph.png"></img>
-                            {/* <BarChart data={typeData} /> */}
+                            <canvas id="myChart"></canvas> {/* 막대 그래프를 그릴 캔버스 */}
                         </div>
                     </div>
                 </div>
