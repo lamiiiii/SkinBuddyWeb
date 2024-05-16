@@ -67,7 +67,6 @@ function UserManagePage() {
 
     // 검색 버튼 클릭 결과 반환
     const onClickSearch = () => {
-        console.log(form.searchId);
         returnUserList(form.searchId);
     }
 

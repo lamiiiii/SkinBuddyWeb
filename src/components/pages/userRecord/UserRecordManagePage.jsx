@@ -9,7 +9,7 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 
 function UserRecordManagePage() {
     const navigate = useNavigate();
-    const [form, setForm] = useState({ search: "" }); // 검색 입력 정보
+    const [form, setForm] = useState({ searchId: "" }); // 검색 입력 정보
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
@@ -55,7 +55,7 @@ function UserRecordManagePage() {
 
     // 검색 버튼 클릭 결과 반환
     const onClickSearch = () => {
-        returnUserRecordList(form.search);
+        returnUserRecordList(form.searchId);
     }
 
     const lastItemIndex = currentPage * pageSize;
@@ -75,7 +75,7 @@ function UserRecordManagePage() {
             <div className={styles.userRecordContainer}>
                 <p className={styles.mainText}>사용자 진단 기록 조회</p>
                 <div className={styles.searchDiv}>
-                    <input className={styles.searchInput} type="text" name="searchName" value={form.searchName} onChange={onChange} placeholder="아이디 검색"></input>
+                    <input className={styles.searchInput} type="text" name="searchId" value={form.searchId} onChange={onChange} placeholder="아이디 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
                 </div>
                 <table className={styles.recordTable}>
@@ -84,14 +84,16 @@ function UserRecordManagePage() {
                             <th className={styles.tableThNum}>목록</th>
                             <th className={styles.tableTh}>아이디</th>
                             <th className={styles.tableTh}>AI 진단 유형</th>
-                            <th className={styles.tableTh}>사진 기록 날짜</th>
+                            <th className={styles.tableTh}>진단 기록 날짜</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentItems.length > 0 ? currentItems.map((item, index) => (
-                            <tr className={styles.tableTr} key={index} onClick>
+                            // 트러블 분석이면 0을 보내고, 호전도 분석이면 1을 보냄
+                            <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserRecordUpdatePage/${item.userId}/${item.recordId}/${item.aiType === "AI 트러블 분석" ? "0" : "1"}`)}>
                                 <td className={styles.tableTdNum}>{item.recordId}</td>
-                                <td className={styles.tableTd}>{item.userId}</td>
+                                <td className={styles.tableTd}>{item.userId ? item.userId : form.searchId}</td>
+                                {/* 검색 결과에 사용자 아이디를 주지 않아요 서버님......엉어엉 */}
                                 <td className={styles.tableTd}>{item.aiType}</td>
                                 <td className={styles.tableTd}>{item.takeDay}</td>
                             </tr>
