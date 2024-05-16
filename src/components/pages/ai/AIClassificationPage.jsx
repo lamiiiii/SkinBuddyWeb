@@ -13,7 +13,7 @@ function AIClassificationPage() {
     const [form, setForm] = useState({ learningRate: "", epochs: "", patience: "" });
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
-    const [resultData, setResultData] = useState({}); // 재학습 결과값
+    const [resultData, setResultData] = useState(""); // 재학습 결과값
     const [modalOpen, setModalOpen] = useState(false); // 모달창 오픈을 위함
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
     const [loading, setLoading] = useState(false);
@@ -43,9 +43,9 @@ function AIClassificationPage() {
                 setLoading(true); setModalOpen(true);
                 // 확인 받았을 경우
                 const requestData = {
-                    "learningRate": form.learningRate,
-                    "Epochs": form.epochs,
-                    "Patience": form.patience,
+                    "learningRate" : form.learningRate,
+                    "Epochs" : form.epochs,
+                    "Patience" : form.patience,
                 }
 
                 // API URL 설정
@@ -53,6 +53,7 @@ function AIClassificationPage() {
     
                 axios.post(apiUrl, requestData)
                 .then(response => {
+                    console.log("requestData: ", JSON.stringify(requestData));
                     setLoading(false);
                     setModalOpen(false);
                     if(response.data["Auc"] && response.data["f1Score"] && response.data["f1ScoreM"] && response.data["f1ScoreW"]){
@@ -64,6 +65,7 @@ function AIClassificationPage() {
                     }
                 })
                 .catch(error => {
+                    console.log("requestData: ", requestData);
                     setLoading(false);
                     // 요청이 실패한 경우 에러 처리
                     console.error('전송 실패: ', error);

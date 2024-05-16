@@ -37,9 +37,11 @@ function AIImprovementPage() {
     };
 
     const onClickImproveModel = () => {
-        if(form.learningRate && form.epochs && form.weightDecay && form.patience){
+        if (form.learningRate && form.epochs && form.weightDecay && form.patience) {
             const isConfirmed = window.confirm("여드름 호전도 개선 모델을 재학습하시겠습니까?");
             if (isConfirmed) {
+                setLoading(true); setModalOpen(true);
+
                 // 확인 받았을 경우
                 const requestData = {
                     "learningRate": form.learningRate,
@@ -47,28 +49,28 @@ function AIImprovementPage() {
                     "Epochs": form.epochs,
                     "Patience": form.patience,
                 }
-    
+
                 // API URL 설정
                 const apiUrl = 'http://ceprj.gachon.ac.kr:60017/detection_train';
-        
+
                 axios.post(apiUrl, requestData)
-                .then(response => {
-                    setLoading(false);
-                    setModalOpen(false);
-                    if(response.data["apScore"]){
-                        setResultData(response.data);
-                        setModalOpen(true); // 모달창에 재학습된 결과값 띄우기
-                    } else {
-                        alert("다시 시도해주세요.");
-                        window.location.reload();
-                    }
-                })
-                .catch(error => {
-                    setLoading(false);
-                    // 요청이 실패한 경우 에러 처리
-                    console.error('전송 실패: ', error);
-                    alert('여드름 호전도 모델 재학습에 실패하였습니다. 관리자에게 문의해주세요.')
-                })
+                    .then(response => {
+                        setLoading(false);
+                        setModalOpen(false);
+                        if (response.data["avgPrecision"] && response.data["avgRecall"]) {
+                            setResultData(response.data);
+                            setModalOpen(true); // 모달창에 재학습된 결과값 띄우기
+                        } else {
+                            alert("다시 시도해주세요.");
+                            window.location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        setLoading(false);
+                        // 요청이 실패한 경우 에러 처리
+                        console.error('전송 실패: ', error);
+                        alert('여드름 호전도 모델 재학습에 실패하였습니다. 관리자에게 문의해주세요.')
+                    })
             }
         } else {
             alert("비어있는 입력값이 존재합니다. 입력해주세요.");
