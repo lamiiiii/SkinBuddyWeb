@@ -24,7 +24,7 @@ function MainPage(props) {
                 // 요청이 성공한 경우 응답한 데이터 처리
                 console.log('메인페이지 정보 반환 응답: ', response.data);
                 setData(response.data);
-                drawBarChart(response.data); // 데이터를 기반으로 막대 그래프 그리기
+                drawLineChart(response.data); // 데이터를 기반으로 선 그래프 그리기
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리
@@ -42,11 +42,11 @@ function MainPage(props) {
         }
     }, []);
 
-    // 막대 그래프 그리기
-    const drawBarChart = (data) => {
+    // 선 그래프 그리기
+    const drawLineChart = (data) => {
         const ctx = document.getElementById('myChart').getContext('2d');
         new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: ['DRNT', 'DRNW', 'DRPT', 'DRPW', 'DSNT', 'DSNW', 'DSPT', 'DSPW', 'ORNT', 'ORNW', 'ORPT', 'ORPW', 'OSNT', 'OSNW', 'OSPT', 'OSPW'],
                 datasets: [{
@@ -57,7 +57,7 @@ function MainPage(props) {
                         data.ORNT, data.ORNW, data.ORPT, data.ORPW,
                         data.OSNT, data.OSNW, data.OSPT, data.OSPW
                     ],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    fill: false,
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
@@ -86,7 +86,7 @@ function MainPage(props) {
                     <div className={styles.graphBox}>
                         <p className={styles.mainText2}>현재 사용자 유형 분포도</p>
                         <div className={styles.graphContentBox}>
-                            <canvas id="myChart"></canvas> {/* 막대 그래프를 그릴 캔버스 */}
+                            <canvas id="myChart"></canvas> {/* 선 그래프를 그릴 캔버스 */}
                         </div>
                     </div>
                 </div>
