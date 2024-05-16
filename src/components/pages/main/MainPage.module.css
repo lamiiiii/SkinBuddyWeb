@@ -24,7 +24,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     margin-bottom: 1%;
-    margin-top: 7%;
+    margin-top: 5%;
 }
 .mainText2 {
     /* 제목 텍스트 (현재 진행 중인 광고, 사용자 유형 분포도) */
@@ -32,7 +32,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     margin-bottom: 1%;
-    margin-top: 10%;
+    margin-top: 7%;
     margin-left: 60px;
     /* 왼쪽 여백 */
     margin-right: 60px;
@@ -76,7 +76,6 @@
     /* 현재 진행 중인 광고 내용 박스 */
     width: 100%;
     height: 300px;
-    background-color: red;
 }
 
 .graphBox {
@@ -85,11 +84,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-right: 100px;
+    margin-right: 50px;
 }
 .graphContentBox{
     /* 유형 분포도 내용 박스 */
-    width: 600px;
-    height: 300px;
+    width: 700px;
+    height: 400px;
     background-color: #F8FAFB;
 }

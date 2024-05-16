@@ -58,7 +58,14 @@ function MainPage(props) {
                         data.OSNT, data.OSNW, data.OSPT, data.OSPW
                     ],
                     fill: false,
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderColor: 'rgba(0, 0, 0, 0.5)',
+                    pointBackgroundColor: [ // 데이터 포인트의 배경색
+                    '#BCD3ED', '#B3A8D3', '#41A3C2', '#F16789',
+                    '#F49AC1', '#F7CDC5', '#D391C0', '#F16789',
+                    '#CCE29D', '#9FD5BC', '#B5D336', '#83C15D',
+                    '#FDD6B9', '#FFE3A3', '#FDD6B9', '#FCB85C'
+                ],
+                pointRadius: 5, // 데이터 포인트의 반지름 설정 (점의 크기)
                     borderWidth: 1
                 }]
             },
