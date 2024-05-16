@@ -10,6 +10,8 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 function NoticeManagePage() {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
 
@@ -31,7 +33,12 @@ function NoticeManagePage() {
 
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
-        returnNoticeList();
+        if (isLoggedIn) {
+            returnNoticeList();
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
     }, []);
 
     // 내용 간략히 보이기

@@ -24,7 +24,7 @@ function MainPage(props) {
                 // 요청이 성공한 경우 응답한 데이터 처리
                 console.log('메인페이지 정보 반환 응답: ', response.data);
                 setData(response.data);
-                drawLineChart(response.data); // 데이터를 기반으로 선 그래프 그리기
+                drawBarChart(response.data); // 데이터를 기반으로 막대 그래프 그리기
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리
@@ -42,30 +42,41 @@ function MainPage(props) {
         }
     }, []);
 
-    // 선 그래프 그리기
-    const drawLineChart = (data) => {
+    // 막대 그래프 그리기
+    const drawBarChart = (data) => {
         const ctx = document.getElementById('myChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
+            // type: 'line',
             data: {
                 labels: ['DRNT', 'DRNW', 'DRPT', 'DRPW', 'DSNT', 'DSNW', 'DSPT', 'DSPW', 'ORNT', 'ORNW', 'ORPT', 'ORPW', 'OSNT', 'OSNW', 'OSPT', 'OSPW'],
                 datasets: [{
                     label: 'Data',
                     data: [
-                        data.DRNT, data.DRNW, data.DRPT, data.DRPW,
-                        data.DSNT, data.DSNW, data.DSPT, data.DSPW,
-                        data.ORNT, data.ORNW, data.ORPT, data.ORPW,
-                        data.OSNT, data.OSNW, data.OSPT, data.OSPW
+                        // data.DRNT, data.DRNW, data.DRPT, data.DRPW,
+                        // data.DSNT, data.DSNW, data.DSPT, data.DSPW,
+                        // data.ORNT, data.ORNW, data.ORPT, data.ORPW,
+                        // data.OSNT, data.OSNW, data.OSPT, data.OSPW
+                        3, 4, 2, 7, 
+                        18, 3, 5, 2, 
+                        1, 4, 23, 1,
+                        2, 6, 1, 11,
                     ],
-                    fill: false,
-                    borderColor: 'rgba(0, 0, 0, 0.5)',
-                    pointBackgroundColor: [ // 데이터 포인트의 배경색
-                    '#BCD3ED', '#B3A8D3', '#41A3C2', '#F16789',
-                    '#F49AC1', '#F7CDC5', '#D391C0', '#F16789',
-                    '#CCE29D', '#9FD5BC', '#B5D336', '#83C15D',
-                    '#FDD6B9', '#FFE3A3', '#FDD6B9', '#FCB85C'
-                ],
-                pointRadius: 5, // 데이터 포인트의 반지름 설정 (점의 크기)
+                    backgroundColor: [
+                        '#BCD3ED', '#B3A8D3', '#41A3C2', '#F16789',
+                        '#F49AC1', '#F7CDC5', '#D391C0', '#F16789',
+                        '#CCE29D', '#9FD5BC', '#B5D336', '#83C15D',
+                        '#FDD6B9', '#FFE3A3', '#FDD6B9', '#FCB85C'
+                    ],
+                    borderColor: 'rgba(255, 255, 255, 0)',
+                    // pointBackgroundColor: [
+                    //     '#BCD3ED', '#B3A8D3', '#41A3C2', '#F16789',
+                    //     '#F49AC1', '#F7CDC5', '#D391C0', '#F16789',
+                    //     '#CCE29D', '#9FD5BC', '#B5D336', '#83C15D',
+                    //     '#FDD6B9', '#FFE3A3', '#FDD6B9', '#FCB85C'
+                    // ],
+                    // borderColor: 'rgba(0, 0, 0, 0.5)',
+                    // pointRadius: 5,
                     borderWidth: 1
                 }]
             },
@@ -93,7 +104,7 @@ function MainPage(props) {
                     <div className={styles.graphBox}>
                         <p className={styles.mainText2}>현재 사용자 유형 분포도</p>
                         <div className={styles.graphContentBox}>
-                            <canvas id="myChart"></canvas> {/* 선 그래프를 그릴 캔버스 */}
+                            <canvas id="myChart"></canvas> {/* 막대 그래프를 그릴 캔버스 */}
                         </div>
                     </div>
                 </div>
