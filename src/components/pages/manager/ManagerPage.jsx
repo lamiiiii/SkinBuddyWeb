@@ -100,7 +100,7 @@ function ManagerPage() {
                         {currentItems.length > 0 ? (
                             currentItems.map((item, index) => (
                                 (currentId === "root" || item.managerId !== "root") && (
-                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}`)}>
+                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}/${item.managerId}`)}>
                                     <td className={styles.tableTdNum}>{index + 1}</td>
                                     <td className={styles.tableTd}>{item.name}</td>
                                     <td className={styles.tableTd}>{item.managerId}</td>

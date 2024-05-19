@@ -34,6 +34,7 @@ import AIImprovementPage from "./components/pages/ai/AIImprovementPage";       /
 import './App.css';
 
 function App(props) {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -46,7 +47,7 @@ function App(props) {
         <Route path="/TypeResultPage" element={<TypeResultPage/>}/>
         <Route path="/ManagerPage" element={<ManagerPage/>}/>
         <Route path="/ManagerAddPage" element={<ManagerAddPage/>}/>
-        <Route path="/ManagerUpdatePage/:managerNum" element={<ManagerUpdatePage/>}/>
+        <Route path="/ManagerUpdatePage/:managerNum/:managerId" element={<ManagerUpdatePage/>}/>
         <Route path="/ManagerPwChangePage" element={<ManagerPwChangePage/>}/>
         <Route path="/UserManagePage" element={<UserManagePage/>}/>
         <Route path="/UserUpdatePage/:userNum" element={<UserUpdatePage/>}/>
