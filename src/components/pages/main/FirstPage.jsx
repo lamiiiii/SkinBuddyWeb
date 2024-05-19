@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
 import { 
     Link, /* 페이지 이동을 위해 */
+    useNavigate,
     } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
 import styles from "./FirstPage.module.css"; // FirstPage.css 파일 import
 
 function FirstPage(props) {
+    const navigate = useNavigate();
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    
+    // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
-        console.log(localStorage.getItem('isLoggedIn'));
-    })
+        if (isLoggedIn) {
+            navigate('/MainPage');
+        } 
+    }, []);
     return (
         <div className={styles.firstWrapper}>
             <Navbar></Navbar>
