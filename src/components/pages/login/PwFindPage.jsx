@@ -37,45 +37,7 @@ function PwFindPage() {
             alert("해당 아이디는 접근 불가능합니다.");
             window.location.reload();
         } else {
-            const isConfirm = window.confirm("임시 비밀번호를 발급받으시겠습니까?");
-            if(isConfirm){
-                if (form.managerId && form.telNumber) {
-                    setNoticeMessage("");
-                    const requestData = { // 전송할 데이터
-                        managerId: form.managerId,
-                        tel: form.telNumber
-                    };
-        
-                    // API URL 설정
-                    // const apiUrl = 'https://r9sesoym3l.execute-api.ap-northeast-2.amazonaws.com/default/manager_findPW'; // 서버리스
-                    const apiUrl = 'http://52.79.237.164:3000/manager/find/psword'; // 비밀번호 찾기 API URL
-        
-        
-                    // axios를 이용하여 POST 요청 보내기
-                    axios.post(apiUrl, requestData)
-                        .then(response => {
-                            // 요청이 성공한 경우 응답한 데이터 처리
-                            if (response.data["property"] === 200) {
-                                console.log('전송 성공: ', response.data);
-                                console.log("아이디:", form.managerId, " 전화번호:", form.telNumber);
-                                setFindPwd(response.data.psword);
-                                setModalOpen(true); // 모달창에 임시 비밀번호 정보 띄우기
-                            } else {
-                                alert(response.data.message);
-                                window.location.reload(); // 페이지 새로 고침
-                            }
-                        })
-                        .catch(error => {
-                            // 요청이 실패한 경우 에러 처리
-                            console.error('전송 실패: ', error);
-                            alert('비밀번호 찾기에 실패하였습니다. 관리자에게 문의하여주세요.');
-                        })
-                } else if (!form.managerId) {
-                    setNoticeMessage("아이디를 입력하세요.");
-                } else {
-                    setNoticeMessage("휴대폰 번호를 입력하세요.");
-                }
-            } // 아무것도 하지 않기.
+
         }
     }
 
