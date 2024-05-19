@@ -142,7 +142,6 @@ function UserHistoryUpdate() {
                         <p className={styles.idText}>{formattedAiType}</p>
                     </div>
                     {/* 유형 - 유형 분류 결과 */}
-                    {/* 번호별 무슨 유형인지 추가 필요 */}
                     {(aiType == 0) && data &&
                         <>
                             <div className={styles.divBox}>
