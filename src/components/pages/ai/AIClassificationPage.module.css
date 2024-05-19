@@ -3,7 +3,8 @@
 .AIClassWrapper {
     /* 화면 전체 감싸기 */
     width: calc(100%);
-    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    min-width: 1000px;
+    /* 화면 축소 최소 넓이 */
     height: 100vh;
     /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
 }
@@ -18,7 +19,9 @@
     align-items: center;
 
 }
-.noticeText{ /* 알림 메세지 */
+
+.noticeText {
+    /* 알림 메세지 */
     width: 350px;
     font-size: 13px;
     font-family: Arial, Helvetica, sans-serif;
@@ -28,6 +31,7 @@
     margin-top: 3%;
     padding: 0;
 }
+
 .mainText {
     /* 제목 텍스트 (여드름 분류 모델 관리) */
     font-size: 35px;
@@ -37,18 +41,23 @@
     margin-top: 5%;
 }
 
-.contentBox{ /* 내용 박스 (input들과 button들) */
+.contentBox {
+    /* 내용 박스 (input들과 button들) */
     width: 600px;
     height: 450px;
     border: 0px solid #9ABBF3;
     border-radius: 7px;
-    flex-direction: column; /* 요소 세로 정렬*/
+    flex-direction: column;
+    /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    /* 그림자 추가 */
 }
-.contentText{ /* 박스 안에 소제목들 */
+
+.contentText {
+    /* 박스 안에 소제목들 */
     margin-left: 21%;
     justify-self: start;
     margin-top: 4%;
@@ -57,7 +66,9 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
 }
-.inputBox{ /* 입력창 박스 */
+
+.inputBox {
+    /* 입력창 박스 */
     background-color: white;
     border: 0.1px solid #9D9797;
     border-radius: 7px;
@@ -69,20 +80,26 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
 }
-.startContent{
+
+.startContent {
     width: 100%;
 }
-.miniText{ /* 박스 안에 소제목들 */
+
+.miniText {
+    /* 박스 안에 소제목들 */
     margin-left: 1%;
-    justify-self: start;
+    justify-self: center;
+    align-self: center;
     margin-top: 2%;
     margin-bottom: 1%;
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    white-space: nowrap; /* 자식 요소를 줄바꿈 없이 한 줄로 */
+    white-space: nowrap;
+    /* 자식 요소를 줄바꿈 없이 한 줄로 */
 }
-.idText{
+
+.idText {
     /* 수정 불가한 아이디 Text */
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
@@ -90,9 +107,11 @@
     font-size: 15px;
     margin-left: 1.5%;
     margin-top: 0;
-    white-space: nowrap; /* 자식 요소를 줄바꿈 없이 한 줄로 */
+    white-space: nowrap;
+    /* 자식 요소를 줄바꿈 없이 한 줄로 */
 }
-.modelButton{
+
+.modelButton {
     width: 360px;
     height: 50px;
     background-color: #9ABBF3;
@@ -105,14 +124,14 @@
     margin-top: 5%;
     margin-bottom: 3%;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* 그림자 추가 */
 
     &:hover {
         background-color: #9D9797;
         color: white;
     }
 }
-
 .modalContainer {
     width: 100%;
     height: 100%;
@@ -124,23 +143,46 @@
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid black;
+    display: flex;
+    flex-direction: column; /* 요소 세로정렬*/
 }
 
 .modalContent {
+        /* 버튼 포함 박스 */
     background-color: #ffffff;
     width: auto;
     height: auto;
-    padding: 15px;
+    padding: 3%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* 그림자 추가 */
-    display: flex;
-    flex-direction: column; /* 요소 가로 정렬*/
+    flex-direction: column;
+    /* 요소 세로 정렬*/
     align-items: center;
     justify-content: center;
     font-size: 23px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.modalCloseButton{
+.modalBox {
+    /* 버튼 뺀 요소 가로 정렬 */
+    display: flex;
+    flex-direction: row;
+    /* 요소 가로정렬*/
+    width: 100%;
+}
+.modalContentBox {
+    display: flex;
+    flex-direction: column; /* 요소 세로정렬*/
+    align-items: center;
+    justify-content: center;
+    margin: 1%;
+}
+.buttonDiv{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modalCloseButton {
     width: 150px;
     height: 30px;
     border: 0px;
@@ -151,7 +193,8 @@
     font-weight: 500;
     margin-top: 5%;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    /* 그림자 추가 */
 
 
     &:hover {
@@ -160,7 +203,7 @@
     }
 }
 
-.image{
+.image {
     /* 기록 사진 */
     width: 400px;
     height: auto;

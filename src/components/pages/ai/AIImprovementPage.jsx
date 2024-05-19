@@ -18,6 +18,7 @@ function AIImprovementPage() {
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
+    const [time, setTime] = useState(0);
 
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
@@ -32,7 +33,7 @@ function AIImprovementPage() {
         const name = e.target.name;
         const value = e.target.value;
         // 숫자가 아닌 값이 입력되었는지 검사
-        if (!isNaN(value) || value === "") { 
+        if (!isNaN(value) || value === "") {
             setForm({
                 ...form,
                 [name]: value
@@ -44,6 +45,10 @@ function AIImprovementPage() {
 
     const onClickImproveModel = () => {
         if (form.learningRate && form.epochs && form.weightDecay && form.patience) {
+            let time = 0;
+            const calculatedTime = 1000 * form.epochs; // 에포크 수에 따른 시간 설정
+            time = calculatedTime;
+
             const isConfirmed = window.confirm("여드름 호전도 개선 모델을 재학습하시겠습니까?");
             if (isConfirmed) {
                 setLoading(true); setModalOpen(true); setMessage("모델 재학습을 진행 중입니다. 잠시만 기다려주세요.");
@@ -57,7 +62,7 @@ function AIImprovementPage() {
                     if (progress >= 95) {
                         clearInterval(updateProgressInterval);
                     }
-                }, 1000);
+                }, time);
 
                 // 확인 받았을 경우
                 const requestData = {
@@ -68,7 +73,7 @@ function AIImprovementPage() {
                 }
 
                 // API URL 설정
-                const apiUrl = 'http://ceprj.gachon.ac.kr:60017/detection_train';
+                const apiUrl = 'http://ceprj.gachon.ac.kr:60017/detection_train'; // 호전도 모델 API
 
                 axios.post(apiUrl, requestData)
                     .then(response => {
@@ -76,6 +81,9 @@ function AIImprovementPage() {
                         setLoading(false); setModalOpen(false);
                         setResultData(response.data);
                         setModalOpen(true); // 모달창에 재학습된 결과값 띄우기
+
+                        // 받은 그래프 사진 서버에 저장해서 메인페이지에 띄우기
+                        graphSave(response.data.photo);
                     })
                     .catch(error => {
                         clearInterval(updateProgressInterval);
@@ -86,6 +94,33 @@ function AIImprovementPage() {
         } else {
             alert("비어있는 입력값이 존재합니다. 입력해주세요.");
         }
+    }
+
+    // 받은 그래프 사진 서버에 저장해서 메인페이지에 띄우기
+    const graphSave = (photo) => {
+
+        // API URL 설정
+        const apiUrl = 'http://52.79.237.164:3000/manager/ai/save/detectionGrp'; // 그래프 저장 API
+        const formData = new FormData();
+        formData.append('photoFile', photo); // 인코딩된 파일명 추가
+
+        // axios를 이용하여 PUT 요청 보내기
+        axios.put(apiUrl, formData)
+            .then(response => {
+                if (response.data.property === 200) {
+                    alert("호전도 그래프 저장 성공");
+                    console.log("호전도 그래프 저장 성공");
+                } else {
+                    alert("호전도 그래프 저장 성공");
+                    console.log("호전도 그래프 저장 실패");
+                }
+            })
+            .catch(error => {
+                // 요청이 실패한 경우 에러 처리
+                console.error('호전도 그래프 저장 오류 발생: ', error);
+                alert('호전도 그래프 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
+            });
+
     }
 
     // 엔터키 누르면 버튼 눌림
@@ -121,13 +156,19 @@ function AIImprovementPage() {
                                 }}
                             >
                                 <div className={styles.modalContent}>
-                                    <p className={styles.miniText}>AvgPrecision: {parseFloat(resultData.avgPrecision).toFixed(5)}</p>
-                                    <p className={styles.idText}>정밀도(Precision)는 모델이 탐지한 객체 중에서 실제로 올바른 객체의 비율이다.</p>
-                                    <p className={styles.miniText}>AvgRecall: {parseFloat(resultData.avgRecall).toFixed(5)}</p>
-                                    <p className={styles.idText}>재현율(Recall)은 실제 객체 중에서 모델이 올바르게 탐지한 비율이다.</p>
-                                    <p className={styles.miniText}>호전도 모델 그래프</p>
-                                <img className={styles.image} src={`data:image/jpeg;base64,${resultData.photo}`} alt="호전도 모델 그래프 사진" />
-                                    <button className={styles.modalCloseButton} onClick={() => { setModalOpen(false); window.location.reload(); }}>확인</button>
+                                    <div className={styles.modalBox}>
+                                        <div className={styles.modalContentBox}>
+                                            <p className={styles.miniText}>AvgPrecision: {parseFloat(resultData.avgPrecision).toFixed(5)}</p>
+                                            <p className={styles.idText}>정밀도(Precision)는 모델이 탐지한 객체 중에서 실제로 올바른 객체의 비율이다.</p>
+                                            <p className={styles.miniText}>AvgRecall: {parseFloat(resultData.avgRecall).toFixed(5)}</p>
+                                            <p className={styles.idText}>재현율(Recall)은 실제 객체 중에서 모델이 올바르게 탐지한 비율이다.</p>
+                                        </div>
+                                        <div className={styles.modalContentBox}>
+                                            <p className={styles.miniText}>호전도 모델 그래프</p>
+                                            <img className={styles.image} src={`data:image/jpeg;base64,${resultData.photo}`} alt="호전도 모델 그래프 사진" />
+                                        </div>
+                                    </div>
+                                    <div className={styles.buttonDiv}><button className={styles.modalCloseButton} onClick={() => { setModalOpen(false); window.location.reload(); }}>확인</button></div>
                                 </div>
                             </div>
                         )

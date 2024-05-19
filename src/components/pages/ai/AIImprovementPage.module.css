@@ -73,7 +73,7 @@
 }
 .miniText{ /* 박스 안에 소제목들 */
     margin-left: 1%;
-    justify-self: start;
+    /* justify-self: start; */
     margin-top: 2%;
     margin-bottom: 1%;
     font-size: 25px;
@@ -123,22 +123,45 @@
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid black;
+    display: flex;
+    flex-direction: column; /* 요소 세로정렬*/
 }
 
 .modalContent {
+        /* 버튼 포함 박스 */
     background-color: #ffffff;
     width: auto;
     height: auto;
-    padding: 15px;
+    padding: 3%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* 그림자 추가 */
-    display: flex;
-    flex-direction: column; /* 요소 가로 정렬*/
+    flex-direction: column;
+    /* 요소 세로 정렬*/
     align-items: center;
     justify-content: center;
     font-size: 23px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.modalBox {
+    /* 버튼 뺀 요소 가로 정렬 */
+    display: flex;
+    flex-direction: row;
+    /* 요소 가로정렬*/
+    width: 100%;
+}
+.modalContentBox {
+    display: flex;
+    flex-direction: column; /* 요소 세로정렬*/
+    align-items: center;
+    justify-content: center;
+    margin: 1%;
+}
+.buttonDiv{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .modalCloseButton{
     width: 150px;
     height: 30px;
