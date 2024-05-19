@@ -27,7 +27,7 @@ function AIClassificationPage() {
         const name = e.target.name;
         const value = e.target.value;
         // 숫자가 아닌 값이 입력되었는지 검사
-        if (!isNaN(value) || value === "") { 
+        if (!isNaN(value) || value === "") {
             setForm({
                 ...form,
                 [name]: value
@@ -77,7 +77,7 @@ function AIClassificationPage() {
                         console.error('전송 실패: ', error);
                         setTimeout(() => {
                             setModalOpen(false);
-                          }, 5000);
+                        }, 5000);
                     })
             }
         } else {
@@ -154,7 +154,9 @@ function AIClassificationPage() {
                                 <p className={styles.idText}>전체 데이터에 대해 계산</p>
                                 <p className={styles.miniText}>F1Score (weighted): {parseFloat(resultData.f1ScoreW).toFixed(5)}</p>
                                 <p className={styles.idText}>각 클래스의 지지도(실제 샘플 수)에 따라 가중 평균</p>
-                                <button className={styles.modalCloseButton} onClick={() => {setModalOpen(false); window.location.reload();}}>확인</button>
+                                <p className={styles.miniText}>분류 모델 그래프</p>
+                                <img className={styles.image} src={`data:image/jpeg;base64,${resultData.photo}`} alt="분류 모델 그래프 사진" />
+                                <button className={styles.modalCloseButton} onClick={() => { setModalOpen(false); window.location.reload(); }}>확인</button>
                             </div>
                         </div>
                     )}

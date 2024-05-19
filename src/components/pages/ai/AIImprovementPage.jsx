@@ -125,6 +125,8 @@ function AIImprovementPage() {
                                     <p className={styles.idText}>정밀도(Precision)는 모델이 탐지한 객체 중에서 실제로 올바른 객체의 비율이다.</p>
                                     <p className={styles.miniText}>AvgRecall: {parseFloat(resultData.avgRecall).toFixed(5)}</p>
                                     <p className={styles.idText}>재현율(Recall)은 실제 객체 중에서 모델이 올바르게 탐지한 비율이다.</p>
+                                    <p className={styles.miniText}>호전도 모델 그래프</p>
+                                <img className={styles.image} src={`data:image/jpeg;base64,${resultData.photo}`} alt="호전도 모델 그래프 사진" />
                                     <button className={styles.modalCloseButton} onClick={() => { setModalOpen(false); window.location.reload(); }}>확인</button>
                                 </div>
                             </div>

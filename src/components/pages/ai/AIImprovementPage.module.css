@@ -158,3 +158,10 @@
         color: white;
     }
 }
+
+.image{
+    /* 기록 사진 */
+    width: 400px;
+    height: auto;
+    margin-bottom: 2%;
+}
