@@ -71,7 +71,7 @@ function Navbar({ selectedPage }) {
                         <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" />
                     </Link>
 
-                    {menuItems.map((item) => (
+                    {/* {menuItems.map((item) => (
                         <ul
                             key={item.name}
                             className={styles.ul}
@@ -79,7 +79,7 @@ function Navbar({ selectedPage }) {
                         >
                             <p className={styles.menuMainText}>{item.name}</p>
                         </ul>
-                    ))}
+                    ))} */}
 
                     <Link className={styles.link} to="/LoginPage">
                         <p className={styles.managerLoginButton}>관리자 로그인</p>
