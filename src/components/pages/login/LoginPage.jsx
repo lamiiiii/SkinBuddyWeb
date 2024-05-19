@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { /* 페이지 이동을 위해 */
     Link,
     useNavigate,
@@ -11,6 +11,14 @@ function LoginPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ managerId: "", managerPw: "" }); // 로그인 입력 정보
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/MainPage');
+        } 
+    }, []);
 
     const onChange = (e) => { // 폼에 입력한 정보 전달
         const name = e.target.name;

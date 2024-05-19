@@ -99,7 +99,7 @@ function ManagerPage() {
                     <tbody>
                         {currentItems.length > 0 ? (
                             currentItems.map((item, index) => (
-                                (currentId === "root" || item.managerId !== "root") && (
+                                (currentId === "root" || item.managerId !== "root") && ( //루트 계정만 루트의 정보를 조회 가능 (나머지 계정은 루트 계정의 존재 확인 불가)
                                 <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}/${item.managerId}`)}>
                                     <td className={styles.tableTdNum}>{index + 1}</td>
                                     <td className={styles.tableTd}>{item.name}</td>

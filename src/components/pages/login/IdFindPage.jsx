@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../auth/Navbar";
 import styles from "./IdFindPage.module.css";
@@ -13,6 +13,14 @@ function IdFindPage() {
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [findIdModalOpen, setFindIdModalOpen] = useState(false);
     const modalBackground = useRef();
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/MainPage');
+        } 
+    }, []);
 
     const onChange = (e) => {
         const name = e.target.name;
