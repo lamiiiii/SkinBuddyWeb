@@ -71,6 +71,7 @@ function Navbar({ selectedPage }) {
                         <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" />
                     </Link>
 
+                    {/* 상태바 가림 */}
                     {/* {menuItems.map((item) => (
                         <ul
                             key={item.name}
