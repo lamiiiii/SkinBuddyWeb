@@ -54,9 +54,13 @@ function NoticeUpdatePage() {
         }
     }, []);
 
-    const onChange = (e) => { // 폼에 입력한 정보 전달
+    const onChange = (e) => { 
         const value = e.target.value;
-        setForm(value);
+        if (value.length <= 400) {
+            setForm(value);
+        } else {
+            alert("입력 값은 최대 400자까지만 허용됩니다.");
+        }
     };
 
     // 수정 완료 버튼 클릭 실행 함수

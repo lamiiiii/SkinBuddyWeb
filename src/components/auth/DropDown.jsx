@@ -7,14 +7,14 @@ import styles from './Dropdown.module.css';
 
 function Dropdown({ cursorMenu }) {
     const navigate = useNavigate();
-    
+
     return (
         <>
             <div className={styles.dropdownWrapper}>
                 {cursorMenu === 1 && (
                     <div className={styles.menu}>
-                        <li className={styles.menuText} onClick={() => navigate('/ManagerPage')}>관리자 관리</li>
-                        <li className={styles.menuText} onClick={() => navigate('/ManagerPwChangePage')}>비밀번호 변경</li>
+                        <li className={styles.menuText} onClick={() => {navigate('/ManagerPage'); window.location.reload();}}>관리자 관리</li>
+                        <li className={styles.menuText} onClick={() => {navigate('/ManagerPwChangePage'); window.location.reload();}}>비밀번호 변경</li>
                     </div>
                 )}
                 {cursorMenu === 2 && (

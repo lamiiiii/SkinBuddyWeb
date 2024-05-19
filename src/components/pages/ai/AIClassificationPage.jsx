@@ -26,10 +26,15 @@ function AIClassificationPage() {
     const onChange = (e) => { // 폼에 입력한 정보 전달
         const name = e.target.name;
         const value = e.target.value;
-        setForm({
-            ...form,
-            [name]: value
-        });
+        // 숫자가 아닌 값이 입력되었는지 검사
+        if (!isNaN(value) || value === "") { 
+            setForm({
+                ...form,
+                [name]: value
+            });
+        } else {
+            alert("숫자를 입력해주세요.");
+        }
     };
 
     const onClickClassModel = () => {
@@ -44,7 +49,7 @@ function AIClassificationPage() {
                     const randomProgress = Math.floor(Math.random() * 5); // 0부터 5까지의 난수 생성
                     progress += randomProgress;
                     setMessage(`모델 재학습을 진행 중입니다. 잠시만 기다려주세요. 진행률: ${progress}%`);
-                    if (progress >= 99) {
+                    if (progress >= 95) {
                         clearInterval(updateProgressInterval);
                     }
                 }, 1000);
@@ -70,6 +75,9 @@ function AIClassificationPage() {
                         clearInterval(updateProgressInterval);
                         setLoading(true); setModalOpen(true); setMessage("학과 서버의 GPU 메모리가 부족합니다. 잠시후 다시 시도해주세요.");
                         console.error('전송 실패: ', error);
+                        setTimeout(() => {
+                            setModalOpen(false);
+                          }, 5000);
                     })
             }
         } else {

@@ -24,7 +24,6 @@ function Navbar({ selectedPage }) {
         setIsDropdownOpen(true);
     };
 
-
     const closeDropdown = () => {
         setSelectedMenu();
         setIsDropdownOpen(false);

@@ -127,8 +127,8 @@
 
 .modalContent {
     background-color: #ffffff;
-    width: 33%;
-    height: 17%;
+    width: auto;
+    height: auto;
     padding: 15px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* 그림자 추가 */
     display: flex;

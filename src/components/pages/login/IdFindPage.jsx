@@ -83,7 +83,7 @@ function IdFindPage() {
                         }
                         <p className={styles.informText}>회원정보에 등록한 휴대폰 번호로 아이디를 찾을 수 있습니다.</p>
                     </div>
-                    <p className={styles.smallText2} onClick={() => navigate('/LoginPage')}>관리자 로그인</p>
+                    <p className={styles.smallText2} onClick={() => navigate('/LoginPage')}>로그인 페이지로 이동</p>
                 </div>
             </div>
         </>

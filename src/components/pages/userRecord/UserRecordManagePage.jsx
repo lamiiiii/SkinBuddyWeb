@@ -91,7 +91,6 @@ function UserRecordManagePage() {
                             <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserRecordUpdatePage/${item.userId}/${item.recordId}/${item.aiType === "AI 트러블 분석" ? "0" : "1"}`)}>
                                 <td className={styles.tableTdNum}>{item.recordId}</td>
                                 <td className={styles.tableTd}>{item.userId ? item.userId : form.searchId}</td>
-                                {/* 검색 결과에 사용자 아이디를 주지 않아요 서버님......엉어엉 */}
                                 <td className={styles.tableTd}>{item.aiType}</td>
                                 <td className={styles.tableTd}>{item.takeDay}</td>
                             </tr>

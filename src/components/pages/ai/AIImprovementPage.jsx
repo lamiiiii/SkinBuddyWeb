@@ -13,7 +13,7 @@ function AIImprovementPage() {
     const [form, setForm] = useState({ learningRate: "", weightDecay: "", epochs: "", patience: "" });
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
-    const [resultData, setResultData] = useState({}); // 재학습 결과값
+    const [resultData, setResultData] = useState(null); // 재학습 결과값
     const [modalOpen, setModalOpen] = useState(false); // 모달창 오픈을 위함
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
     const [loading, setLoading] = useState(false);
@@ -31,10 +31,15 @@ function AIImprovementPage() {
     const onChange = (e) => { // 폼에 입력한 정보 전달
         const name = e.target.name;
         const value = e.target.value;
-        setForm({
-            ...form,
-            [name]: value
-        });
+        // 숫자가 아닌 값이 입력되었는지 검사
+        if (!isNaN(value) || value === "") { 
+            setForm({
+                ...form,
+                [name]: value
+            });
+        } else {
+            alert("숫자를 입력해주세요.");
+        }
     };
 
     const onClickImproveModel = () => {
@@ -49,7 +54,7 @@ function AIImprovementPage() {
                     const randomProgress = Math.floor(Math.random() * 5); // 0부터 5까지의 난수 생성
                     progress += randomProgress;
                     setMessage(`모델 재학습을 진행 중입니다. 잠시만 기다려주세요. 진행률: ${progress}%`);
-                    if (progress >= 99) {
+                    if (progress >= 95) {
                         clearInterval(updateProgressInterval);
                     }
                 }, 1000);
@@ -69,14 +74,14 @@ function AIImprovementPage() {
                     .then(response => {
                         clearInterval(updateProgressInterval);
                         setLoading(false); setModalOpen(false);
-                        console.log(response.data);
                         setResultData(response.data);
                         setModalOpen(true); // 모달창에 재학습된 결과값 띄우기
                     })
                     .catch(error => {
                         clearInterval(updateProgressInterval);
                         setLoading(true); setModalOpen(true); setMessage("학과 서버의 GPU 메모리가 부족합니다. 잠시후 다시 시도해주세요.");
-                        console.error('전송 실패: ', error);                    })
+                        console.error('전송 실패: ', error);
+                    })
             }
         } else {
             alert("비어있는 입력값이 존재합니다. 입력해주세요.");
@@ -106,21 +111,24 @@ function AIImprovementPage() {
                     <input className={styles.inputBox} type="search" name="patience" value={form.patience} placeholder="Patience" onChange={onChange} onKeyDown={handleKeyDown}></input>
                     <button className={styles.modelButton} onClick={onClickImproveModel}>모델 재학습</button>
                     {
-                        resultData && modalOpen &&
-                        <div className={styles.modalContainer} ref={modalBackground} onClick={e => {
-                            if (e.target === modalBackground.current) {
-                                setModalOpen(false);
-                            }
-                        }}
-                        >
-                            <div className={styles.modalContent}>
-                                <p className={styles.miniText}>AvgPrecision: {parseFloat(resultData.avgPrecision).toFixed(5)}</p>
-                                <p className={styles.idText}>정밀도(Precision)는 모델이 탐지한 객체 중에서 실제로 올바른 객체의 비율이다.</p>
-                                <p className={styles.miniText}>AvgRecall: {parseFloat(resultData.avgRecall).toFixed(5)}</p>
-                                <p className={styles.idText}>재현율(Recall)은 실제 객체 중에서 모델이 올바르게 탐지한 비율이다.</p>
-                                <button className={styles.modalCloseButton} onClick={() => { setModalOpen(false); window.location.reload(); }}>확인</button>
+                        resultData && modalOpen && (
+                            <div
+                                className={styles.modalContainer}
+                                ref={modalBackground} onClick={e => {
+                                    if (e.target === modalBackground.current) {
+                                        setModalOpen(false);
+                                    }
+                                }}
+                            >
+                                <div className={styles.modalContent}>
+                                    <p className={styles.miniText}>AvgPrecision: {parseFloat(resultData.avgPrecision).toFixed(5)}</p>
+                                    <p className={styles.idText}>정밀도(Precision)는 모델이 탐지한 객체 중에서 실제로 올바른 객체의 비율이다.</p>
+                                    <p className={styles.miniText}>AvgRecall: {parseFloat(resultData.avgRecall).toFixed(5)}</p>
+                                    <p className={styles.idText}>재현율(Recall)은 실제 객체 중에서 모델이 올바르게 탐지한 비율이다.</p>
+                                    <button className={styles.modalCloseButton} onClick={() => { setModalOpen(false); window.location.reload(); }}>확인</button>
+                                </div>
                             </div>
-                        </div>
+                        )
                     }
                     {loading && modalOpen && (
                         <div className={styles.modalContainer} ref={modalBackground}>

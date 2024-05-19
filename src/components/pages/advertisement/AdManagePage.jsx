@@ -67,35 +67,36 @@ function AdManagePage() {
         };
         reader.readAsDataURL(file);
     };
+// 광고 추가 함수
+const onClickAdd = () => {
+    if (!selectedFile) {
+        alert("파일을 선택해주세요.");
+        return;
+    }
 
-    // 광고 추가 함수
-    const onClickAdd = () => {
-        if (!selectedFile) {
-            alert("파일을 선택해주세요.");
-            return;
-        }
+    // 파일명 인코딩
+    const encodedFileName = encodeURIComponent(selectedFile.name);
+    const formData = new FormData();
+    formData.append('photoFile', selectedFile, encodedFileName); // 인코딩된 파일명 추가
+    const apiUrl = 'http://52.79.237.164:3000/manager/advertise/create'; // 광고 업로드 API
 
-        const formData = new FormData();
-        formData.append('photoFile', selectedFile, selectedFile.name); // 명시적으로 파일 이름 추가
-        const apiUrl = 'http://52.79.237.164:3000/manager/advertise/create'; // 광고 업로드 API
-
-        // axios를 이용하여 POST 요청 보내기
-        axios.post(apiUrl, formData)
-            .then(response => {
-                if (response.data.property === 200) {
-                    alert("광고가 성공적으로 추가되었습니다.");
-                    returnAdList(); // 목록 갱신
-                    setSelectedFile(null); // 파일 선택 초기화
-                } else {
-                    alert("광고 추가에 실패하였습니다.");
-                }
-            })
-            .catch(error => {
-                // 요청이 실패한 경우 에러 처리
-                console.error('광고 추가 오류 발생: ', error);
-                alert('광고 추가 중 오류가 발생했습니다. 다시 시도해주세요.');
-            });
-    };
+    // axios를 이용하여 POST 요청 보내기
+    axios.post(apiUrl, formData)
+        .then(response => {
+            if (response.data.property === 200) {
+                alert("광고가 성공적으로 추가되었습니다.");
+                returnAdList(); // 목록 갱신
+                setSelectedFile(null); // 파일 선택 초기화
+            } else {
+                alert("광고 추가에 실패하였습니다.");
+            }
+        })
+        .catch(error => {
+            // 요청이 실패한 경우 에러 처리
+            console.error('광고 추가 오류 발생: ', error);
+            alert('광고 추가 중 오류가 발생했습니다. 다시 시도해주세요.');
+        });
+};
 
     // 광고 삭제 함수
     const onClickDelete = (advertisementId) => {

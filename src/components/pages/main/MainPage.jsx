@@ -11,6 +11,9 @@ import Chart from 'chart.js/auto'; // Chart.js import
 function MainPage(props) {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [advertisements, setAdvertisements] = useState([]);
+    const [currentAdIndex, setCurrentAdIndex] = useState(0);
+    const [intervalId, setIntervalId] = useState(null);
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
@@ -32,6 +35,18 @@ function MainPage(props) {
             })
     }
 
+    // 광고 반환
+    const returnAdList = () => {
+        const apiUrl = 'http://52.79.237.164:3000/manager/advertise/list';
+        axios.get(apiUrl)
+            .then(response => {
+                setAdvertisements(response.data.data);
+            })
+            .catch(error => {
+                console.error('광고 목록 반환 오류 발생: ', error);
+            });
+    };
+
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
         if (!isLoggedIn) {
@@ -39,8 +54,41 @@ function MainPage(props) {
             navigate("/LoginPage"); // 로그인 페이지로 이동
         } else {
             returnMainInformation();
+            returnAdList(); // 광고 목록 불러오기
         }
     }, []);
+
+    useEffect(() => {
+        if (advertisements.length > 1) {
+            // startAutoSlide();
+        }
+    }, [advertisements]);
+
+    const startAutoSlide = () => {
+        // 3초마다 다음 광고로 자동 슬라이드
+        const id = setInterval(() => {
+            setCurrentAdIndex(prevIndex => (prevIndex + 1) % advertisements.length);
+        }, 3000);
+        setIntervalId(id);
+    }
+
+    const stopAutoSlide = () => {
+        // 자동 슬라이드 멈춤
+        clearInterval(intervalId);
+        setIntervalId(null);
+    }
+
+    const goToPrevAd = () => {
+        // 이전 광고로 이동
+        setCurrentAdIndex(prevIndex => (prevIndex === 0 ? advertisements.length - 1 : prevIndex - 1));
+        stopAutoSlide();
+    }
+
+    const goToNextAd = () => {
+        // 다음 광고로 이동
+        setCurrentAdIndex(prevIndex => (prevIndex + 1) % advertisements.length);
+        stopAutoSlide();
+    }
 
     // 막대 그래프 그리기
     const drawBarChart = (data) => {
@@ -57,14 +105,14 @@ function MainPage(props) {
                 datasets: [{
                     label: 'Data',
                     data: [
-                        // data.DRNT, data.DRNW, data.DRPT, data.DRPW,
-                        // data.DSNT, data.DSNW, data.DSPT, data.DSPW,
-                        // data.ORNT, data.ORNW, data.ORPT, data.ORPW,
-                        // data.OSNT, data.OSNW, data.OSPT, data.OSPW
-                        3, 4, 2, 7,
-                        18, 3, 5, 2,
-                        1, 4, 23, 1,
-                        2, 6, 1, 11,
+                        data.DRNT, data.DRNW, data.DRPT, data.DRPW,
+                        data.DSNT, data.DSNW, data.DSPT, data.DSPW,
+                        data.ORNT, data.ORNW, data.ORPT, data.ORPW,
+                        data.OSNT, data.OSNW, data.OSPT, data.OSPW
+                        // 3, 4, 2, 7,
+                        // 18, 3, 5, 2,
+                        // 1, 4, 23, 1,
+                        // 2, 6, 1, 11,
                     ],
                     backgroundColor: [
                         '#BCD3ED', '#B3A8D3', '#41A3C2', '#F16789',
@@ -111,7 +159,15 @@ function MainPage(props) {
                 <div className={styles.contentBox2}>
                     <div className={styles.adBox}>
                         <p className={styles.mainText2}>현재 진행 중인 광고</p>
-                        <div className={styles.adContentBox}></div>
+                        <div className={styles.adContentBox}>
+                        {advertisements.length > 0 && (
+                                <img className={styles.image} src={`data:image/jpeg;base64,${advertisements[currentAdIndex].photo}`} alt={`Advertisement ${currentAdIndex + 1}`}/>
+                            )}
+                            <div className={styles.buttonDiv}>
+                            <button className={styles.button} onClick={goToPrevAd}>이전</button>
+                            <button className={styles.button} onClick={goToNextAd}>다음</button>
+                            </div>
+                        </div>
                     </div>
                     <div className={styles.graphBox}>
                         <p className={styles.mainText2}>현재 사용자 유형 분포도</p>

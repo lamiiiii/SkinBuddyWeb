@@ -12,9 +12,13 @@ function NoticeAddPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState([]); // 공지사항 내용
 
-    const onChange = (e) => { // 폼에 입력한 정보 전달
+    const onChange = (e) => { 
         const value = e.target.value;
-        setForm(value);
+        if (value.length <= 400) {
+            setForm(value);
+        } else {
+            alert("입력 값은 최대 400자까지만 허용됩니다.");
+        }
     };
 
     // 공지사항 추가 버튼 클릭 실행 함수
