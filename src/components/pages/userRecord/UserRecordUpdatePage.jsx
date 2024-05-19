@@ -42,6 +42,23 @@ function UserHistoryUpdate() {
                 if (aiType === "0" && response.data["property"] === 200) {
                     // 유형 분석일 경우
                     setData(response.data["data"]);
+                    // 유형에 따른 결과 저장
+                    switch(response.data["data"].troubleType) {
+                        case 0:
+                            response.data["data"].troubleType = "깨끗하거나 면포";
+                            break;
+                        case 1:
+                            response.data["data"].troubleType = "구진";
+                            break;
+                        case 2:
+                            response.data["data"].troubleType = "농포";
+                            break;
+                        case 3:
+                            response.data["data"].troubleType = "결절";
+                            break;
+                        default:
+                            response.data["data"].troubleType = "알 수 없는 유형";
+                    }
                     setCurrentData(""); setPastData(""); setImprovement("");
                 } else if (aiType === "1" && response.data["property"] === 200) {
                     // 호전도 분석일 경우
