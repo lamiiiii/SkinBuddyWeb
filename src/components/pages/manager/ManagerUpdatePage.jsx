@@ -19,30 +19,34 @@ function ManagerUpdatePage() {
 
     // 특정 관리자 세부 정보 반환 
     const returnManagerInfo = (search) => {
-        const apiUrl = 'http://52.79.237.164:3000/manager/list'; // 관리자 목록 반환 API URL
+        if (currentId !== 'root' && managerId === 'root') {
+        // root 계정이 아닌데 root 정보 수정페이지를 url 입력으로 접근할 경우
+        alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+    } else {
+            const apiUrl = 'http://52.79.237.164:3000/manager/list'; // 관리자 목록 반환 API URL
 
-        // axios를 이용하여 POST 요청 보내기
-        axios.post(apiUrl, { name: search })
-            .then(response => {
-                // 요청이 성공한 경우 응답한 데이터 처리
-                console.log(response.data);
-
-                // 받아온 데이터에서 특정 managerId와 일치하는 값 필터링
-                const managerIdToFind = managerId; // 동명이인 처리를 위해 이름과 아이디 이중 확인
-                const matchedManager = response.data.list.find(manager => manager.managerId === managerIdToFind);
-
-                // 필터링된 결과를 setData에 설정
-                if (matchedManager) {
-                    setData(matchedManager);
-                } else {
-                    console.error('해당 managerId를 가진 관리자를 찾을 수 없습니다.');
-                }
-            })
-            .catch(error => {
-                // 요청이 실패한 경우 에러 처리
-                console.error('특정 관리자 세부 정보 반환 오류 발생: ', error);
-            });
-
+            // axios를 이용하여 POST 요청 보내기
+            axios.post(apiUrl, { name: search })
+                .then(response => {
+                    // 요청이 성공한 경우 응답한 데이터 처리
+                    console.log(response.data);
+    
+                    // 받아온 데이터에서 특정 managerId와 일치하는 값 필터링
+                    const managerIdToFind = managerId; // 동명이인 처리를 위해 이름과 아이디 이중 확인
+                    const matchedManager = response.data.list.find(manager => manager.managerId === managerIdToFind);
+    
+                    // 필터링된 결과를 setData에 설정
+                    if (matchedManager) {
+                        setData(matchedManager);
+                    } else {
+                        console.error('해당 managerId를 가진 관리자를 찾을 수 없습니다.');
+                    }
+                })
+                .catch(error => {
+                    // 요청이 실패한 경우 에러 처리
+                    console.error('특정 관리자 세부 정보 반환 오류 발생: ', error);
+                });
+        }
     }
 
     // 페이지 렌더링 처음에 자동 목록 반환
@@ -71,7 +75,7 @@ function ManagerUpdatePage() {
 
     // 수정 완료 버튼 누르면 관리자 정보 수정하는 함수
     const onClickManagerUpdate = () => {
-        // root 계정인지 확인
+        // root 계정인지 확인 또는 본인 계정
         if (currentId === "root" || currentId === data.managerId) {
             // 수정 사항이 있는지 확인
             const nameRegex = /^[가-힣a-zA-Z]+$/;  // 이름에 특수 문자를 허용하지 않음
@@ -115,9 +119,10 @@ function ManagerUpdatePage() {
                                 console.error('전송 실패: ', error);
                                 alert('사용자 정보 수정 실패하였습니다. 관리자에게 문의하세요.');
                             })
-                    } else {
-                        alert("이름에는 한글 또는 영문자만 사용할 수 있습니다.");
-                    }
+                    } 
+                } else {
+                    alert("이름에는 한글 또는 영문자만 사용할 수 있습니다. (공백 문자 불가)");
+                    window.location.reload(); // 페이지 새로고침
                 }
             }
         }
@@ -125,7 +130,7 @@ function ManagerUpdatePage() {
 
     // 삭제 버튼 누르면 관리자 삭제하는 함수
     const onClickDelete = () => {
-        // root 계정인지 확인
+        // root 계정인지 확인 또는 본인 계정
         if (currentId === "root" || currentId === data.managerId) {
             const requestData = {
                 data: {
