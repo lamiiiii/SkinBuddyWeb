@@ -46,7 +46,7 @@ function AIImprovementPage() {
     const onClickImproveModel = () => {
         if (form.learningRate && form.epochs && form.weightDecay && form.patience) {
             let time = 0;
-            const calculatedTime = 1000 * form.epochs; // 에포크 수에 따른 시간 설정
+            const calculatedTime = 500 * form.epochs; // 에포크 수에 따른 시간 설정
             time = calculatedTime;
 
             const isConfirmed = window.confirm("여드름 호전도 개선 모델을 재학습하시겠습니까?");
@@ -102,16 +102,19 @@ function AIImprovementPage() {
         // API URL 설정
         const apiUrl = 'http://52.79.237.164:3000/manager/ai/save/detectionGrp'; // 그래프 저장 API
         const formData = new FormData();
-        formData.append('photoFile', photo); // 인코딩된 파일명 추가
+
+        // base64 문자열을 Blob으로 변환
+        const byteCharacters = atob(photo);
+        const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+        formData.append('photoFile', blob, 'detectionGraph.jpg');
 
         // axios를 이용하여 PUT 요청 보내기
         axios.put(apiUrl, formData)
             .then(response => {
-                if (response.data.property === 200) {
-                    alert("호전도 그래프 저장 성공");
-                    console.log("호전도 그래프 저장 성공");
-                } else {
-                    alert("호전도 그래프 저장 성공");
+                if (response.data.property !== 200) {
                     console.log("호전도 그래프 저장 실패");
                 }
             })

@@ -97,16 +97,20 @@ function AIClassificationPage() {
 
         // API URL 설정
         const apiUrl = 'http://52.79.237.164:3000/manager/ai/save/classificationGrp'; // 그래프 저장 API
-
         const formData = new FormData();
-        formData.append('photoFile', photo); // 인코딩된 파일명 추가
+
+        // base64 문자열을 Blob으로 변환
+        const byteCharacters = atob(photo);
+        const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+        formData.append('photoFile', blob, 'classificationGraph.jpg');
 
         // axios를 이용하여 PUT 요청 보내기
         axios.put(apiUrl, formData)
             .then(response => {
-                if (response.data.property === 200) {
-                    console.log("분류 그래프 저장 성공");
-                } else {
+                if (response.data.property !== 200) {
                     console.log("분류 그래프 저장 실패");
                 }
             })
