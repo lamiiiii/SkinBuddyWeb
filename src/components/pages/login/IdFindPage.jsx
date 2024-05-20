@@ -14,11 +14,16 @@ function IdFindPage() {
     const modalBackground = useRef();
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
         if (isLoggedIn) {
             navigate('/MainPage');
-        } 
+        }
     }, []);
 
     const onChange = (e) => {
@@ -70,7 +75,7 @@ function IdFindPage() {
                     <div className={styles.contentBox}>
                         <div className={styles.telContent}>
                             <p className={styles.telText}>휴대폰 번호</p>
-                            <input className={styles.telInput} type="text" name="telNumber" value={form.telNumber} onChange={onChange} placeholder="'-'빼고 숫자만 입력" onKeyDown={handleKeyDown}  autoFocus ></input>
+                            <input className={styles.telInput} type="text" name="telNumber" value={form.telNumber} onChange={onChange} placeholder="'-'빼고 숫자만 입력" onKeyDown={handleKeyDown} autoFocus ></input>
                         </div>
                         <p className={styles.noticeText}>{noticeMessage}</p>
                         <button className={styles.checkButton} onClick={() => onClickIdFind()}>확인</button>
@@ -92,6 +97,7 @@ function IdFindPage() {
                     </div>
                     <p className={styles.smallText2} onClick={() => navigate('/LoginPage')}>로그인 페이지로 이동</p>
                 </div>
+                <button className={styles.topButton} onClick={scrollToTop}>Top</button>
                 <Footer></Footer>
             </div>
         </>

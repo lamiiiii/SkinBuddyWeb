@@ -16,6 +16,7 @@ function UserHistoryUpdate() {
     const [pastData, setPastData] = useState([]); // 호전도 지난 결과 데이터 받아오기
     const [improvement, setImprovement] = useState(); // 호전도 결과 메세지 받아오기
     const { userId, recordId, aiType } = useParams(); // 정보 받아오기
+
     let formattedAiType; // ai 유형 값 재저장
     if (aiType === "0") {
         formattedAiType = "AI 트러블 분석";
@@ -25,6 +26,11 @@ function UserHistoryUpdate() {
 
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     // 과거 특정 진단 기록 내용 반환
     const returnHistory = () => {
@@ -44,7 +50,7 @@ function UserHistoryUpdate() {
                     // 유형 분석일 경우
                     setData(response.data["data"]);
                     // 유형에 따른 결과 저장
-                    switch(response.data["data"].troubleType) {
+                    switch (response.data["data"].troubleType) {
                         case 0:
                             response.data["data"].troubleType = "깨끗하거나 면포";
                             break;
@@ -191,6 +197,7 @@ function UserHistoryUpdate() {
                     <button className={styles.button} onClick={onClickDelete}>삭제</button>
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

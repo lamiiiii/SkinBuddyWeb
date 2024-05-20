@@ -16,6 +16,11 @@ function UserRecordManagePage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 사용자 진단 기록 목록 반환 
     const returnUserRecordList = (search) => {
         const apiUrl = 'http://52.79.237.164:3000/user/skin/record/list'; // 사용자 진단 기록 목록 반환 API URL
@@ -58,7 +63,7 @@ function UserRecordManagePage() {
     }
 
     const lastItemIndex = currentPage * pageSize;
-    const firstItemIndex = lastItemIndex - pageSize; 
+    const firstItemIndex = lastItemIndex - pageSize;
     const currentItems = data.slice(firstItemIndex, lastItemIndex);
 
     const totalPages = Math.ceil(data.length / pageSize);
@@ -72,7 +77,7 @@ function UserRecordManagePage() {
         <div className={styles.userRecordWrapper}>
             <Navbar selectedPage={"진단 기록 관리"}></Navbar>
             <div className={styles.userRecordContainer}>
-                <p className={styles.mainText} onClick={() => {navigate('/UserRecordManagePage'); window.location.reload();}}>사용자 진단 기록 조회</p>
+                <p className={styles.mainText} onClick={() => { navigate('/UserRecordManagePage'); window.location.reload(); }}>사용자 진단 기록 조회</p>
                 <div className={styles.searchDiv}>
                     <input className={styles.searchInput} type="text" name="searchId" value={form.searchId} onChange={onChange} placeholder="아이디 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
@@ -110,6 +115,7 @@ function UserRecordManagePage() {
                     ))}
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

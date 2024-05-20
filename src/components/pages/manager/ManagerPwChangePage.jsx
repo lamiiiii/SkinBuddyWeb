@@ -17,6 +17,11 @@ function ManagerPwChangePage() {
     const [button, setButton] = useState(false);
     const [check, setCheck] = useState(false); // 기존 비밀번호 체크 여부 저장
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
         if (!isLoggedIn) {
@@ -48,14 +53,14 @@ function ManagerPwChangePage() {
     };
 
     const onClickCheckOriginalPwd = () => { // 기존 비밀번호 일치 여부 확인
-        if(form.originalPwd){
+        if (form.originalPwd) {
             const requestData = { // 전송할 데이터
                 managerId: currentId,
                 psword: form.originalPwd,
             };
-    
+
             const apiUrl = 'http://52.79.237.164:3000/manager/login'; // 로그인 API URL
-    
+
             // axios를 이용하여 POST 요청 보내기
             axios.post(apiUrl, requestData,
                 {
@@ -156,7 +161,7 @@ function ManagerPwChangePage() {
         <div className={styles.managerPwChangeWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerPwChangeContainer}>
-                <p className={styles.mainText} onClick={() => {navigate('/ManagerPwChangePage'); window.location.reload();}}>비밀번호 변경</p>
+                <p className={styles.mainText} onClick={() => { navigate('/ManagerPwChangePage'); window.location.reload(); }}>비밀번호 변경</p>
                 <div className={styles.contentBox}>
                     {(!check) &&
                         <>
@@ -174,6 +179,7 @@ function ManagerPwChangePage() {
                     {(button) ? <button className={styles.changePwdButton} onClick={onClickChangePwd}>변경 완료</button> : <button className={styles.changePwdButtonH} onClick={onClickCheckOriginalPwd}>확인</button>}
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

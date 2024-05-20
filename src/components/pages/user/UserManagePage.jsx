@@ -18,6 +18,11 @@ function UserManagePage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 사용자 정보 목록 반환 
     const returnUserList = (search) => {
         const apiUrl = 'http://52.79.237.164:3000/manager/user/list'; // 사용자 정보 목록 반환 API URL
@@ -74,7 +79,7 @@ function UserManagePage() {
         <div className={styles.userManageWrapper}>
             <Navbar selectedPage={"사용자 정보 관리"}></Navbar>
             <div className={styles.userManageContainer}>
-                <p className={styles.mainText} onClick={() => {navigate('/UserManagePage'); window.location.reload();}}>사용자 정보 조회</p>
+                <p className={styles.mainText} onClick={() => { navigate('/UserManagePage'); window.location.reload(); }}>사용자 정보 조회</p>
                 <div className={styles.searchDiv}>
                     <input className={styles.searchInput} type="text" name="searchId" value={form.searchId} onChange={onChange} placeholder="아이디 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
@@ -91,14 +96,14 @@ function UserManagePage() {
                     </thead>
                     <tbody>
                         {currentItems.length > 0 ? currentItems.map((item, index) => (
-                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserUpdatePage/${item.userId}`)}>
-                                    <td className={styles.tableTdNum}>{index + 1}</td>
-                                    <td className={styles.tableTd}>{item.nickname ? item.nickname : '정보 없음'}</td>
-                                    <td className={styles.tableTd}>{item.userId ? item.userId : '정보 없음'}</td>
-                                    <td className={styles.tableTd}>{item.tel ? item.tel : '정보 없음'}</td>
-                                    <td className={styles.tableTd}>{item.skinType ? item.skinType : '검사 정보 없음'}</td>
-                                </tr>
-                            )) : (
+                            <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserUpdatePage/${item.userId}`)}>
+                                <td className={styles.tableTdNum}>{index + 1}</td>
+                                <td className={styles.tableTd}>{item.nickname ? item.nickname : '정보 없음'}</td>
+                                <td className={styles.tableTd}>{item.userId ? item.userId : '정보 없음'}</td>
+                                <td className={styles.tableTd}>{item.tel ? item.tel : '정보 없음'}</td>
+                                <td className={styles.tableTd}>{item.skinType ? item.skinType : '검사 정보 없음'}</td>
+                            </tr>
+                        )) : (
                             <tr>
                                 <td colSpan="5" style={{ textAlign: 'center' }}>검색 결과 없음</td>
                             </tr>
@@ -113,6 +118,7 @@ function UserManagePage() {
                     ))}
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import {
-    Link,
     useNavigate, /* 페이지 이동을 위해 */
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
@@ -11,10 +10,15 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 function NoticeManagePage() {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
+    // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
+
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     // 공지사항 목록 반환
     const returnNoticeList = () => {
@@ -40,7 +44,7 @@ function NoticeManagePage() {
             alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
             navigate('/');
         }
-    }, []);
+    }, [isLoggedIn, navigate]);
 
     // 내용 간략히 보이기
     const contentCut = (content) => {
@@ -68,7 +72,7 @@ function NoticeManagePage() {
         <div className={styles.noticeWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.noticeContainer}>
-                <p className={styles.mainText} onClick={() => {navigate('/NoticeManagePage'); window.location.reload();}}>공지사항 관리</p>
+                <p className={styles.mainText} onClick={() => { navigate('/NoticeManagePage'); window.location.reload(); }}>공지사항 관리</p>
                 <table className={styles.noticeTable}>
                     <thead>
                         <tr>
@@ -103,6 +107,7 @@ function NoticeManagePage() {
                 </div>
                 <div className={styles.addDiv}><button className={styles.addButton} onClick={() => navigate('/NoticeAddPage')}>작성하기</button></div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

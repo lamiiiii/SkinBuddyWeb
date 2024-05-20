@@ -17,6 +17,11 @@ function ManagerPage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 관리자 목록 반환 
     const returnManagerList = (search) => {
         const apiUrl = 'http://52.79.237.164:3000/manager/list'; // 관리자 목록 반환 API URL
@@ -70,20 +75,20 @@ function ManagerPage() {
 
     // 관리자 추가 버튼 클릭시 실행 함수
     const onClickAdd = () => {
-            // 관리자 추가 이중 확인
-            const isConfirmed = window.confirm(`관리자를 추가하시겠습니까?`);
-            if(isConfirmed){
-                navigate('/ManagerAddPage')
-            } else {
-                window.location.reload(); // 페이지 새로고침
-            }
+        // 관리자 추가 이중 확인
+        const isConfirmed = window.confirm(`관리자를 추가하시겠습니까?`);
+        if (isConfirmed) {
+            navigate('/ManagerAddPage')
+        } else {
+            window.location.reload(); // 페이지 새로고침
+        }
     }
 
     return (
         <div className={styles.managerWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerContainer}>
-                <p className={styles.mainText} onClick={() => {navigate('/ManagerPage'); window.location.reload();}}>관리자 조회</p>
+                <p className={styles.mainText} onClick={() => { navigate('/ManagerPage'); window.location.reload(); }}>관리자 조회</p>
                 <div className={styles.searchDiv}>
                     <input className={styles.searchInput} type="search" name="searchName" value={form.searchName} onChange={onChange} placeholder="이름 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
@@ -101,17 +106,17 @@ function ManagerPage() {
                         {currentItems.length > 0 ? (
                             currentItems.map((item, index) => (
                                 (currentId === "root" || item.managerId !== "root") && ( //루트 계정만 루트의 정보를 조회 가능 (나머지 계정은 루트 계정의 존재 확인 불가)
-                                <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}/${item.managerId}`)}>
-                                    <td className={styles.tableTdNum}>{index + 1}</td>
-                                    <td className={styles.tableTd}>{item.name}</td>
-                                    <td className={styles.tableTd}>{item.managerId}</td>
-                                    <td className={styles.tableTd}>{item.tel}</td>
-                                </tr>
+                                    <tr className={styles.tableTr} key={index} onClick={() => navigate(`/ManagerUpdatePage/${item.name}/${item.managerId}`)}>
+                                        <td className={styles.tableTdNum}>{index + 1}</td>
+                                        <td className={styles.tableTd}>{item.name}</td>
+                                        <td className={styles.tableTd}>{item.managerId}</td>
+                                        <td className={styles.tableTd}>{item.tel}</td>
+                                    </tr>
                                 )
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4" style={{ textAlign: 'center', fontFamily: 'Arial, Helvetica, sans-serif'}}>검색 결과 없음</td>
+                                <td colSpan="4" style={{ textAlign: 'center', fontFamily: 'Arial, Helvetica, sans-serif' }}>검색 결과 없음</td>
                             </tr>
                         )}
                     </tbody>
@@ -125,6 +130,7 @@ function ManagerPage() {
                 </div>
                 <div className={styles.addDiv}><button className={styles.addButton} onClick={(onClickAdd)}>관리자 추가</button></div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

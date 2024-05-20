@@ -52,7 +52,7 @@ function Navbar({ selectedPage }) {
         <div className={styles.navbarWrapper}>
             {isLoggedIn ? (
                 <>
-                    <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" onClick={() => { navigate('/MainPage'); window.location.reload(); }} />
+                    <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" onClick={() => { navigate('/MainPage'); window.location.reload(); window.scrollTo({ top: 0 });}} />
 
 
                     {menuItems.map((item) => (

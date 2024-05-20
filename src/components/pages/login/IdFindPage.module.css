@@ -188,3 +188,30 @@
         color: white;
     }
 }
+
+.topButton {
+    /* 최상단 스크롤 버튼*/
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    /* 너비 설정 */
+    height: 50px;
+    /* 높이 설정 */
+    /* background-color: #9ABBF3;
+    color: white; */
+    background-color: rgba(0, 0, 0, 0);
+    color: #9ABBF3;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border: 2px solid #9ABBF3;
+    border-radius: 50%;
+    /* 동그라미 모양 */
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 1;
+}

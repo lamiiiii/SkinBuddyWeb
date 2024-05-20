@@ -17,6 +17,11 @@ function ManagerAddPage() {
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [button, setButton] = useState(false);
 
+        // 최상단 스크롤 버튼 함수
+        const scrollToTop = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
         if (!isLoggedIn) {
@@ -182,6 +187,7 @@ function ManagerAddPage() {
                 <div className={styles.listButtonDiv}><button className={styles.listButton}
                     onClick={handleNavigate}>목록</button></div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

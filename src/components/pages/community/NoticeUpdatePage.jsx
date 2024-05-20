@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import {
-    Link,
     useNavigate, /* 페이지 이동을 위해 */
     useParams,
 } from "react-router-dom";
@@ -13,10 +12,15 @@ function NoticeUpdatePage() {
     const navigate = useNavigate();
     const [form, setForm] = useState([]); // 공지사항 수정 내용
     const [data, setData] = useState([]); // 공지사항 기존 내용
-    const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
+    // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
     const [noticeData, setNoticeData] = useState([]); // 응답 데이터
     const { noticeNum } = useParams(); // notice table 상세 index 번호 넘겨받기
+
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     // 특정 공지사항 내용 반환 
     const returnNotice = (search) => {
@@ -53,9 +57,9 @@ function NoticeUpdatePage() {
             alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
             navigate('/');
         }
-    }, []);
+    }, [isLoggedIn, navigate]);
 
-    const onChange = (e) => { 
+    const onChange = (e) => {
         const value = e.target.value;
         if (value.length <= 400) {
             setForm(value);
@@ -164,6 +168,7 @@ function NoticeUpdatePage() {
                     <button className={styles.button} onClick={(onClickDelete)}>삭제</button>
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

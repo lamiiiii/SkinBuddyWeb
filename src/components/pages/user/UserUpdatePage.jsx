@@ -17,6 +17,11 @@ function UserUpdatePage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+        // 최상단 스크롤 버튼 함수
+        const scrollToTop = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
     // 특정 사용자 세부 정보 반환 
     const returnUserInfo = (search) => {
         const apiUrl = 'http://52.79.237.164:3000/manager/user/list'; // 관리자 목록 반환 API URL
@@ -163,6 +168,7 @@ function UserUpdatePage() {
                     <button className={styles.button} onClick={(onClickDelete)}>삭제</button>
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

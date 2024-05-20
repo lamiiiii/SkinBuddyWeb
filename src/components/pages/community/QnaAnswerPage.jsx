@@ -15,6 +15,11 @@ function QnaAnswerPage() {
     const [data, setData] = useState([]); // 질문 내용
     const { qnaNum } = useParams(); // qna table 상세 index 번호 넘겨받기
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
 
     // 특정 QnA 내용 반환
     const returnQnAList = (search) => {
@@ -117,6 +122,7 @@ function QnaAnswerPage() {
                     </div>
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

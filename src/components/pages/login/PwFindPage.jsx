@@ -17,11 +17,16 @@ function PwFindPage() {
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
         if (isLoggedIn) {
             navigate('/MainPage');
-        } 
+        }
     }, []);
 
     const onChange = (e) => { // 폼에 입력한 정보 전달
@@ -34,24 +39,24 @@ function PwFindPage() {
     };
 
     const onClickPwFind = () => {
-        if(form.managerId == "root"){ // 루트 계정 접근 제한
+        if (form.managerId == "root") { // 루트 계정 접근 제한
             alert("해당 아이디는 접근 불가능합니다.");
             window.location.reload();
         } else {
             const isConfirm = window.confirm("임시 비밀번호를 발급받으시겠습니까?");
-            if(isConfirm){
+            if (isConfirm) {
                 if (form.managerId && form.telNumber) {
                     setNoticeMessage("");
                     const requestData = { // 전송할 데이터
                         managerId: form.managerId,
                         tel: form.telNumber
                     };
-        
+
                     // API URL 설정
                     // const apiUrl = 'https://r9sesoym3l.execute-api.ap-northeast-2.amazonaws.com/default/manager_findPW'; // 서버리스
                     const apiUrl = 'http://52.79.237.164:3000/manager/find/psword'; // 비밀번호 찾기 API URL
-        
-        
+
+
                     // axios를 이용하여 POST 요청 보내기
                     axios.post(apiUrl, requestData)
                         .then(response => {
@@ -95,7 +100,7 @@ function PwFindPage() {
                     <div className={styles.contentBox}>
                         <div className={styles.telContent}>
                             <p className={styles.telText}>아이디</p>
-                            <input className={styles.telInput} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디 입력" onKeyDown={handleKeyDown}  autoFocus ></input>
+                            <input className={styles.telInput} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디 입력" onKeyDown={handleKeyDown} autoFocus ></input>
                         </div>
                         <div className={styles.telContent}>
                             <p className={styles.telText}>휴대폰 번호</p>
@@ -122,6 +127,7 @@ function PwFindPage() {
                     </div>
                     <p className={styles.smallText} onClick={() => navigate('/IdFindPage')}>아이디가 기억나지 않는다면?</p>
                 </div>
+                <button className={styles.topButton} onClick={scrollToTop}>Top</button>
                 <Footer></Footer>
             </div>
         </>

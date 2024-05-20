@@ -13,6 +13,11 @@ function TermsManagePage() {
     const [form, setForm] = useState([]); // 이용약관 수정 내용
     const [data, setData] = useState([]); // 이용약관 기존 내용
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const onChange = (e) => { // 폼에 입력한 정보 전달
         const value = e.target.value;
         setForm(value);
@@ -108,6 +113,7 @@ function TermsManagePage() {
                 </div>
                 <div className={styles.updateDiv}><button className={styles.updateButton} onClick={(onClickUpdate)}>수정 완료</button></div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

@@ -14,11 +14,16 @@ function LoginPage() {
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
         if (isLoggedIn) {
             navigate('/MainPage');
-        } 
+        }
     }, []);
 
     const onChange = (e) => { // 폼에 입력한 정보 전달
@@ -31,17 +36,17 @@ function LoginPage() {
     };
 
     const onClickLogin = () => { // 로그인 버튼 누르면 실행할 함수
-        if(form.managerId && form.managerPw){
+        if (form.managerId && form.managerPw) {
             setNoticeMessage("");
             const requestData = { // 전송할 데이터
                 managerId: form.managerId,
                 psword: form.managerPw,
             };
-    
+
             // API URL 설정
             // const apiUrl = 'https://hugopmbque.execute-api.ap-northeast-2.amazonaws.com/default/manager_login'; // 서버리스 방식 추후 시도 (CORS 문제)
             const apiUrl = 'http://52.79.237.164:3000/manager/login'; // 로그인 API URL
-    
+
             // axios를 이용하여 POST 요청 보내기
             axios.post(apiUrl, requestData,
                 {
@@ -54,17 +59,17 @@ function LoginPage() {
                 })
                 .then(response => {
                     // 요청이 성공한 경우 응답한 데이터 처리
-                    if(response.data["property"] === 200){
+                    if (response.data["property"] === 200) {
                         localStorage.setItem("ID", form.managerId); // 로그인 정보 유지를 위한 저장
                         localStorage.setItem("isLoggedIn", true); // 로그인 여부 저장
                         navigate('/MainPage');
                     }
-                    else if(response.data["property"] === 301){
+                    else if (response.data["property"] === 301) {
                         alert(`${response.data["message"]}`);
                         localStorage.setItem("IsLoggedIn", false); // 로그인 여부 저장
                         window.location.reload(); // 페이지 새로고침
                     }
-                    else{
+                    else {
                         alert("로그인 정보를 다시 입력해주세요.");
                         localStorage.setItem("isLoggedIn", false); // 로그인 여부 저장
                         window.location.reload(); // 페이지 새로고침
@@ -76,9 +81,9 @@ function LoginPage() {
                     localStorage.setItem("isLoggedIn", false); // 로그인 여부 저장
                     alert('로그인에 실패하였습니다. 관리자에게 문의해주세요.');
                 })
-        } else if(!form.managerId){
+        } else if (!form.managerId) {
             setNoticeMessage("아이디를 입력해주세요.");
-        } else{
+        } else {
             setNoticeMessage("비밀번호를 입력해주세요.");
         }
     }
@@ -96,7 +101,7 @@ function LoginPage() {
             <div className={styles.loginContainer}>
                 <p className={styles.mainText}>관리자 로그인</p>
                 <div className={styles.contentBox}>
-                    <input className={styles.inputBox} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디를 입력해주세요" onKeyDown={handleKeyDown}  autoFocus ></input>
+                    <input className={styles.inputBox} type="text" name="managerId" value={form.managerId} onChange={onChange} placeholder="아이디를 입력해주세요" onKeyDown={handleKeyDown} autoFocus ></input>
                     <input className={styles.inputBox} type="password" name="managerPw" value={form.managerPw} onChange={onChange} placeholder="비밀번호를 입력해주세요" onKeyDown={handleKeyDown}></input>
                     <p className={styles.noticeText}>{noticeMessage}</p>
                     <button className={styles.loginCheckButton} onClick={onClickLogin}>로그인</button>
@@ -106,6 +111,7 @@ function LoginPage() {
                     </div>
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

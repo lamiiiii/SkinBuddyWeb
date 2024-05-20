@@ -14,6 +14,11 @@ function QnaManagePage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // QnA 목록 반환
     const returnQnAList = () => {
         const apiUrl = 'http://52.79.237.164:3000/manager/question/list'; // QnA 목록 반환 API URL
@@ -35,32 +40,32 @@ function QnaManagePage() {
         returnQnAList();
     }, []);
 
-        // 내용 간략히 보이기
-        const contentCut = (content) => {
-            // item.content에서 ':'를 기준으로 분리
-            const splitContent = content.includes('\n') ? content.split('\n')[0] : content;
-    
-            // 분리된 내용이 일정 길이 이상이면 자르고, 그렇지 않으면 그대로 사용
-            const displayedContent = splitContent.length > 15 ? splitContent.substring(0, 15) + "..." : splitContent;
-    
-            return (displayedContent);
-        }
-    
-        const lastItemIndex = currentPage * pageSize;
-        const firstItemIndex = lastItemIndex - pageSize;
-        const currentItems = data.slice(firstItemIndex, lastItemIndex);
-    
-        const totalPages = Math.ceil(data.length / pageSize);
-    
-        const changePage = (number) => {
-            setCurrentPage(number);
-        };
+    // 내용 간략히 보이기
+    const contentCut = (content) => {
+        // item.content에서 ':'를 기준으로 분리
+        const splitContent = content.includes('\n') ? content.split('\n')[0] : content;
+
+        // 분리된 내용이 일정 길이 이상이면 자르고, 그렇지 않으면 그대로 사용
+        const displayedContent = splitContent.length > 15 ? splitContent.substring(0, 15) + "..." : splitContent;
+
+        return (displayedContent);
+    }
+
+    const lastItemIndex = currentPage * pageSize;
+    const firstItemIndex = lastItemIndex - pageSize;
+    const currentItems = data.slice(firstItemIndex, lastItemIndex);
+
+    const totalPages = Math.ceil(data.length / pageSize);
+
+    const changePage = (number) => {
+        setCurrentPage(number);
+    };
 
     return (
         <div className={styles.qnaManageWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.qnaManageContainer}>
-                <p className={styles.mainText} onClick={() => {navigate('/QnaManagePage'); window.location.reload();}}>Q&A 관리</p>
+                <p className={styles.mainText} onClick={() => { navigate('/QnaManagePage'); window.location.reload(); }}>Q&A 관리</p>
                 <table className={styles.qnaTable}>
                     <thead>
                         <tr>
@@ -96,6 +101,7 @@ function QnaManagePage() {
                     ))}
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );

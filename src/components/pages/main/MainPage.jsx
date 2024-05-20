@@ -24,6 +24,11 @@ function MainPage(props) {
 
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부 저장
 
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // 메인페이지 정보 반환
     const returnMainInformation = () => {
         const apiUrl = 'http://52.79.237.164:3000/manager/home/user'; // 메인페이지 정보 반환 API URL
@@ -236,6 +241,7 @@ function MainPage(props) {
                     </div>
                 </div>
             </div>
+            <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer></Footer>
         </div>
     );
