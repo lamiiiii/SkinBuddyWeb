@@ -19,7 +19,6 @@ function AdManagePage() {
         // axios를 이용하여 GET 요청 보내기
         axios.get(apiUrl)
             .then(response => {
-                console.log(response.data.data);
                 setData(response.data.data);
             })
             .catch(error => {
@@ -67,6 +66,7 @@ function AdManagePage() {
         };
         reader.readAsDataURL(file);
     };
+
 // 광고 추가 함수
 const onClickAdd = () => {
     if (!selectedFile) {
@@ -100,7 +100,6 @@ const onClickAdd = () => {
 
     // 광고 삭제 함수
     const onClickDelete = (advertisementId) => {
-        console.log(advertisementId);
         const requestData = {
             data: {
                 advertisementId: advertisementId
@@ -137,7 +136,7 @@ const onClickAdd = () => {
                     {data.length > 0 ? (
                         data.map(ad => (
                             <div key={ad.advertisementId} className={styles.divBox}>
-                                <p className={styles.miniText}>Number.{ad.advertisementId}</p>
+                                <p className={styles.miniText}>Ad Number.{ad.advertisementId}</p>
                                 <img className={styles.image} src={`data:image/jpeg;base64,${ad.photo}`} alt="광고 사진" />
                                 <button className={styles.button} onClick={() => onClickDelete(ad.advertisementId)}>삭제</button>
                             </div>
