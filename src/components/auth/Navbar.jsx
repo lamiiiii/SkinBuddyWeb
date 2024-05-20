@@ -19,16 +19,27 @@ function Navbar({ selectedPage }) {
         { name: 'AI 모델', path: '/AIClassificationPage', num: 6 }
     ];
 
+    // 앱 다운로드 함수
+    const handleAppDownload = () => {
+        const isConfirmed = window.confirm("SkinBuddy 앱을 다운받으시겠습니까?");
+        if(isConfirmed) {
+            window.location.href = "https://expo.dev/artifacts/eas/iivJ6gTL3g3FznWLahQiKC.apk";
+        }
+    };
+
+    // 메뉴 선택 함수
     const onClickMenu = (menuItem) => {
         setSelectedMenu(menuItem.name);
         setIsDropdownOpen(true);
     };
 
+    // 드롭다운 닫기 함수
     const closeDropdown = () => {
         setSelectedMenu();
         setIsDropdownOpen(false);
     };
 
+    // 로그아웃 함수
     const onClickLogout = () => {
         const isConfirmed = window.confirm("로그아웃 하시겠습니까?");
         if (isConfirmed) {
@@ -81,7 +92,7 @@ function Navbar({ selectedPage }) {
                         </ul>
                     ))} */}
                     <div className={styles.firstButtons}>
-                        <Link className={styles.link} to="/LoginPage">
+                        <Link to="#" className={styles.link} onClick={handleAppDownload}>
                             <p className={styles.appDownloadButton}>앱 다운로드</p>
                         </Link>
                         <Link className={styles.link} to="/LoginPage">
