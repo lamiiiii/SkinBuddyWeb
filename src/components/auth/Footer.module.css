@@ -1,0 +1,43 @@
+.footerWrapper{ /* 상단바 전체 감싸기 */
+    height: 130px;
+    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    padding-left: 5%;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    background-color: #f3f7ff;
+    /* color: #9ABBF3; */
+    /* border-bottom: 1px solid #EBF1FD; */
+    /* position: sticky; 위치 고정 (스크롤해도 사라지지 않도록) */
+    bottom: 0; /* 위치 하단 지정 (스크롤해도 사라지지 않도록) */
+    z-index: 9999; /* 다른 요소보다 항상 위에 있도록 (스크롤해도 사라지지 않도록) */
+}
+
+.mainText{
+    font-size: 13px;
+    /* font-family: 'NanumSquareRoundEB'; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #9D9797;
+    margin-bottom: 0.5%;
+}
+
+.miniText{
+    margin: 0;
+    margin-bottom: 2px;
+    font-size: 11px;
+    /* font-family: 'NanumSquareRoundEB'; */
+    font-family: Arial, Helvetica, sans-serif;
+    color: #9D9797;
+}
+
+.lastText{
+    margin-top: 0.5%;
+    font-size: 12px;
+    /* font-family: 'NanumSquareRoundEB'; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #9D9797;
+}

@@ -4,6 +4,7 @@ import {
     useNavigate,
     } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./FirstPage.module.css"; // FirstPage.css 파일 import
 
 function FirstPage(props) {
@@ -23,6 +24,7 @@ function FirstPage(props) {
                 <img className={styles.centerLogo} src="/img/firstLogo.png" alt="페이지 로고 사진"/>
                 <Link to="/LoginPage"><button className={styles.loginButton}>관리자 로그인</button></Link>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

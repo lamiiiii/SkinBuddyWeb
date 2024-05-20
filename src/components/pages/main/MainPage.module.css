@@ -17,20 +17,36 @@
     align-items: center;
 
 }
+.lineBox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+}
+.smallBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1%;
+    width: 27%;
+}
 
 .mainText {
     /* 제목 텍스트 (현재 가입자 수) */
     font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:'NanumSquareRoundEB';
     font-weight: bold;
     margin-bottom: 1%;
     margin-top: 5%;
 }
 .mainText2 {
     /* 제목 텍스트 (현재 진행 중인 광고, 사용자 유형 분포도) */
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+    font-size: 23px;
+    font-family:'NanumSquareRoundB';
+    /* font-weight: 600; */
     margin-bottom: 1%;
     margin-top: 7%;
     margin-left: 60px;
@@ -43,16 +59,20 @@
     /* 내용 박스 */
     width: 40%;
     height: 12%;
-    margin-bottom: 1%;
-    background-color: #F8FAFB;
-    color: black;
+    margin-top: 5%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 5%;
+    color: #9ABBF3;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 60px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 4px 6px #9ABBF380; /* 그림자 추가 */
+
 }
 
 .contentBox2 {
@@ -61,23 +81,33 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    
 }
-
+.aiGraph{
+    /* AI 결과 그래프 사진 */
+    width: 350px;
+    height: auto;
+    background-color: #F8FAFB;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+}
 .adBox {
     /* 현재 진행 중인 광고 박스 */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-left: 100px;
+    margin: 3%;
+    margin-top: 0;
 }
 
 .adContentBox {
     /* 현재 진행 중인 광고 내용 박스 */
     width: 100%;
-    height: 300px;
+    /* height: 200px; */
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+
 }
 
 .graphBox {
@@ -86,11 +116,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-right: 50px;
+    margin: 3%;
+    margin-top: 0;
 }
 .graphContentBox{
     /* 유형 분포도 내용 박스 */
-    width: 700px;
+    width: 600px;
     height: auto;
     background-color: #F8FAFB;
 }
@@ -121,6 +152,7 @@
 .image{
     /* 기록 사진 */
     width: auto;
-    height: 320px;
+    height: 280px;
     margin-bottom: 2%;
+    border-radius: 10px;
 }

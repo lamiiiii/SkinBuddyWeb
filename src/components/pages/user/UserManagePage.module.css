@@ -26,6 +26,7 @@
     font-weight: 500;
     margin-bottom: 0%;
     margin-top: 5%;
+    cursor: pointer;
 }
 .searchDiv{
     /* 검색 박스 & 버튼 Div */

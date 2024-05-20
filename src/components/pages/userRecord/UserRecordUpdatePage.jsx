@@ -5,6 +5,7 @@ import {
     useParams,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./UserRecordUpdatePage.module.css"; // UserRecordUpdatePage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -126,8 +127,7 @@ function UserHistoryUpdate() {
         <div className={styles.userRecordUpdateWrapper}>
             <Navbar selectedPage={"진단 기록 관리"}></Navbar>
             <div className={styles.userRecordUpdateContainer}>
-                <p className={styles.mainText}>사용자 진단 기록 상세</p>
-                {/* 진단 기록 날짜는 여기 없삼... */}
+                <p className={styles.mainText} onClick={() => window.location.reload()}>사용자 진단 기록 상세</p>
                 <div className={styles.contentBox}>
                     <div className={styles.divBox}>
                         <p className={styles.miniText}>진단 기록 번호</p>
@@ -191,6 +191,7 @@ function UserHistoryUpdate() {
                     <button className={styles.button} onClick={onClickDelete}>삭제</button>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

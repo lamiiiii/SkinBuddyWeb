@@ -5,6 +5,7 @@ import { /* 페이지 이동을 위해 */
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
 import styles from "./ManagerAddPage.module.css"; // ManagerAddPage.module.css import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
 function ManagerAddPage() {
@@ -133,11 +134,27 @@ function ManagerAddPage() {
         }
     };
 
+    // form에 하나라도 입력한 경우에 목록 버튼 누르면 경고 알림 확인 받음
+    const handleNavigateReload = () => {
+        // form에 값이 있는지 확인
+        if (Object.values(form).some(value => value.length > 0)) {
+            const confirmNavigate = window.confirm("입력한 정보가 지워질 수 있습니다. 계속하시겠습니까?");
+            if (confirmNavigate) {
+                navigate('/ManagerAddPage');
+                window.location.reload();
+            }
+        } else {
+            navigate('/ManagerAddPage');
+            window.location.reload();
+        }
+    };
+
+
     return (
         <div className={styles.managerAddWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerAddContainer}>
-                <p className={styles.mainText}>관리자 추가</p>
+                <p className={styles.mainText} onClick={handleNavigateReload}>관리자 추가</p>
                 <div className={styles.contentBox}>
                     <p className={styles.noticeText}>{noticeMessage}</p>
 
@@ -165,6 +182,7 @@ function ManagerAddPage() {
                 <div className={styles.listButtonDiv}><button className={styles.listButton}
                     onClick={handleNavigate}>목록</button></div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

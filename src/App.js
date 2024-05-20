@@ -12,7 +12,6 @@ import LoginPage from "./components/pages/login/LoginPage";    // 로그인
 import IdFindPage from "./components/pages/login/IdFindPage";  // 로그인
 import PwFindPage from "./components/pages/login/PwFindPage";  // 로그인
 import MainPage from "./components/pages/main/MainPage";              // 메인
-import TypeResultPage from "./components/pages/main/TypeResultPage";  // 메인
 import ManagerPage from "./components/pages/manager/ManagerPage";                 // 관리자
 import ManagerAddPage from "./components/pages/manager/ManagerAddPage";           // 관리자
 import ManagerUpdatePage from "./components/pages/manager/ManagerUpdatePage";     // 관리자 
@@ -44,7 +43,6 @@ function App(props) {
         <Route path="/IdFindPage" element={<IdFindPage/>}/>
         <Route path="/PwFindPage" element={<PwFindPage/>}/>
         <Route path="/MainPage" element={<MainPage/>}/>
-        <Route path="/TypeResultPage" element={<TypeResultPage/>}/>
         <Route path="/ManagerPage" element={<ManagerPage/>}/>
         <Route path="/ManagerAddPage" element={<ManagerAddPage/>}/>
         <Route path="/ManagerUpdatePage/:managerNum/:managerId" element={<ManagerUpdatePage/>}/>

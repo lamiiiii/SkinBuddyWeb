@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import {
-    Link, /* 페이지 이동을 위해 */
     useNavigate
 } from "react-router-dom";
 import styles from './Dropdown.module.css';

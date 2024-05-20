@@ -5,6 +5,7 @@ import {
     useParams,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./NoticeUpdatePage.module.css"; // NoticeUpdatePage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -148,7 +149,7 @@ function NoticeUpdatePage() {
         <div className={styles.noticeUpdateWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.noticeUpdateContainer}>
-                <p className={styles.mainText}>공지사항 상세 내용</p>
+                <p className={styles.mainText} onClick={() => window.location.reload()}>공지사항 상세 내용</p>
                 <div className={styles.contentBox}>
                     <div className={styles.noticeContentBox}>
                         <p className={styles.sideText}>글 번호</p>
@@ -163,6 +164,7 @@ function NoticeUpdatePage() {
                     <button className={styles.button} onClick={(onClickDelete)}>삭제</button>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

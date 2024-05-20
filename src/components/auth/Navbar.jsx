@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from './Navbar.module.css';
 import Dropdown from "./DropDown";
 
 function Navbar({ selectedPage }) {
     const navigate = useNavigate();
-    const currentId = localStorage.getItem("ID");
+    // const currentId = localStorage.getItem("ID");
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const [selectedMenu, setSelectedMenu] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -93,7 +93,7 @@ function Navbar({ selectedPage }) {
                     ))} */}
                     <div className={styles.firstButtons}>
                         <Link to="#" className={styles.link} onClick={handleAppDownload}>
-                            <p className={styles.appDownloadButton}>앱 다운로드</p>
+                            <p className={styles.appDownloadButton}>Download APP</p>
                         </Link>
                         <Link className={styles.link} to="/LoginPage">
                             <p className={styles.managerLoginButton}>관리자 로그인</p>

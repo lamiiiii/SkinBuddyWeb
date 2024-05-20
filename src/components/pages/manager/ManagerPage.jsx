@@ -4,6 +4,7 @@ import {
     useNavigate, /* 페이지 이동을 위해 */
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./ManagerPage.module.css"; // ManagerPage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -82,7 +83,7 @@ function ManagerPage() {
         <div className={styles.managerWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerContainer}>
-                <p className={styles.mainText}>관리자 조회</p>
+                <p className={styles.mainText} onClick={() => {navigate('/ManagerPage'); window.location.reload();}}>관리자 조회</p>
                 <div className={styles.searchDiv}>
                     <input className={styles.searchInput} type="search" name="searchName" value={form.searchName} onChange={onChange} placeholder="이름 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
@@ -124,6 +125,7 @@ function ManagerPage() {
                 </div>
                 <div className={styles.addDiv}><button className={styles.addButton} onClick={(onClickAdd)}>관리자 추가</button></div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

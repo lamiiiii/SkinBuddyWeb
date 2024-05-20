@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
 import styles from "./UserRecordManagePage.module.css"; // UserRecordManagePage.css 파일 import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
 function UserRecordManagePage() {
@@ -71,7 +72,7 @@ function UserRecordManagePage() {
         <div className={styles.userRecordWrapper}>
             <Navbar selectedPage={"진단 기록 관리"}></Navbar>
             <div className={styles.userRecordContainer}>
-                <p className={styles.mainText}>사용자 진단 기록 조회</p>
+                <p className={styles.mainText} onClick={() => {navigate('/UserRecordManagePage'); window.location.reload();}}>사용자 진단 기록 조회</p>
                 <div className={styles.searchDiv}>
                     <input className={styles.searchInput} type="text" name="searchId" value={form.searchId} onChange={onChange} placeholder="아이디 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
@@ -109,6 +110,7 @@ function UserRecordManagePage() {
                     ))}
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

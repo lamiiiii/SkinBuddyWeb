@@ -1,9 +1,9 @@
 import { React, useState, useEffect, useRef } from "react";
 import { /* 페이지 이동을 위해 */
-    Link,
     useNavigate,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./AIImprovementPage.module.css"; // AIImprovementPage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -11,14 +11,13 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 function AIImprovementPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ learningRate: "", weightDecay: "", epochs: "", patience: "" });
-    const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
+    // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
     const [resultData, setResultData] = useState(null); // 재학습 결과값
     const [modalOpen, setModalOpen] = useState(false); // 모달창 오픈을 위함
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
-    const [time, setTime] = useState(0);
 
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
@@ -133,11 +132,26 @@ function AIImprovementPage() {
         }
     };
 
+        // form에 하나라도 입력한 경우에 목록 버튼 누르면 경고 알림 확인 받음
+        const handleNavigate = () => {
+            // form에 값이 있는지 확인
+            if (Object.values(form).some(value => value.length > 0)) {
+                const confirmNavigate = window.confirm("작성중인 내용이 지워질 수 있습니다. 계속하시겠습니까?");
+                if (confirmNavigate) {
+                    navigate('/AIImprovementPage');
+                    window.location.reload();
+                }
+            } else {
+                navigate('/AIImprovementPage');
+                window.location.reload();
+            }
+        };
+
     return (
         <div className={styles.AIImproveWrapper}>
             <Navbar selectedPage={"AI 모델"}></Navbar>
             <div className={styles.AIImproveContainer}>
-                <p className={styles.mainText}>여드름 호전도 개선 모델 관리</p>
+                <p className={styles.mainText} onClick={handleNavigate}>여드름 호전도 개선 모델 관리</p>
                 <div className={styles.contentBox}>
                     <div className={styles.startContent}><p className={styles.contentText}>Learning Rate (학습률)</p></div>
                     <input className={styles.inputBox} type="search" name="learningRate" value={form.learningRate} placeholder="Learning Rate" onChange={onChange} onKeyDown={handleKeyDown}></input>
@@ -185,6 +199,7 @@ function AIImprovementPage() {
                     )}
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

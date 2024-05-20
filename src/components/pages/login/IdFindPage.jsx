@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../auth/Navbar";
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./IdFindPage.module.css";
 import axios from "axios";
 
@@ -91,6 +92,7 @@ function IdFindPage() {
                     </div>
                     <p className={styles.smallText2} onClick={() => navigate('/LoginPage')}>로그인 페이지로 이동</p>
                 </div>
+                <Footer></Footer>
             </div>
         </>
     );

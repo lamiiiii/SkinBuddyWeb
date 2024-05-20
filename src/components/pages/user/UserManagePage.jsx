@@ -4,6 +4,8 @@ import {
     useNavigate, /* 페이지 이동을 위해 */
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
+
 import styles from "./UserManagePage.module.css"; // UserManagePage.css 파일 import
 import axios from "axios";
 
@@ -72,7 +74,7 @@ function UserManagePage() {
         <div className={styles.userManageWrapper}>
             <Navbar selectedPage={"사용자 정보 관리"}></Navbar>
             <div className={styles.userManageContainer}>
-                <p className={styles.mainText}>사용자 정보 조회</p>
+                <p className={styles.mainText} onClick={() => {navigate('/UserManagePage'); window.location.reload();}}>사용자 정보 조회</p>
                 <div className={styles.searchDiv}>
                     <input className={styles.searchInput} type="text" name="searchId" value={form.searchId} onChange={onChange} placeholder="아이디 검색"></input>
                     <button className={styles.searchButton} onClick={onClickSearch}>검색</button>
@@ -111,6 +113,7 @@ function UserManagePage() {
                     ))}
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

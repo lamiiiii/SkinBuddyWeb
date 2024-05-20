@@ -4,6 +4,7 @@ import { /* 페이지 이동을 위해 */
     useNavigate,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./TermsManagePage.module.css"; // TermsManagePage.module.css import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -82,16 +83,32 @@ function TermsManagePage() {
         }
     }
 
+    // form에 하나라도 입력한 경우에 목록 버튼 누르면 경고 알림 확인 받음
+    const handleNavigate = () => {
+        // form에 값이 있는지 확인
+        if (form != data) {
+            const confirmNavigate = window.confirm("작성 중인 내용이 저장되지 않을 수 있습니다. 계속하시겠습니까?");
+            if (confirmNavigate) {
+                navigate('/TermsManagePage');
+                window.location.reload();
+            }
+        } else {
+            navigate('/TermsManagePage');
+            window.location.reload();
+        }
+    };
+
     return (
         <div className={styles.termsWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.termsContainer}>
-                <p className={styles.mainText}>이용약관 관리</p>
+                <p className={styles.mainText} onClick={handleNavigate}>이용약관 관리</p>
                 <div className={styles.contentBox}>
                     <textarea className={styles.textBox} value={form} onChange={onChange} placeholder={data}></textarea>
                 </div>
                 <div className={styles.updateDiv}><button className={styles.updateButton} onClick={(onClickUpdate)}>수정 완료</button></div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

@@ -5,6 +5,7 @@ import {
     useParams,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./ManagerUpdatePage.module.css"; // ManagerUpdatePage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -183,7 +184,7 @@ function ManagerUpdatePage() {
         <div className={styles.managerUpdateWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerUpdateContainer}>
-                <p className={styles.mainText}>{((currentId) === "root") ? "관리자 정보 수정" : "관리자 정보"}</p>
+                <p className={styles.mainText} onClick={() => window.location.reload()}>{(currentId === "root" || currentId === data.managerId) ? "관리자 정보 수정" : "관리자 정보"}</p>
                 <div className={styles.contentBox}>
                     <div className={styles.divBox}>
                         <p className={styles.miniText}>아이디</p>
@@ -216,6 +217,7 @@ function ManagerUpdatePage() {
                     }
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

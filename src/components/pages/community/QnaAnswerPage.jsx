@@ -5,6 +5,7 @@ import {
     useParams,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./QnaAnswerPage.module.css"; // QnaAnswerPage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -96,7 +97,7 @@ function QnaAnswerPage() {
         <div className={styles.qnaAnswerWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.qnaAnswerContainer}>
-                <p className={styles.mainText}>Q&A 상세 내용</p>
+                <p className={styles.mainText} onClick={() => window.location.reload()}>Q&A 상세 내용</p>
                 <div className={styles.contentBox}>
                     <div className={styles.qnaContentBox}>
                         <p className={styles.sideText}>글 번호</p>
@@ -116,6 +117,7 @@ function QnaAnswerPage() {
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./AdManagePage.module.css"; // AdManagePage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -9,7 +10,7 @@ function AdManagePage() {
     const [data, setData] = useState([]); // 트러블 분석 결과 데이터 받아오기
     const [selectedFile, setSelectedFile] = useState(null); // 파일 선택 상태
 
-    const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
+    // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // 로그인 상태 여부 저장
 
     // 광고 목록 반환
@@ -131,7 +132,7 @@ const onClickAdd = () => {
         <div className={styles.AdManageWrapper}>
             <Navbar selectedPage={"광고 관리"} />
             <div className={styles.AdManageContainer}>
-                <p className={styles.mainText}>광고 관리</p>
+                <p className={styles.mainText} onClick={() => {navigate('/AdManagePage'); window.location.reload();}}>광고 관리</p>
                 <div className={styles.contentBox}>
                     {data.length > 0 ? (
                         data.map(ad => (
@@ -150,6 +151,7 @@ const onClickAdd = () => {
                     <button className={styles.addButton} onClick={onClickAdd}>광고 추가</button>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

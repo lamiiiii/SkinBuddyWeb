@@ -5,6 +5,7 @@ import {
     useParams,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./UserUpdatePage.module.css"; // UserUpdatePage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -137,7 +138,7 @@ function UserUpdatePage() {
         <div className={styles.userUpdateWrapper}>
             <Navbar selectedPage={"사용자 정보 관리"}></Navbar>
             <div className={styles.userUpdateContainer}>
-                <p className={styles.mainText}>사용자 정보 수정</p>
+                <p className={styles.mainText} onClick={() => window.location.reload()}>사용자 정보 수정</p>
                 <div className={styles.contentBox}>
                 <div className={styles.divBox}>
                         <p className={styles.miniText}>아이디</p>
@@ -162,6 +163,7 @@ function UserUpdatePage() {
                     <button className={styles.button} onClick={(onClickDelete)}>삭제</button>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

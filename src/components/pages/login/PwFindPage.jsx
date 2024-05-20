@@ -4,6 +4,7 @@ import {
     useNavigate,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./PwFindPage.module.css"; // PwFindPage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -121,6 +122,7 @@ function PwFindPage() {
                     </div>
                     <p className={styles.smallText} onClick={() => navigate('/IdFindPage')}>아이디가 기억나지 않는다면?</p>
                 </div>
+                <Footer></Footer>
             </div>
         </>
     );

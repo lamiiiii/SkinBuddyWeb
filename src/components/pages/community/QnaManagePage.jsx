@@ -4,6 +4,7 @@ import {
     useNavigate, /* 페이지 이동을 위해 */
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./QnaManagePage.module.css"; // QnaManagePage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -59,7 +60,7 @@ function QnaManagePage() {
         <div className={styles.qnaManageWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.qnaManageContainer}>
-                <p className={styles.mainText}>Q&A 관리</p>
+                <p className={styles.mainText} onClick={() => {navigate('/QnaManagePage'); window.location.reload();}}>Q&A 관리</p>
                 <table className={styles.qnaTable}>
                     <thead>
                         <tr>
@@ -95,6 +96,7 @@ function QnaManagePage() {
                     ))}
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

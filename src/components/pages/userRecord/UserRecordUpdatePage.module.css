@@ -18,6 +18,7 @@
     /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
+    margin-bottom: 300px;
 }
 
 .mainText {
@@ -27,6 +28,7 @@
     font-weight: 500;
     margin-bottom: 3%;
     margin-top: 5%;
+    cursor: pointer;
 }
 
 .contentBox{ /* 내용 박스 (input들과 button들) */

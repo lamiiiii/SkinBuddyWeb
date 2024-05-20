@@ -4,6 +4,7 @@ import { /* 페이지 이동을 위해 */
     useNavigate,
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./ManagerPwChangePage.module.css"; // ManagerPwChangePage.module.css import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -155,7 +156,7 @@ function ManagerPwChangePage() {
         <div className={styles.managerPwChangeWrapper}>
             <Navbar selectedPage={"관리자 관리"}></Navbar>
             <div className={styles.managerPwChangeContainer}>
-                <p className={styles.mainText}>비밀번호 변경</p>
+                <p className={styles.mainText} onClick={() => {navigate('/ManagerPwChangePage'); window.location.reload();}}>비밀번호 변경</p>
                 <div className={styles.contentBox}>
                     {(!check) &&
                         <>
@@ -173,6 +174,7 @@ function ManagerPwChangePage() {
                     {(button) ? <button className={styles.changePwdButton} onClick={onClickChangePwd}>변경 완료</button> : <button className={styles.changePwdButtonH} onClick={onClickCheckOriginalPwd}>확인</button>}
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

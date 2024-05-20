@@ -4,6 +4,7 @@ import {
     useNavigate, /* 페이지 이동을 위해 */
 } from "react-router-dom";
 import Navbar from "../../auth/Navbar"; // 상단바 Component import
+import Footer from "../../auth/Footer"; // 하단 Footer Component import
 import styles from "./NoticeManagePage.module.css"; // NoticeManagePage.css 파일 import
 import axios from "axios"; // api 통신을 위해 axios install & import
 
@@ -67,7 +68,7 @@ function NoticeManagePage() {
         <div className={styles.noticeWrapper}>
             <Navbar selectedPage={"커뮤니티 관리"}></Navbar>
             <div className={styles.noticeContainer}>
-                <p className={styles.mainText}>공지사항 관리</p>
+                <p className={styles.mainText} onClick={() => {navigate('/NoticeManagePage'); window.location.reload();}}>공지사항 관리</p>
                 <table className={styles.noticeTable}>
                     <thead>
                         <tr>
@@ -102,6 +103,7 @@ function NoticeManagePage() {
                 </div>
                 <div className={styles.addDiv}><button className={styles.addButton} onClick={() => navigate('/NoticeAddPage')}>작성하기</button></div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }
