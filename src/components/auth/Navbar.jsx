@@ -41,9 +41,8 @@ function Navbar({ selectedPage }) {
         <div className={styles.navbarWrapper}>
             {isLoggedIn ? (
                 <>
-                    <Link className={styles.link} to={'/MainPage'}>
-                        <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" />
-                    </Link>
+                    <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" onClick={() => { navigate('/MainPage'); window.location.reload(); }} />
+
 
                     {menuItems.map((item) => (
                         <ul
@@ -81,10 +80,14 @@ function Navbar({ selectedPage }) {
                             <p className={styles.menuMainText}>{item.name}</p>
                         </ul>
                     ))} */}
-
-                    <Link className={styles.link} to="/LoginPage">
-                        <p className={styles.managerLoginButton}>관리자 로그인</p>
-                    </Link>
+                    <div className={styles.firstButtons}>
+                        <Link className={styles.link} to="/LoginPage">
+                            <p className={styles.appDownloadButton}>앱 다운로드</p>
+                        </Link>
+                        <Link className={styles.link} to="/LoginPage">
+                            <p className={styles.managerLoginButton}>관리자 로그인</p>
+                        </Link>
+                    </div>
                 </>
             )}
 
