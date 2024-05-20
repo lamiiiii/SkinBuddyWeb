@@ -33,13 +33,13 @@
     width: 650px;
     height: 300px;
     background-color: #F8FAFB;
-    border: 0.5px solid #9ABBF3;
+    /* border: 0.5px solid #9ABBF3; */
     border-radius: 7px;
     flex-direction: column; /* 요소 세로 정렬*/
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
 }
 
 .telContent {
