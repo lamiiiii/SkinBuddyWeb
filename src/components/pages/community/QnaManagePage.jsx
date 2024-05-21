@@ -13,6 +13,20 @@ function QnaManagePage() {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
+    const [unansweredCount, setUnansweredCount] = useState(0); // 답변 대기 중인 Q&A 개수
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnQnAList();
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [isLoggedIn, navigate]);
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
@@ -27,18 +41,18 @@ function QnaManagePage() {
         axios.get(apiUrl)
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                setData(response.data.list);
+                const qnaList = response.data.list;
+                setData(qnaList);
+    
+                // 답변 대기인 Q&A 수를 셈
+                const unanswered = qnaList.filter(item => !item.answer).length;
+                setUnansweredCount(unanswered);
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리
                 console.error('QnA 목록 반환 오류 발생: ', error);
             })
     }
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        returnQnAList();
-    }, []);
 
     // 내용 간략히 보이기
     const contentCut = (content) => {
@@ -88,10 +102,18 @@ function QnaManagePage() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4" style={{ textAlign: 'center', fontFamily: 'NanumSquareRoundB' }}>등록된 Q&A 없음</td>
+                                <td colSpan="4" style={{ textAlign: 'center', fontFamily: 'Arial, Helvetica, sans-serif' }}>등록된 Q&A 없음</td>
                             </tr>
                         )}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="4" style={{ padding: '1%', textAlign: 'center', fontWeight: 'bold', color: 'grey' }}>
+                                전체 Q&A 수: {data.length} 
+                                {/* <span style={{ color: 'red', fontSize: '13px'}}>&emsp; 답변 대기 중인 질문이 {unansweredCount}개 있습니다.</span> */}
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div className={styles.pagination}>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (

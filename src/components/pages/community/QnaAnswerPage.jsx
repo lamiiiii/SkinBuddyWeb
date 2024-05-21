@@ -14,12 +14,24 @@ function QnaAnswerPage() {
     const [form, setForm] = useState([]); // 답변 내용
     const [data, setData] = useState([]); // 질문 내용
     const { qnaNum } = useParams(); // qna table 상세 index 번호 넘겨받기
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnQnAList();
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [isLoggedIn, navigate]);
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-
 
     // 특정 QnA 내용 반환
     const returnQnAList = (search) => {
@@ -47,11 +59,6 @@ function QnaAnswerPage() {
             })
     }
 
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        returnQnAList();
-    }, []);
-
     // 폼에 입력한 정보 전달
     const onChange = (e) => {
         const value = e.target.value;
@@ -68,7 +75,7 @@ function QnaAnswerPage() {
             }
 
             // 수정 완료 실행 이중 확인
-            const isConfirmed = window.confirm(`답변을 저장하시겠습니까?\n등록 후에는 수정이 불가능합니다.`);
+            const isConfirmed = window.confirm(`답변을 저장하시겠습니까?`);
 
             if (isConfirmed) {
                 // API URL 설정
@@ -92,9 +99,9 @@ function QnaAnswerPage() {
                         alert('답변 저장 실패~~~~~~~~~')
                     })
 
-            } else {
-                alert("답변 내용이 없습니다.");
             }
+        } else {
+            alert("답변 내용이 없습니다.");
         }
     }
 
