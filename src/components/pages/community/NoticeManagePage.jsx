@@ -15,6 +15,18 @@ function NoticeManagePage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
 
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnNoticeList();
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [isLoggedIn, navigate]);
+
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -35,16 +47,6 @@ function NoticeManagePage() {
                 console.error('공지사항 목록 반환 오류 발생: ', error);
             })
     }
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        if (isLoggedIn) {
-            returnNoticeList();
-        } else {
-            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
-            navigate('/');
-        }
-    }, [isLoggedIn, navigate]);
 
     // 내용 간략히 보이기
     const contentCut = (content) => {
@@ -93,10 +95,17 @@ function NoticeManagePage() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="3" style={{ textAlign: 'center', fontFamily: 'NanumSquareRoundB' }}>등록된 공지사항 없음</td>
+                                <td colSpan="3" style={{ textAlign: 'center', fontFamily: 'Arial, Helvetica, sans-serif' }}>등록된 공지사항 없음</td>
                             </tr>
                         )}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="3" style={{ padding: '1%', textAlign: 'center', fontWeight: 'bold', color: 'grey' }}>
+                                전체 공지사항 수: {data.length}
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div className={styles.pagination}>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (

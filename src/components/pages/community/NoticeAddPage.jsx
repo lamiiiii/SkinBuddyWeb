@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
     useNavigate, /* 페이지 이동을 위해 */
 } from "react-router-dom";
@@ -10,8 +10,19 @@ import axios from "axios"; // api 통신을 위해 axios install & import
 function NoticeAddPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState([]); // 공지사항 내용
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
     // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
 
+    // 페이지 로드 시 로그인 상태 확인
+    useEffect(() => {
+        if (!isLoggedIn) {
+            alert("로그인이 필요합니다.");
+            navigate("/LoginPage"); // 로그인 페이지로 이동
+        } else {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+        }
+    }, [isLoggedIn, navigate]);
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {

@@ -17,6 +17,19 @@ function NoticeUpdatePage() {
     const [noticeData, setNoticeData] = useState([]); // 응답 데이터
     const { noticeNum } = useParams(); // notice table 상세 index 번호 넘겨받기
 
+
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnNotice();
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [isLoggedIn, navigate]);
+
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -48,16 +61,6 @@ function NoticeUpdatePage() {
                 console.error('특정 공지사항 내용 반환 오류 발생: ', error);
             })
     }
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        if (isLoggedIn) {
-            returnNotice();
-        } else {
-            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
-            navigate('/');
-        }
-    }, [isLoggedIn, navigate]);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -91,7 +94,7 @@ function NoticeUpdatePage() {
                     .then(response => {
                         // 요청이 성공한 경우 응답한 데이터 처리
                         if (response.data["property"] === 200) { // 전송 성공 && 수정 완료
-                            alert(`${noticeData.noticeId}번 공지사항 수정 성공`);
+                            // alert(`${noticeData.noticeId}번 공지사항 수정 성공`);
                             navigate("/NoticeManagePage");
                         } else if (response.data["property"] == 304) { // 전송 성공했으나 수정 불가 사유 메세지 띄우기
                             alert(response.data.message);
@@ -131,7 +134,7 @@ function NoticeUpdatePage() {
                     // 요청이 성공한 경우 응답한 데이터 처리
                     // 서버 응답 처리
                     if (response.data["property"] === 200) {
-                        alert(`${noticeData.noticeId}번 공지사항이 삭제되었습니다`);
+                        // alert(`${noticeData.noticeId}번 공지사항이 삭제되었습니다`);
                         navigate("/NoticeManagePage");
                     } else {
                         alert(`${noticeData.noticeId}번 공지사항 삭제에 실패하였습니다`);
