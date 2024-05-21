@@ -13,6 +13,18 @@ function AdManagePage() {
     // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // 로그인 상태 여부 저장
 
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnAdList();
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [isLoggedIn, navigate]);
+
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -32,16 +44,6 @@ function AdManagePage() {
                 console.error('광고 목록 반환 오류 발생: ', error);
             });
     };
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        if (isLoggedIn) {
-            returnAdList();
-        } else {
-            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
-            navigate('/');
-        }
-    }, [isLoggedIn, navigate]);
 
     // 파일 선택 핸들러
     const onFileChange = (e) => {
@@ -142,7 +144,7 @@ function AdManagePage() {
                     {data.length > 0 ? (
                         data.map(ad => (
                             <div key={ad.advertisementId} className={styles.divBox}>
-                                <p className={styles.miniText}>Ad Number.{ad.advertisementId}</p>
+                                <p className={styles.miniText}>Number.{ad.advertisementId}</p>
                                 <img className={styles.image} src={`data:image/jpeg;base64,${ad.photo}`} alt="광고 사진" />
                                 <button className={styles.button} onClick={() => onClickDelete(ad.advertisementId)}>삭제</button>
                             </div>
