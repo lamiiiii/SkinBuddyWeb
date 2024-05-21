@@ -50,6 +50,7 @@
     border-radius: 7px;
     flex-direction: column;
     /* 요소 세로 정렬*/
+    background-color: #F8FAFB;
     display: flex;
     align-items: center;
     justify-content: center;
