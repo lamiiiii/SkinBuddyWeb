@@ -78,7 +78,7 @@ function Navbar({ selectedPage }) {
             ) : (
                 <>
                     <Link className={styles.link} to={'/'}>
-                        <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" />
+                        <img className={styles.logoImage} src="/img/SkinBuddy.png" alt="메인 로고 버튼" onClick={() => { navigate('/'); window.location.reload(); window.scrollTo({ top: 0 });}}/>
                     </Link>
 
                     {/* 상태바 가림 */}
