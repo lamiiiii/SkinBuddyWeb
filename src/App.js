@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
 import Navbar from "./components/auth/Navbar";
@@ -30,36 +26,37 @@ import TermsManagePage from "./components/pages/community/TermsManagePage"; // �
 import AIClassificationPage from "./components/pages/ai/AIClassificationPage"; // AI 분류 모델
 import AIImprovementPage from "./components/pages/ai/AIImprovementPage";       // AI 개선도 모델
 
+import AutoLogout from "./components/auth/autoLogout"; // AutoLogout 컴포넌트 import
 import './App.css';
 
 function App(props) {
-  
   return (
     <BrowserRouter>
+      <AutoLogout /> {/* AutoLogout 컴포넌트를 추가 */}
       <Routes>
-        <Route path="/NavBar" element={<Navbar/>}/>
-        <Route index element={<FirstPage/>}/> {/* 루트 페이지 */}
-        <Route path="/LoginPage" element={<LoginPage/>}/>
-        <Route path="/IdFindPage" element={<IdFindPage/>}/>
-        <Route path="/PwFindPage" element={<PwFindPage/>}/>
-        <Route path="/MainPage" element={<MainPage/>}/>
-        <Route path="/ManagerPage" element={<ManagerPage/>}/>
-        <Route path="/ManagerAddPage" element={<ManagerAddPage/>}/>
-        <Route path="/ManagerUpdatePage/:managerNum/:managerId" element={<ManagerUpdatePage/>}/>
-        <Route path="/ManagerPwChangePage" element={<ManagerPwChangePage/>}/>
-        <Route path="/UserManagePage" element={<UserManagePage/>}/>
-        <Route path="/UserUpdatePage/:userNum" element={<UserUpdatePage/>}/>
-        <Route path="/UserRecordManagePage" element={<UserRecordManagePage/>}/>
-        <Route path="/UserRecordUpdatePage/:userId/:recordId/:aiType" element={<UserRecordUpdatePage/>}/>
-        <Route path="/AdManagePage" element={<AdManagePage/>}/>
-        <Route path="/NoticeAddPage" element={<NoticeAddPage/>}/>
-        <Route path="/NoticeManagePage" element={<NoticeManagePage/>}/>
-        <Route path="/NoticeUpdatePage/:noticeNum" element={<NoticeUpdatePage/>}/>
-        <Route path="/QnaAnswerPage/:qnaNum" element={<QnaAnswerPage/>}/>
-        <Route path="/QnaManagePage" element={<QnaManagePage/>}/>
-        <Route path="/TermsManagePage" element={<TermsManagePage/>}/>
-        <Route path="/AIClassificationPage" element={<AIClassificationPage/>}/>
-        <Route path="/AIImprovementPage" element={<AIImprovementPage/>}/>
+        <Route path="/NavBar" element={<Navbar />} />
+        <Route index element={<FirstPage />} /> {/* 루트 페이지 */}
+        <Route path="/LoginPage" element={<LoginPage />} />
+        <Route path="/IdFindPage" element={<IdFindPage />} />
+        <Route path="/PwFindPage" element={<PwFindPage />} />
+        <Route path="/MainPage" element={<MainPage />} />
+        <Route path="/ManagerPage" element={<ManagerPage />} />
+        <Route path="/ManagerAddPage" element={<ManagerAddPage />} />
+        <Route path="/ManagerUpdatePage/:managerNum/:managerId" element={<ManagerUpdatePage />} />
+        <Route path="/ManagerPwChangePage" element={<ManagerPwChangePage />} />
+        <Route path="/UserManagePage" element={<UserManagePage />} />
+        <Route path="/UserUpdatePage/:userNum" element={<UserUpdatePage />} />
+        <Route path="/UserRecordManagePage" element={<UserRecordManagePage />} />
+        <Route path="/UserRecordUpdatePage/:userId/:recordId/:aiType" element={<UserRecordUpdatePage />} />
+        <Route path="/AdManagePage" element={<AdManagePage />} />
+        <Route path="/NoticeAddPage" element={<NoticeAddPage />} />
+        <Route path="/NoticeManagePage" element={<NoticeManagePage />} />
+        <Route path="/NoticeUpdatePage/:noticeNum" element={<NoticeUpdatePage />} />
+        <Route path="/QnaAnswerPage/:qnaNum" element={<QnaAnswerPage />} />
+        <Route path="/QnaManagePage" element={<QnaManagePage />} />
+        <Route path="/TermsManagePage" element={<TermsManagePage />} />
+        <Route path="/AIClassificationPage" element={<AIClassificationPage />} />
+        <Route path="/AIImprovementPage" element={<AIImprovementPage />} />
       </Routes>
     </BrowserRouter>
   );
