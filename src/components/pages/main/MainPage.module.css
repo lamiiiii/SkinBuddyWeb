@@ -2,7 +2,8 @@
 .mainWrapper {
     /* 화면 전체 감싸기 */
     width: calc(100%);
-    min-width: 1000px; /* 화면 축소 최소 넓이 */
+    min-width: 1000px;
+    /* 화면 축소 최소 넓이 */
     height: 100vh;
     /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
 }
@@ -15,81 +16,139 @@
     flex-direction: column;
     display: flex;
     align-items: center;
+    background-color: #F8FAFB;
+    margin-bottom: 600px;
 
 }
+
 .lineBox {
+    /* 줄 나누기 박스 */
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    align-items: center;
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 1%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    /* 그림자 추가 */
+    border-radius: 5px;
+}
+
+.middleLineBox {
+    /* 줄 나누기 절반크기 박스 */
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    background-color: white;
+    margin: 1%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    /* 그림자 추가 */
+    border-radius: 5px;
+}
+
+.middleSet {
+    /* middleLineBox 두개 합침 */
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    width: 97%;
+}
+
+.inlineBox {
+    /* 줄 나누기 안에 작은 박스 */
     display: flex;
     flex-direction: row;
     width: 100%;
-    align-items: center;
     justify-content: center;
-    margin-top: 0;
+    /* align-items: center; */
 }
-.smallBox{
+
+.divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    /* 구분선의 스타일을 지정합니다. */
+    margin: 0;
+    /* 구분선의 위아래 여백을 조정합니다. */
+    width: 100%;
+}
+
+.smallBox {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin: 1%;
-    width: 27%;
+    width: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+.titleText {
+    /* 관리자 계정 텍스트 */
+    font-size: 15px;
+    font-family: 'NanumSquareRoundB';
+    width: 99%;
+    text-align: end;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    /* font-weight: 600; */
+    /* margin-bottom: 1%;
+    margin-top: 7%;
+    margin-left: 60px;
+    margin-right: 60px; */
 }
 
 .mainText {
-    /* 제목 텍스트 (현재 가입자 수) */
-    font-size: 30px;
-    font-family:'NanumSquareRoundEB';
-    font-weight: bold;
-    margin-bottom: 1%;
-    margin-top: 5%;
+    /* 박스 제목 텍스트*/
+    font-size: 19px;
+    font-family: 'NanumSquareRoundEB';
+    width: 100%;
+    margin: 12px;
+    margin-left: 50px;
+    /* color: blue; */
+    /* margin-bottom: 1%; */
+    /* margin-top: 5%; */
 }
+
 .mainText2 {
-    /* 제목 텍스트 (현재 진행 중인 광고, 사용자 유형 분포도) */
+    /* 박스 내부 세부 제목 텍스트 */
     font-size: 23px;
-    font-family:'NanumSquareRoundB';
-    /* font-weight: 600; */
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: 'NanumSquareRoundB';
+    /* font-weight: bold; */
     margin-bottom: 1%;
-    margin-top: 7%;
-    margin-left: 60px;
-    /* 왼쪽 여백 */
-    margin-right: 60px;
-    /* 오른쪽 여백 */
+    white-space: nowrap;
+    /* 자식 요소를 줄바꿈 없이 한 줄로 */
 }
 
 .contentBox {
     /* 내용 박스 */
-    width: 40%;
-    height: 12%;
-    margin-top: 5%;
-    background-color: white;
-    border-radius: 20px;
-    padding: 5%;
+    width: 100px;
+    height: 100px;
+    margin-top: 30%;
     color: #9ABBF3;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 60px;
+    font-family: 'NanumSquareRoundEB';
+    /* font-weight: bold; */
+    font-size: 70px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 4px 6px #9ABBF380; /* 그림자 추가 */
+    cursor: pointer;
 
 }
 
-.contentBox2 {
-    /* 내용 박스 가로 정렬 */
-    flex-direction: row;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    
-}
-.aiGraph{
+.aiGraph {
     /* AI 결과 그래프 사진 */
     width: 350px;
     height: auto;
     background-color: #F8FAFB;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+    margin-bottom: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    /* 그림자 추가 */
 }
+
 .adBox {
     /* 현재 진행 중인 광고 박스 */
     display: flex;
@@ -106,8 +165,7 @@
     /* height: 200px; */
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
-
+    
 }
 
 .graphBox {
@@ -116,23 +174,28 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 3%;
-    margin-top: 0;
+    /* margin: 3%; */
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: 1%;
 }
-.graphContentBox{
+
+.graphContentBox {
     /* 유형 분포도 내용 박스 */
-    width: 600px;
+    width: 550px;
     height: auto;
     background-color: #F8FAFB;
 }
-.buttonDiv{
+
+.buttonDiv {
     /* 버튼 가로 정렬 Div */
     width: 500px;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.button{
+
+.button {
     /* 버튼 스타일 */
     /* 검색 버튼 */
     border: 0px;
@@ -142,19 +205,34 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* 그림자 추가 */
 
     &:hover {
         font-weight: bolder;
     }
 }
 
-.image{
+.image {
     /* 기록 사진 */
     width: auto;
     height: 280px;
     margin-bottom: 2%;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.lists {
+    width: 100%;
+}
+.listContent{
+    margin-bottom: 4%;
+    /* border-bottom: 0.1px solid grey; */
+    cursor: pointer;
+    list-style-type: none;
+    &:hover {
+        font-weight: bolder;
+    }
 }
 
 .topButton {
