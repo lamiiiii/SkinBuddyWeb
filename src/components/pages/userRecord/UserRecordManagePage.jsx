@@ -15,6 +15,20 @@ function UserRecordManagePage() {
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const [troubleCount, setTroubleCount] = useState(0);
+    const [improvementCount, setImprovementCount] = useState(0);
+
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnUserRecordList("all");
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, []);
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
@@ -26,26 +40,19 @@ function UserRecordManagePage() {
         const apiUrl = 'http://52.79.237.164:3000/user/skin/record/list'; // 사용자 진단 기록 목록 반환 API URL
 
         // axios를 이용하여 POST 요청 보내기
-        axios.post(apiUrl, { userId: search }) // 진단 기록은 아이디로 찾을테니 아마 수정해야함
+        axios.post(apiUrl, { userId: search }) // 진단 기록은 아이디로
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                setData(response.data.list);
+                const records = response.data.list;
+                setData(records);
+                setTroubleCount(records.filter(record => record.aiType === "AI 트러블 분석").length);
+                setImprovementCount(records.filter(record => record.aiType === "AI 호전도 분석").length);
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리
                 console.error('사용자 진단 기록 반환 오류 발생: ', error);
             })
     }
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        if (isLoggedIn) {
-            returnUserRecordList("all");
-        } else {
-            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
-            navigate('/');
-        }
-    }, []);
 
     // 폼에 입력한 정보 전달
     const onChange = (e) => {
@@ -96,6 +103,7 @@ function UserRecordManagePage() {
                             // 트러블 분석이면 0을 보내고, 호전도 분석이면 1을 보냄
                             <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserRecordUpdatePage/${item.userId}/${item.recordId}/${item.aiType === "AI 트러블 분석" ? "0" : "1"}`)}>
                                 <td className={styles.tableTdNum}>{item.recordId}</td>
+                                {/* <td className={styles.tableTdNum}>{index + 1}</td> */}
                                 <td className={styles.tableTd}>{item.userId ? item.userId : form.searchId}</td>
                                 <td className={styles.tableTd}>{item.aiType}</td>
                                 <td className={styles.tableTd}>{item.takeDay}</td>
@@ -106,6 +114,13 @@ function UserRecordManagePage() {
                             </tr>
                         )}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="5" style={{ padding: '1%', textAlign: 'center', fontWeight: 'bold', color: 'grey' }}>
+                                전체 진단 기록 수: {data.length} &emsp; (트러블 분석: {troubleCount}, 호전도 분석: {improvementCount})
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div className={styles.pagination}>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (

@@ -12,6 +12,19 @@ function TermsManagePage() {
     const navigate = useNavigate();
     const [form, setForm] = useState([]); // 이용약관 수정 내용
     const [data, setData] = useState([]); // 이용약관 기존 내용
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnTerms();
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [isLoggedIn, navigate]);
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
@@ -44,11 +57,6 @@ function TermsManagePage() {
                 console.error('이용약관 내용 반환 오류 발생: ', error);
             })
     }
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        returnTerms();
-    }, []);
 
     // 수정 완료 버튼 클릭 실행 함수
     const onClickUpdate = () => {

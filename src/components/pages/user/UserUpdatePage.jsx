@@ -17,10 +17,22 @@ function UserUpdatePage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
-        // 최상단 스크롤 버튼 함수
-        const scrollToTop = () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnUserInfo(userNum);
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, []);
+
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     // 특정 사용자 세부 정보 반환 
     const returnUserInfo = (search) => {
@@ -37,15 +49,6 @@ function UserUpdatePage() {
                 console.error('특정 사용자 세부 정보 반환 오류 발생: ', error);
             })
     }
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        if (isLoggedIn) {
-            returnUserInfo(userNum);
-        } else {
-            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
-            navigate('/');
-        }
-    }, []);
 
     // 폼에 입력한 정보 전달
     const onChange = (e) => {
@@ -68,14 +71,14 @@ function UserUpdatePage() {
                 nickname: form.nickname || data.nickname, // 수정한 부분 없으면 기존 값 불러옴
                 tel: form.tel || data.tel, // 수정한 부분 없으면 기존 값 불러옴
             };
-    
+
             // 수정 완료 실행 이중 확인
             const isConfirmed = window.confirm(`사용자 "${data.userId}" 님의 정보를 정말로 수정하시겠습니까?`);
-    
+
             if (isConfirmed) {
                 // API URL 설정
                 const apiUrl = 'http://52.79.237.164:3000/user/profile/update'
-    
+
                 // axios를 이용하여 PUT 요청 보내기
                 axios.put(apiUrl, requestData)
                     .then(response => {
@@ -145,7 +148,7 @@ function UserUpdatePage() {
             <div className={styles.userUpdateContainer}>
                 <p className={styles.mainText} onClick={() => window.location.reload()}>사용자 정보 수정</p>
                 <div className={styles.contentBox}>
-                <div className={styles.divBox}>
+                    <div className={styles.divBox}>
                         <p className={styles.miniText}>아이디</p>
                         <p className={styles.idText}>{data.userId}</p>
                     </div>

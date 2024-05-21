@@ -17,6 +17,18 @@ function ManagerPage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
+    // 페이지 로드 시 로그인 상태 확인
+    useEffect(() => {
+        if (!isLoggedIn) {
+            alert("로그인이 필요합니다.");
+            navigate("/LoginPage"); // 로그인 페이지로 이동
+        } else {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnManagerList("all"); // 관리자 목록 정보 반환
+        }
+    }, [isLoggedIn, navigate]);
+
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -37,16 +49,6 @@ function ManagerPage() {
                 console.error('관리자 목록 반환 오류 발생: ', error);
             })
     }
-
-    // 페이지 로드 시 로그인 상태 확인
-    useEffect(() => {
-        if (!isLoggedIn) {
-            alert("로그인이 필요합니다.");
-            navigate("/LoginPage"); // 로그인 페이지로 이동
-        } else {
-            returnManagerList("all"); // 관리자 목록 정보 반환
-        }
-    }, [isLoggedIn, navigate]);
 
     // 폼에 입력한 정보 전달
     const onChange = (e) => {
@@ -120,6 +122,13 @@ function ManagerPage() {
                             </tr>
                         )}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="4" style={{ padding: '1%', textAlign: 'center', fontWeight: 'bold', color: 'grey' }}>
+                                전체 관리자 수: {currentId === "root" ? data.length : (data.length > 0 ? data.length - 1 : 0)}
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div className={styles.pagination}>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (

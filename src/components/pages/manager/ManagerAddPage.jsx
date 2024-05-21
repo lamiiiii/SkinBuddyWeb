@@ -17,16 +17,19 @@ function ManagerAddPage() {
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [button, setButton] = useState(false);
 
-        // 최상단 스크롤 버튼 함수
-        const scrollToTop = () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
+    // 최상단 스크롤 버튼 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     // 페이지 로드 시 로그인 상태 확인
     useEffect(() => {
         if (!isLoggedIn) {
             alert("로그인이 필요합니다.");
             navigate("/LoginPage"); // 로그인 페이지로 이동
+        } else {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
         }
     }, [isLoggedIn, navigate]
     );

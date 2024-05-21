@@ -22,7 +22,11 @@ function LoginPage() {
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
         if (isLoggedIn) {
+            // 로그인된 상태에서는 접근 필요 없기 때문에 메인페이지로 이동
             navigate('/MainPage');
+        } else {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
         }
     }, []);
 

@@ -18,6 +18,18 @@ function UserManagePage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
+            returnUserList("all");
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, []);
+
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -39,16 +51,6 @@ function UserManagePage() {
                 console.error('사용자 정보 목록 반환 오류 발생: ', error);
             })
     }
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        if (isLoggedIn) {
-            returnUserList("all");
-        } else {
-            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
-            navigate('/');
-        }
-    }, []);
 
     // 폼에 입력한 정보 전달
     const onChange = (e) => {
@@ -105,10 +107,17 @@ function UserManagePage() {
                             </tr>
                         )) : (
                             <tr>
-                                <td colSpan="5" style={{ textAlign: 'center' }}>검색 결과 없음</td>
+                                <td colSpan="5" style={{ textAlign: 'center', fontFamily: 'Arial, Helvetica, sans-serif' }}>검색 결과 없음</td>
                             </tr>
                         )}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="5" style={{ padding: '1%', textAlign: 'center', fontWeight: 'bold', color: 'grey' }}>
+                                전체 사용자 수: {data.length}
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div className={styles.pagination}>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (

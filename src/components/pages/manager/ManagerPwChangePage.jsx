@@ -28,6 +28,8 @@ function ManagerPwChangePage() {
             alert("로그인이 필요합니다.");
             navigate("/LoginPage"); // 로그인 페이지로 이동
         } else {
+            // 페이지 처음 로드할 때 스크롤 위치 초기화
+            window.scrollTo({ top: 0 });
         }
     }, [isLoggedIn, navigate]);
 

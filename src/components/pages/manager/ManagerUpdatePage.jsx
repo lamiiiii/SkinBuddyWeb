@@ -18,6 +18,22 @@ function ManagerUpdatePage() {
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
 
+
+    // 페이지 렌더링 처음에 자동 목록 반환
+    useEffect(() => {
+        if (isLoggedIn) {
+            if (managerNum) {
+                // 페이지 처음 로드할 때 스크롤 위치 초기화
+                window.scrollTo({ top: 0 });
+                const decodedManagerNum = decodeURIComponent(managerNum);
+                returnManagerInfo(decodedManagerNum);
+            }
+        } else {
+            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
+            navigate('/');
+        }
+    }, [managerNum]);
+
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -34,9 +50,6 @@ function ManagerUpdatePage() {
             // axios를 이용하여 POST 요청 보내기
             axios.post(apiUrl, { name: search })
                 .then(response => {
-                    // 요청이 성공한 경우 응답한 데이터 처리
-                    console.log(response.data);
-
                     // 받아온 데이터에서 특정 managerId와 일치하는 값 필터링
                     const managerIdToFind = managerId; // 동명이인 처리를 위해 이름과 아이디 이중 확인
                     const matchedManager = response.data.list.find(manager => manager.managerId === managerIdToFind);
@@ -54,20 +67,6 @@ function ManagerUpdatePage() {
                 });
         }
     }
-
-    // 페이지 렌더링 처음에 자동 목록 반환
-    useEffect(() => {
-        if (isLoggedIn) {
-            if (managerNum) {
-                const decodedManagerNum = decodeURIComponent(managerNum);
-                console.log(decodedManagerNum);
-                returnManagerInfo(decodedManagerNum);
-            }
-        } else {
-            alert("잘못된 접근 방법입니다. 다시 시도해주세요.");
-            navigate('/');
-        }
-    }, [managerNum]);
 
     // 폼에 입력한 정보 전달
     const onChange = (e) => {
