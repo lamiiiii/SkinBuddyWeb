@@ -117,13 +117,13 @@ function MainPage(props) {
     // 광고 반환 함수
     const returnAdList = () => {
         const apiUrl = 'http://52.79.237.164:3000/manager/advertise/list';
-        // axios.get(apiUrl)
-        //     .then(response => {
-        //         setAdvertisements(response.data.data);
-        //     })
-        //     .catch(error => {
-        //         console.error('광고 목록 반환 오류 발생: ', error);
-        //     });
+        axios.get(apiUrl)
+            .then(response => {
+                setAdvertisements(response.data.data);
+            })
+            .catch(error => {
+                console.error('광고 목록 반환 오류 발생: ', error);
+            });
     };
 
     // 광고 자동 슬라이드 
@@ -323,7 +323,7 @@ function MainPage(props) {
                             <div className={styles.smallBox}>
                                 <p className={styles.mainText2} onClick={() => navigate('/NoticeManagePage')} style={{ cursor: 'pointer' }}>공지사항 &nbsp;|&nbsp; {noticeData.length}</p>
                                 <ul className={styles.lists}>
-                                    {noticeData.slice(0, 5).map((notice) => (
+                                    {noticeData.slice(0, 10).map((notice) => (
                                         <li className={styles.listContent} key={notice.noticeId} onClick={() => navigate(`/NoticeUpdatePage/${notice.noticeId}`)}>
                                             <span style={{ fontWeight: "bold" }}>No.{notice.noticeId}  &nbsp;</span>
                                             {notice.content.length > 8
@@ -338,7 +338,7 @@ function MainPage(props) {
                                 <p className={styles.mainText2} onClick={() => navigate('/QnaManagePage')} style={{ cursor: 'pointer' }}>Q&A &nbsp;|&nbsp; {qnaData.length}</p>
                                 <p style={{ color: "red", margin: "1%" }}>답변 대기 중인 질문 &nbsp;|&nbsp; {unansweredCount}</p>
                                 <ul className={styles.lists}>
-                                    {qnaData.filter(qna => !qna.answer).slice(0,5).map((qna) => (
+                                    {qnaData.filter(qna => !qna.answer).slice(0, 9).map((qna) => (
                                         <li className={styles.listContent} key={qna.questionId} onClick={() => navigate(`/QnaAnswerPage/${qna.questionId}`)}>
                                             <span style={{ fontWeight: "bold" }}>No.{qna.questionId}  &nbsp;</span>
                                             {qna.question.length > 8
