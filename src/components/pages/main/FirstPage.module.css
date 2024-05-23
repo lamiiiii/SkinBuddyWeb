@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     padding-top: 3%;
-    margin-bottom: 2000px; /* 여백 추가 */
+    margin-bottom: 2200px; /* 여백 추가 */
 }
 
 @keyframes fadeIn {
@@ -73,8 +73,8 @@
     align-items: center;
     justify-content: center;
     margin: 5%;
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: 3%;
+    margin-bottom: 1%;
 }
 
 .appImage {
@@ -98,6 +98,7 @@
 .centerLogo {
     /* 중앙 로고 이미지 스타일 */
     padding: 5%;
+    margin-top: 10%;
     width: calc(40%);
     height: auto;
 }
