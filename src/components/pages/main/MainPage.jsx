@@ -327,18 +327,19 @@ function MainPage(props) {
             <div className={styles.mainContainer}>
                 <p className={styles.titleText}>관리자 {currentId} 님 환영합니다.</p>
                 <div className={styles.middleSet}>
+                    {/* 첫번째 라인 - 관리자 현황*/}
                     <div className={styles.box}>
                         <p className={styles.mainText}>관리자 현황</p>
                         <hr className={styles.divider}></hr>
                         <p className={styles.mainText2} onClick={() => navigate('/ManagerPage')} style={{ cursor: 'pointer' }}>관리자 &nbsp;|&nbsp; {(currentId == "root") ? managerData.length : managerData.length - 1}</p>
-                        <ul className={styles.lists} style={{padding: '1%'}}>
+                        <ul className={styles.lists} style={{ padding: '1%' }}>
                             {managerData.slice(0, 7).map((manager) => (
                                 (currentId === 'root' || manager.managerId !== 'root') && (
                                     <li
                                         className={styles.listContent}
-                                        style={{marginBottom: '10%'}}
+                                        style={{ marginBottom: '10%' }}
                                         key={manager.managerId}
-                                        onClick={() => navigate(`/ManagerUpdatePage/${manager.managerId}`)}
+                                        onClick={() => navigate(`/ManagerUpdatePage/${manager.name}/${manager.managerId}`)}
                                     >
                                         <span>{manager.managerId} &emsp;</span>
                                         <span>{manager.name}</span>
@@ -355,7 +356,7 @@ function MainPage(props) {
                             <div className={styles.smallBox}>
                                 <p className={styles.mainText2}>현재 가입자</p>
                                 <div className={styles.contentBox} onClick={() => navigate('/UserManagePage')}>{data.userCount}</div>
-                                <p style={{ marginBottom: "0", fontWeight: 'bold'}}>최근 가입자 아이디</p>
+                                <p style={{ marginBottom: "0", fontWeight: 'bold' }}>최근 가입자 아이디</p>
                                 <p>{userData.userId}</p>
 
                             </div>
@@ -399,7 +400,7 @@ function MainPage(props) {
                             </div>
                         </div>
                     </div>
-                                        {/* 두번째 라인 - 광고 현황 & 커뮤니티 현황 */}
+                    {/* 두번째 라인 - 광고 현황 & 커뮤니티 현황 */}
                     <div className={styles.middleLineBox2}>
                         <p className={styles.mainText}>커뮤니티 현황</p>
                         <hr className={styles.divider}></hr>
