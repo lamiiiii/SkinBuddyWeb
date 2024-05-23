@@ -10,6 +10,8 @@ import Modal from "../../auth/Modal";
 function MainPage(props) {
     const navigate = useNavigate();
     const [data, setData] = useState([]); // 메인 페이지 정보 
+    const [managerData, setManagerData] = useState([]); // 관리자 정보
+    const [userData, setUserData] = useState([]); // 사용자 정보
     const [recordData, setRecordData] = useState(0); // 진단 기록 정보
     const [troubleCount, setTroubleCount] = useState(0); // 트러블 진단 기록
     const [improvementCount, setImprovementCount] = useState(0); // 호전도 진단 기록
@@ -21,6 +23,7 @@ function MainPage(props) {
     const [noticeData, setNoticeData] = useState([]); // 공지사항 정보 반환
     const [qnaData, setQnaData] = useState([]); // Q&A 정보 반환
     const [unansweredCount, setUnansweredCount] = useState(0); // 답변 대기 중인 Q&A 개수
+    const [termsData, setTermsData] = useState([]); // 이용약관 정보
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 관리자 계정 아이디
     const isLoggedIn = localStorage.getItem("isLoggedIn"); // 현재 로그인 여부
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
@@ -39,11 +42,14 @@ function MainPage(props) {
             // 페이지 처음 로드할 때 스크롤 위치 초기화
             window.scrollTo({ top: 0 });
             returnMainInformation();
+            returnManagerList();
+            returnUserList();
             returnAIGraph();
             returnAdList();
             returnUserRecordList();
             returnNoticeList();
             returnQnAList();
+            returnTerms();
         }
     }, []);
 
@@ -63,6 +69,39 @@ function MainPage(props) {
             })
             .catch(error => {
                 console.error('메인페이지 정보 반환 오류 발생: ', error);
+            })
+    }
+
+    // 관리자 목록 반환 
+    const returnManagerList = () => {
+        const apiUrl = 'http://52.79.237.164:3000/manager/list'; // 관리자 목록 반환 API URL
+
+        // axios를 이용하여 POST 요청 보내기
+        axios.post(apiUrl, { name: "all" })
+            .then(response => {
+                // 요청이 성공한 경우 응답한 데이터 처리
+                setManagerData(response.data.list);
+            })
+            .catch(error => {
+                // 요청이 실패한 경우 에러 처리
+                console.error('관리자 목록 반환 오류 발생: ', error);
+            })
+    }
+
+    // 사용자 정보 목록 반환 
+    const returnUserList = () => {
+        const apiUrl = 'http://52.79.237.164:3000/manager/user/list'; // 사용자 정보 목록 반환 API URL
+
+        // axios를 이용하여 POST 요청 보내기
+        axios.post(apiUrl, { userId: "all" })
+            .then(response => {
+                // 요청이 성공한 경우 응답한 데이터 처리
+                // console.log(response.data.list[0].userId);
+                setUserData(response.data.list[0]);
+            })
+            .catch(error => {
+                // 요청이 실패한 경우 에러 처리
+                console.error('사용자 정보 목록 반환 오류 발생: ', error);
             })
     }
 
@@ -95,7 +134,7 @@ function MainPage(props) {
     }
 
     // 사용자 진단 기록 목록 반환 
-    const returnUserRecordList = (search) => {
+    const returnUserRecordList = () => {
         const apiUrl = 'http://52.79.237.164:3000/user/skin/record/list'; // 사용자 진단 기록 목록 반환 API URL
 
         // axios를 이용하여 POST 요청 보내기
@@ -204,6 +243,26 @@ function MainPage(props) {
             })
     }
 
+    // 이용약관 내용 반환
+    const returnTerms = () => {
+        const apiUrl = 'http://52.79.237.164:3000/user/terms'; // 이용약관 내용 반환 API URL
+
+        // axios를 이용하여 GET 요청 보내기
+        axios.get(apiUrl)
+            .then(response => {
+                // 요청이 성공한 경우 응답한 데이터 처리
+                if (response.data["property"] === 404) {
+                    setTermsData("내용 없음")
+                } else {
+                    setTermsData(response.data.terms);
+                }
+            })
+            .catch(error => {
+                // 요청이 실패한 경우 에러 처리
+                console.error('이용약관 내용 반환 오류 발생: ', error);
+            })
+    }
+
     // 유형 막대 그래프 그리기
     const drawBarChart = (data) => {
         const ctx = document.getElementById('myChart').getContext('2d');
@@ -267,36 +326,60 @@ function MainPage(props) {
             <Navbar />
             <div className={styles.mainContainer}>
                 <p className={styles.titleText}>관리자 {currentId} 님 환영합니다.</p>
-                <div className={styles.lineBox}>
-                    {/* 첫번째 라인 - 사용자 현황*/}
-                    <p className={styles.mainText}>사용자 현황</p>
-                    <hr className={styles.divider}></hr>
-                    <div className={styles.inlineBox}>
-                        <div className={styles.smallBox}>
-                            <p className={styles.mainText2}>현재 가입자</p>
-                            <div className={styles.contentBox} onClick={() => navigate('/UserManagePage')}>{data.userCount}</div>
-                        </div>
-                        <div className={styles.smallBox}>
-                            <p className={styles.mainText2}>AI 진단 기록</p>
-                            <div className={styles.contentBox} onClick={() => navigate('/UserRecordManagePage')}>{recordData}</div>
-                            <p style={{ marginBottom: "0", fontWeight: "bold", width: "50%" }}>트러블 분석 &nbsp;|&nbsp; {troubleCount}</p>
-                            <p style={{ marginBottom: "0", fontWeight: "bold", width: "50%" }}>호전도 분석 &nbsp;|&nbsp; {improvementCount}</p>
-                        </div>
-                        <div className={styles.smallBox}>
-                            <p className={styles.mainText2}>피부 MBTI 검사</p>
-                            <div className={styles.contentBox} style={{ cursor: 'default' }}>{totalSkinTypes}</div>
-                            <p style={{ color: "grey" }}>검사 미완료 사용자 &nbsp;|&nbsp; {data.userCount - totalSkinTypes}</p>
-                        </div>
-                        <div className={styles.graphBox}>
-                            <p className={styles.mainText2}>사용자 피부 유형 분포도</p>
-                            <div className={styles.graphContentBox}>
-                                <canvas id="myChart"></canvas>
+                <div className={styles.middleSet}>
+                    <div className={styles.box}>
+                        <p className={styles.mainText}>관리자 현황</p>
+                        <hr className={styles.divider}></hr>
+                        <p className={styles.mainText2} onClick={() => navigate('/ManagerPage')} style={{ cursor: 'pointer' }}>관리자 &nbsp;|&nbsp; {(currentId == "root") ? managerData.length : managerData.length - 1}</p>
+                        <ul className={styles.lists} style={{padding: '1%'}}>
+                            {managerData.slice(0, 7).map((manager) => (
+                                (currentId === 'root' || manager.managerId !== 'root') && (
+                                    <li
+                                        className={styles.listContent}
+                                        style={{marginBottom: '10%'}}
+                                        key={manager.managerId}
+                                        onClick={() => navigate(`/ManagerUpdatePage/${manager.managerId}`)}
+                                    >
+                                        <span>{manager.managerId} &emsp;</span>
+                                        <span>{manager.name}</span>
+                                    </li>
+                                )
+                            ))}
+                        </ul>
+                    </div>
+                    <div className={styles.box2}>
+                        {/* 첫번째 라인 - 사용자 현황*/}
+                        <p className={styles.mainText}>사용자 현황</p>
+                        <hr className={styles.divider}></hr>
+                        <div className={styles.inlineBox}>
+                            <div className={styles.smallBox}>
+                                <p className={styles.mainText2}>현재 가입자</p>
+                                <div className={styles.contentBox} onClick={() => navigate('/UserManagePage')}>{data.userCount}</div>
+                                <p style={{ marginBottom: "0", fontWeight: 'bold'}}>최근 가입자 아이디</p>
+                                <p>{userData.userId}</p>
+
+                            </div>
+                            <div className={styles.smallBox}>
+                                <p className={styles.mainText2}>AI 진단 기록</p>
+                                <div className={styles.contentBox} style={{ color: 'grey' }} onClick={() => navigate('/UserRecordManagePage')}>{recordData}</div>
+                                <p style={{ marginBottom: "0", fontWeight: "bold" }}>트러블 분석 &nbsp;|&nbsp; {troubleCount}</p>
+                                <p style={{ marginBottom: "0", fontWeight: "bold" }}>호전도 분석 &nbsp;|&nbsp; {improvementCount}</p>
+                            </div>
+                            <div className={styles.smallBox}>
+                                <p className={styles.mainText2}>피부 MBTI 검사</p>
+                                <div className={styles.contentBox} style={{ color: 'grey', cursor: 'default' }}>{totalSkinTypes}</div>
+                                <p style={{ color: "grey" }}>검사 미완료 사용자 &nbsp;|&nbsp; {data.userCount - totalSkinTypes}</p>
+                            </div>
+                            <div className={styles.graphBox}>
+                                <p className={styles.mainText2}>사용자 피부 유형 분포도</p>
+                                <div className={styles.graphContentBox}>
+                                    <canvas id="myChart"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div></div>
                 <div className={styles.middleSet}>
-                    {/* 두번째 라인 - 광고 현황 & Q&A 현황 */}
+                    {/* 두번째 라인 - 광고 현황 & 커뮤니티 현황 */}
                     <div className={styles.middleLineBox}>
                         <p className={styles.mainText}>광고 현황</p>
                         <hr className={styles.divider}></hr>
@@ -316,16 +399,17 @@ function MainPage(props) {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.middleLineBox}>
+                                        {/* 두번째 라인 - 광고 현황 & 커뮤니티 현황 */}
+                    <div className={styles.middleLineBox2}>
                         <p className={styles.mainText}>커뮤니티 현황</p>
                         <hr className={styles.divider}></hr>
                         <div className={styles.inlineBox}>
                             <div className={styles.smallBox}>
                                 <p className={styles.mainText2} onClick={() => navigate('/NoticeManagePage')} style={{ cursor: 'pointer' }}>공지사항 &nbsp;|&nbsp; {noticeData.length}</p>
                                 <ul className={styles.lists}>
-                                    {noticeData.slice(0, 10).map((notice) => (
+                                    {noticeData.slice(0, 5).map((notice) => (
                                         <li className={styles.listContent} key={notice.noticeId} onClick={() => navigate(`/NoticeUpdatePage/${notice.noticeId}`)}>
-                                            <span style={{ fontWeight: "bold" }}>No.{notice.noticeId}  &nbsp;</span>
+                                            <span style={{ fontWeight: "bold" }}>No.{notice.noticeId}  &emsp;</span>
                                             {notice.content.length > 8
                                                 ? `${notice.content.substring(0, 8)}...`
                                                 : (notice.content.includes(':') ? notice.content.split(':')[0] : notice.content)}
@@ -335,10 +419,33 @@ function MainPage(props) {
                                 </ul>
                             </div>
                             <div className={styles.smallBox}>
-                                <p className={styles.mainText2} onClick={() => navigate('/QnaManagePage')} style={{ cursor: 'pointer' }}>Q&A &nbsp;|&nbsp; {qnaData.length}</p>
-                                <p style={{ color: "red", margin: "1%" }}>답변 대기 중인 질문 &nbsp;|&nbsp; {unansweredCount}</p>
+                                <p className={styles.mainText2} style={{ color: "red", margin: "1%" }}>답변 대기중인 질문 &nbsp;|&nbsp; {unansweredCount}</p>
+                                <p onClick={() => navigate('/QnaManagePage')} style={{ cursor: 'pointer', margin: "1%" }}>Q&A &nbsp;|&nbsp; {qnaData.length}</p>
                                 <ul className={styles.lists}>
-                                    {qnaData.filter(qna => !qna.answer).slice(0, 9).map((qna) => (
+                                    {qnaData.filter(qna => !qna.answer).slice(0, 5).map((qna) => (
+                                        <li className={styles.listContent} key={qna.questionId} onClick={() => navigate(`/QnaAnswerPage/${qna.questionId}`)}>
+                                            <span style={{ fontWeight: "bold" }}>No.{qna.questionId}  &nbsp;</span>
+                                            {qna.question.length > 8
+                                                ? `${qna.question.substring(0, 8)}...`
+                                                : (qna.question.includes('\n') ? qna.question.split('\n')[0] : qna.question)}
+                                            <span> &emsp;({qna.createday})</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div className={styles.inlineBox}>
+                            <div className={styles.smallBox}>
+                                <p className={styles.mainText2} onClick={() => navigate('/TermsManagePage')} style={{ cursor: 'pointer' }}>이용약관</p>
+                                <div className={styles.lists}>
+                                    <p>{termsData.length > 150 && `${termsData.substring(0, 150)}...`}</p>
+                                </div>
+                            </div>
+                            <div className={styles.smallBox}>
+                                <p className={styles.mainText2} style={{ color: "blue", margin: "1%" }}>답변 완료된 질문 &nbsp;|&nbsp; {qnaData.length - unansweredCount}</p>
+                                <p onClick={() => navigate('/QnaManagePage')} style={{ cursor: 'pointer', margin: "1%" }}>Q&A &nbsp;|&nbsp; {qnaData.length}</p>
+                                <ul className={styles.lists}>
+                                    {qnaData.filter(qna => qna.answer).slice(0, 5).map((qna) => (
                                         <li className={styles.listContent} key={qna.questionId} onClick={() => navigate(`/QnaAnswerPage/${qna.questionId}`)}>
                                             <span style={{ fontWeight: "bold" }}>No.{qna.questionId}  &nbsp;</span>
                                             {qna.question.length > 8
