@@ -48,8 +48,8 @@ function TermsManagePage() {
                     setData("내용 없음")
                     setForm("내용 없음")
                 } else {
-                    setData(response.data.trems);
-                    setForm(response.data.trems);
+                    setData(response.data.terms);
+                    setForm(response.data.terms);
                 }
             })
             .catch(error => {
