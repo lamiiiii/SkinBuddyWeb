@@ -33,7 +33,7 @@
 .contentBox {
     /* 내용 박스 (input들) */
     width: 800px;
-    height: 320px;
+    height: 300px;
     border: 0px solid #9ABBF3;
     border-radius: 7px;
     background-color: #F8FAFB;
@@ -44,11 +44,11 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 }
 .textareaBox {
-    /* 공지사항 내용 textarea */
+    /* Q&A 내용 textarea */
     background-color: white;
     border: 0px solid #9D9797;
     width: 100%;
-    height: 80%;
+    height: 100%;
     padding: 1%;
     margin-top: 0;
     margin-left: 2%;
@@ -62,7 +62,7 @@
     flex-direction: column;
     align-items: start;
     width: 80%;
-    height: 60%;
+    height: 70%;
 }
 .sideText{
     /* '글 번호' Text */
@@ -127,10 +127,10 @@
 }
 .answerTextarea{
     width: 95%;
-    height: 40%;
+    height: 50%;
     border-radius: 10px;
     padding: 2%;
-    font-size: 18px;
+    font-size: 15px;
 }
 .answerButtonDiv{
     /* 버튼 가로 정렬 Div */
