@@ -43,7 +43,6 @@ function UserManagePage() {
         axios.post(apiUrl, { userId: search })
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
-                console.log('사용자 정보 목록 반환 응답: ', response.data);
                 setData(response.data.list);
             })
             .catch(error => {
