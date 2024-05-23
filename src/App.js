@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // pages
 import Navbar from "./components/auth/Navbar";
 import FirstPage from "./components/pages/main/FirstPage";     // 로그인 전 첫 페이지
+import GuestPage from "./components/pages/main/GuestPage";     // 로그인 전 게스트 페이지 (모든 정보 관람 불가)
 import LoginPage from "./components/pages/login/LoginPage";    // 로그인
 import IdFindPage from "./components/pages/login/IdFindPage";  // 로그인
 import PwFindPage from "./components/pages/login/PwFindPage";  // 로그인
@@ -36,6 +37,7 @@ function App(props) {
       <Routes>
         <Route path="/NavBar" element={<Navbar />} />
         <Route index element={<FirstPage />} /> {/* 루트 페이지 */}
+        <Route path="/GuestPage" element={<GuestPage/>}  />
         <Route path="/LoginPage" element={<LoginPage />} />
         <Route path="/IdFindPage" element={<IdFindPage />} />
         <Route path="/PwFindPage" element={<PwFindPage />} />

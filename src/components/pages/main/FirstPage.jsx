@@ -80,6 +80,9 @@ function FirstPage(props) {
                 <button ref={el => imagesRef.current[8] = el} className={styles.loginButton} onClick={() => navigate('/LoginPage')}>
                     관리자 로그인
                 </button>
+                <button ref={el => imagesRef.current[9] = el} className={styles.guestButton} onClick={() => navigate('/GuestPage')}>
+                    Guest
+                </button>
             </div>
             <button className={styles.topButton} onClick={scrollToTop}>Top</button>
             <Footer />
