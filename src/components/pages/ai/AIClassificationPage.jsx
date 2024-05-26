@@ -9,7 +9,7 @@ function AIClassificationPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ learningRate: "", epochs: "", patience: "" });
     // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
     const [resultData, setResultData] = useState(null); // 재학습 결과값
     const [modalOpen, setModalOpen] = useState(false); // 모달창 오픈을 위함
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함

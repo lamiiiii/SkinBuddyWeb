@@ -25,14 +25,14 @@ function MainPage(props) {
     const [unansweredCount, setUnansweredCount] = useState(0); // 답변 대기 중인 Q&A 개수
     const [termsData, setTermsData] = useState([]); // 이용약관 정보
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 관리자 계정 아이디
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 현재 로그인 여부
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
     const [modalImageSrc, setModalImageSrc] = useState(""); // 모달에 보낼 사진
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    }
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -213,7 +213,6 @@ function MainPage(props) {
             .then(response => {
                 // 요청이 성공한 경우 응답한 데이터 처리
                 setNoticeData(response.data.list);
-                console.log(noticeData)
             })
             .catch(error => {
                 // 요청이 실패한 경우 에러 처리
@@ -231,8 +230,6 @@ function MainPage(props) {
                 // 요청이 성공한 경우 응답한 데이터 처리
                 const qnaList = response.data.list;
                 setQnaData(qnaList);
-                console.log(qnaData)
-
                 // 답변 대기인 Q&A 수를 셈
                 const unanswered = qnaList.filter(item => !item.answer).length;
                 setUnansweredCount(unanswered);

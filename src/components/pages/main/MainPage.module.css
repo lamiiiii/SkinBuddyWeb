@@ -11,7 +11,7 @@
 .mainContainer {
     /* 상단바 부분 빼고 화면 컨테이너 */
     width: calc(100%);
-    height: 200vh;
+    height: 250vh;
     /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
     flex-direction: column;
     display: flex;
@@ -36,6 +36,7 @@
     display: flex;
     flex-direction: column;
     width: 15%;
+    min-width: 15%;
     align-items: center;
     background-color: white;
     margin-top: 0;
@@ -51,6 +52,7 @@
     display: flex;
     flex-direction: column;
     width: 85%;
+    min-width: 85%;
     align-items: center;
     background-color: white;
     margin-top: 0;

@@ -16,7 +16,7 @@ function ManagerUpdatePage() {
     const { managerNum } = useParams(); // manager table 상세 이름 넘겨받기
     const { managerId } = useParams(); // manager table 상세 아이디 넘겨 받기
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
 
     // 페이지 렌더링 처음에 자동 목록 반환

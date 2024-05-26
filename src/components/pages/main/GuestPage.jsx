@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function GuestPage(props) {
     const navigate = useNavigate();
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 관리자 계정 아이디
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 현재 로그인 여부
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
     const [modalImageSrc, setModalImageSrc] = useState(""); // 모달에 보낼 사진
 
@@ -217,13 +217,13 @@ function GuestPage(props) {
                     <div className={styles.inlineBox}>
                         <div className={styles.smallBox}>
                             <p className={styles.mainText2} style={{ cursor: 'pointer' }}>AI 분류 모델</p>
-                            <img className={styles.aiGraph} src={'/img/AIClassification.jpeg'} alt="분류 모델 그래프 예시 사진" onClick={() => openModal('/img/AIClassification.jpeg')} />
-                            <p style={{ fontSize: '13px', margin: '0%' }}>그래프를 클릭하면 크게 확인할 수 있습니다.</p>
+                            {/* <img className={styles.aiGraph} src={'/img/AIClassification.jpeg'} alt="분류 모델 그래프 예시 사진" onClick={() => openModal('/img/AIClassification.jpeg')} /> */}
+                            <p style={{ fontSize: '15px', margin: '5%' }}>로그인 후에 확인할 수 있습니다.</p>
                         </div>
                         <div className={styles.smallBox}>
                             <p className={styles.mainText2} style={{ cursor: 'pointer' }}>AI 호전도 모델</p>
-                            <img className={styles.aiGraph} src={'/img/AIDetection.jpeg'} alt="호전도 모델 그래프 예시 사진" onClick={() => openModal('/img/AIDetection.jpeg')} />
-                            <p style={{ fontSize: '13px', margin: '0%' }}>그래프를 클릭하면 크게 확인할 수 있습니다.</p>
+                            {/* <img className={styles.aiGraph} src={'/img/AIDetection.jpeg'} alt="호전도 모델 그래프 예시 사진" onClick={() => openModal('/img/AIDetection.jpeg')} /> */}
+                            <p style={{ fontSize: '15px', margin: '5%' }}>로그인 후에 확인할 수 있습니다.</p>
                         </div>
                     </div>
                 </div>

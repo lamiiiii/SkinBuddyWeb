@@ -15,7 +15,7 @@ function PwFindPage() {
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [modalOpen, setModalOpen] = useState(false); // 모달창 오픈을 위함
     const modalBackground = useRef(); // 모달창 바깥에 클릭 시 닫기를 위함
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
@@ -43,8 +43,8 @@ function PwFindPage() {
     };
 
     const onClickPwFind = () => {
-        if (form.managerId == "root") { // 루트 계정 접근 제한
-            alert("해당 아이디는 접근 불가능합니다.");
+        if (form.managerId == "root" || form.telNumber == "010--------") { // 루트 계정 접근 제한
+            alert("접근 권한이 없습니다. 관리자에게 문의해주세요.");
             window.location.reload();
         } else {
             const isConfirm = window.confirm("임시 비밀번호를 발급받으시겠습니까?");

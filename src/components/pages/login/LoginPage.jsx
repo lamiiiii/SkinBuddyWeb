@@ -12,7 +12,7 @@ function LoginPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ managerId: "", managerPw: "" }); // 로그인 입력 정보
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {
@@ -52,29 +52,21 @@ function LoginPage() {
             const apiUrl = 'http://52.79.237.164:3000/manager/login'; // 로그인 API URL
 
             // axios를 이용하여 POST 요청 보내기
-            axios.post(apiUrl, requestData,
-                {
-                    headers: {
-                        'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin',
-                        'Access-Control-Allow-Credentials': true,
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                    }
-                })
+            axios.post(apiUrl, requestData)
                 .then(response => {
                     // 요청이 성공한 경우 응답한 데이터 처리
-                    if (response.data["property"] === 200) {
+                    if (response.data["property"] === 200 && response.data["success"] === true && response.data["message"] === "로그인 성공") {
                         localStorage.setItem("ID", form.managerId); // 로그인 정보 유지를 위한 저장
                         localStorage.setItem("isLoggedIn", true); // 로그인 여부 저장
                         navigate('/MainPage');
                     }
                     else if (response.data["property"] === 301) {
                         alert(`${response.data["message"]}`);
-                        localStorage.setItem("IsLoggedIn", false); // 로그인 여부 저장
+                        localStorage.setItem("isLoggedIn", false); // 로그인 여부 저장
                         window.location.reload(); // 페이지 새로고침
                     }
                     else {
-                        alert("로그인 정보를 다시 입력해주세요.");
+                        alert("로그인에 실패하였습니다. 다시 시도해주세요.");
                         localStorage.setItem("isLoggedIn", false); // 로그인 여부 저장
                         window.location.reload(); // 페이지 새로고침
                     }
@@ -87,8 +79,10 @@ function LoginPage() {
                 })
         } else if (!form.managerId) {
             setNoticeMessage("아이디를 입력해주세요.");
+            localStorage.setItem("isLoggedIn", false); // 로그인 여부 저장
         } else {
             setNoticeMessage("비밀번호를 입력해주세요.");
+            localStorage.setItem("isLoggedIn", false); // 로그인 여부 저장
         }
     }
 

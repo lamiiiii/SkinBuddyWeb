@@ -12,7 +12,7 @@ function IdFindPage() {
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [findIdModalOpen, setFindIdModalOpen] = useState(false);
     const modalBackground = useRef();
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
     // 최상단 스크롤 버튼 함수
     const scrollToTop = () => {

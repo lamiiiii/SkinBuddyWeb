@@ -12,7 +12,7 @@ function TermsManagePage() {
     const navigate = useNavigate();
     const [form, setForm] = useState([]); // 이용약관 수정 내용
     const [data, setData] = useState([]); // 이용약관 기존 내용
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
     
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {

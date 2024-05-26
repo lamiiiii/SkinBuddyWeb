@@ -10,12 +10,11 @@
 .firstContainer {
     /* 상단바를 제외한 화면 컨테이너 */
     width: calc(100%);
-    height: 100vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면 전체 포함) */
+    height: 400vh; /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면 전체 포함) */
     flex-direction: column;
     display: flex;
     align-items: center;
     padding-top: 3%;
-    margin-bottom: 2200px; /* 여백 추가 */
 }
 
 @keyframes fadeIn {

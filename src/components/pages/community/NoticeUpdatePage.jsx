@@ -13,7 +13,7 @@ function NoticeUpdatePage() {
     const [form, setForm] = useState([]); // 공지사항 수정 내용
     const [data, setData] = useState([]); // 공지사항 기존 내용
     // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
     const [noticeData, setNoticeData] = useState([]); // 응답 데이터
     const { noticeNum } = useParams(); // notice table 상세 index 번호 넘겨받기
 

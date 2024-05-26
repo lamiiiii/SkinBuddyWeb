@@ -12,7 +12,7 @@ function ManagerPwChangePage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({ originalPwd: "", newPwd: "", checkNewPwd: "" }); // 새로운 비밀번호 변경 입력 정보
     const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
     const [noticeMessage, setNoticeMessage] = useState([]); // 알림 메세지
     const [button, setButton] = useState(false);
     const [check, setCheck] = useState(false); // 기존 비밀번호 체크 여부 저장

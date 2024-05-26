@@ -14,7 +14,7 @@ function QnaAnswerPage() {
     const [form, setForm] = useState([]); // 답변 내용
     const [data, setData] = useState([]); // 질문 내용
     const { qnaNum } = useParams(); // qna table 상세 index 번호 넘겨받기
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {

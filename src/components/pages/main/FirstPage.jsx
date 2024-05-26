@@ -6,7 +6,7 @@ import styles from "./FirstPage.module.css";
 
 function FirstPage(props) {
     const navigate = useNavigate();
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
     const imagesRef = useRef([]);
 

@@ -14,7 +14,7 @@ function QnaManagePage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 한 페이지에 15개의 기록을 표시
     const [unansweredCount, setUnansweredCount] = useState(0); // 답변 대기 중인 Q&A 개수
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // 로그인 상태 여부 저장
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // boolean 타입으로 가져오기
 
     // 페이지 렌더링 처음에 자동 목록 반환
     useEffect(() => {
