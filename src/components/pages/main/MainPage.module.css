@@ -2,7 +2,7 @@
 .mainWrapper {
     /* 화면 전체 감싸기 */
     width: calc(100%);
-    min-width: 1000px;
+    min-width: 1300px;
     /* 화면 축소 최소 넓이 */
     height: 100vh;
     /* 뷰포트의 높이와 동일하게 설정 (요소가 없어도 화면전체 포함) */
@@ -36,7 +36,6 @@
     display: flex;
     flex-direction: column;
     width: 15%;
-    min-width: 15%;
     align-items: center;
     background-color: white;
     margin-top: 0;
@@ -52,7 +51,6 @@
     display: flex;
     flex-direction: column;
     width: 85%;
-    min-width: 85%;
     align-items: center;
     background-color: white;
     margin-top: 0;

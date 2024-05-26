@@ -54,7 +54,7 @@ function MainPage(props) {
     }, []);
 
     useEffect(() => { // 반복 렌더링
-        if (advertisements.length > 1) {
+        if (advertisements  && advertisements.length > 1) {
             startAutoSlide();
         }
     }, [advertisements]);
@@ -383,9 +383,9 @@ function MainPage(props) {
                         <hr className={styles.divider}></hr>
                         <div className={styles.inlineBox}>
                             <div className={styles.adBox}>
-                                <p className={styles.mainText2} onClick={() => navigate('/AdManagePage')} style={{ cursor: 'pointer' }}>진행 중인 광고 &nbsp;|&nbsp; {advertisements.length}</p>
+                                <p className={styles.mainText2} onClick={() => navigate('/AdManagePage')} style={{ cursor: 'pointer' }}>진행 중인 광고 &nbsp;|&nbsp; {advertisements && advertisements.length ? advertisements.length : 0} </p>
                                 <div className={styles.adContentBox}>
-                                    {advertisements.length > 0 ? (
+                                    {advertisements && advertisements.length > 0 ? ( // 광고 데이터 undefined 처리
                                         <img className={styles.image} src={`data:image/jpeg;base64,${advertisements[currentAdIndex].photo}`} alt={`Advertisement ${currentAdIndex + 1}`} onClick={() => openModal(`data:image/jpeg;base64,${advertisements[currentAdIndex].photo}`)} />
                                     ) : <p style={{ margin: "10%", fontWeight: "bold", width: "100%" }}>현재 진행 중인 광고 없음</p>
                                     }
