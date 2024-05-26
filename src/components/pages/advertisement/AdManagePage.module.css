@@ -112,10 +112,17 @@
     justify-content: end;
 }
 
-.addButton {
-    /* 관리자 추가 버튼 */
-    margin-top: 3%;
-    font-size: 15px;
+.fileInput {
+    /* 파일 선택 안 했을 때 안보이게 */
+    display: none;
+}
+
+.addFile {
+    /* 파일 추가 버튼 */
+    margin: 3%;
+    margin-right: 1px;
+    margin-left: 1px;
+    font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     background-color: white;
@@ -129,6 +136,27 @@
     &:hover {
         background-color: #9D9797;
         color: white;
+    }
+}
+
+.addButton {
+    /* 광고 추가 전송 버튼 */
+    margin: 3%;
+    margin-right: 0;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: #9ABBF3;
+    color: white;
+    border-radius: 3px;
+    border: 0px solid #9ABBF3;
+    cursor: pointer;
+    padding: 0.5%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
+
+    &:hover {
+        background-color: white;
+        color: #9ABBF3;
     }
 }
 

@@ -9,8 +9,7 @@ function AdManagePage() {
     const navigate = useNavigate();
     const [data, setData] = useState([]); // 트러블 분석 결과 데이터 받아오기
     const [selectedFile, setSelectedFile] = useState(null); // 파일 선택 상태
-
-    // const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
+    const currentId = localStorage.getItem("ID"); // 현재 로그인된 아이디 가져오기
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // 로그인 상태 여부 저장
 
     // 페이지 렌더링 처음에 자동 목록 반환
@@ -83,7 +82,9 @@ function AdManagePage() {
         }
 
         // 파일명 인코딩
-        const encodedFileName = encodeURIComponent(selectedFile.name);
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleString("en-US", { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const encodedFileName = `${currentId}_${formattedDate}_AddAd.jpg`; // 로그인한 관리자 아이디와 날짜, 정보 텍스트 조합으로 파일명 임의 지정
         const formData = new FormData();
         formData.append('photoFile', selectedFile, encodedFileName); // 인코딩된 파일명 추가
         const apiUrl = 'http://52.79.237.164:3000/manager/advertise/create'; // 광고 업로드 API
@@ -141,7 +142,7 @@ function AdManagePage() {
             <div className={styles.AdManageContainer}>
                 <p className={styles.mainText} onClick={() => { navigate('/AdManagePage'); window.location.reload(); }}>광고 관리</p>
                 <div className={styles.contentBox}>
-                    {data.length > 0 ? (
+                    {data && data.length > 0 ? ( // 광고 데이터 undefined 처리
                         data.map(ad => (
                             <div key={ad.advertisementId} className={styles.divBox}>
                                 <p className={styles.miniText}>Number.{ad.advertisementId}</p>
@@ -154,8 +155,23 @@ function AdManagePage() {
                     )}
                 </div>
                 <div className={styles.addDiv}>
-                    <input className={styles.addButton} type="file" onChange={onFileChange} />
-                    <button className={styles.addButton} onClick={onClickAdd}>광고 추가</button>
+                    {!selectedFile ?
+                        <label htmlFor="file-upload" className={styles.addFile}>
+                            광고 추가
+                        </label>
+                        :
+                        <label htmlFor="file-upload" className={styles.addFile}>
+                        파일 변경
+                    </label>
+                        }
+                    <input id="file-upload" className={styles.fileInput} type="file" onChange={onFileChange} />
+                    {selectedFile &&
+                        <>
+                            <p className={styles.addFile}>{selectedFile.name}</p>
+                            <button className={styles.addButton} onClick={onClickAdd}>광고 추가</button>
+                        </>
+                    }
+
                 </div>
             </div>
             <button className={styles.topButton} onClick={scrollToTop}>Top</button>
