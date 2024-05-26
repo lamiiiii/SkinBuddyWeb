@@ -86,12 +86,12 @@ function GuestPage(props) {
         <div className={styles.mainWrapper}>
             <Navbar />
             <div className={styles.mainContainer}>
-                <p className={styles.titleText}>관리자 Guest 님 환영합니다.</p>
+                <p style={{color: 'red'}}> 환영합니다, Guest님. &nbsp; 이 페이지는 예시 정보를 보여주고 있습니다. &nbsp; 더 많은 정보를 확인하시려면 로그인해주세요. </p>
                 <div className={styles.middleSet}>
                     <div className={styles.box}>
                         <p className={styles.mainText}>관리자 현황</p>
                         <hr className={styles.divider}></hr>
-                        <p className={styles.mainText2}>관리자 &nbsp;|&nbsp; 7</p>
+                        <p className={styles.mainText2}>관리자 &nbsp;|&nbsp; N</p>
                         <ul className={styles.lists} style={{ padding: '1%' }}>
                             <li className={styles.listContent} style={{ marginBottom: '10%' }} onClick={() => { alert("로그인 후에 이용해주세요.") }}><span>Guest1 &emsp;</span><span>게스트1</span></li>
                             <li className={styles.listContent} style={{ marginBottom: '10%' }} onClick={() => { alert("로그인 후에 이용해주세요.") }}><span>Guest2 &emsp;</span><span>게스트2</span></li>
@@ -109,21 +109,21 @@ function GuestPage(props) {
                         <div className={styles.inlineBox}>
                             <div className={styles.smallBox}>
                                 <p className={styles.mainText2}>현재 가입자</p>
-                                <div className={styles.contentBox}>261</div>
+                                <div className={styles.contentBox} onClick={() => { alert("로그인 후에 이용해주세요.") }}>N</div>
                                 <p style={{ marginBottom: "0", fontWeight: 'bold' }}>최근 가입자 아이디</p>
                                 <p>Guest</p>
 
                             </div>
                             <div className={styles.smallBox}>
                                 <p className={styles.mainText2}>AI 진단 기록</p>
-                                <div className={styles.contentBox} style={{ color: 'grey' }}>224</div>
-                                <p style={{ marginBottom: "0", fontWeight: "bold" }}>트러블 분석 &nbsp;|&nbsp; 169</p>
-                                <p style={{ marginBottom: "0", fontWeight: "bold" }}>호전도 분석 &nbsp;|&nbsp; 55</p>
+                                <div className={styles.contentBox} style={{ color: 'grey' }} onClick={() => { alert("로그인 후에 이용해주세요.") }}>N</div>
+                                <p style={{ marginBottom: "0", fontWeight: "bold" }}>트러블 분석 &nbsp;|&nbsp; N</p>
+                                <p style={{ marginBottom: "0", fontWeight: "bold" }}>호전도 분석 &nbsp;|&nbsp; N</p>
                             </div>
                             <div className={styles.smallBox}>
                                 <p className={styles.mainText2}>피부 MBTI 검사</p>
-                                <div className={styles.contentBox} style={{ color: 'grey', cursor: 'default' }}>181</div>
-                                <p style={{ color: "grey" }}>검사 미완료 사용자 &nbsp;|&nbsp; 43</p>
+                                <div className={styles.contentBox} style={{ color: 'grey', cursor: 'default' }}>N</div>
+                                <p style={{ color: "grey" }}>검사 미완료 사용자 &nbsp;|&nbsp; N</p>
                             </div>
                             <div className={styles.graphBox}>
                                 <p className={styles.mainText2}>사용자 피부 유형 분포도</p>
@@ -140,7 +140,7 @@ function GuestPage(props) {
                         <hr className={styles.divider}></hr>
                         <div className={styles.inlineBox}>
                             <div className={styles.adBox}>
-                                <p className={styles.mainText2} style={{ cursor: 'pointer' }}>진행 중인 광고 &nbsp;|&nbsp; 5</p>
+                                <p className={styles.mainText2} style={{ cursor: 'pointer' }}>진행 중인 광고 &nbsp;|&nbsp; N</p>
                                 <div className={styles.adContentBox}>
                                     <img className={styles.image} src={'/img/photo1.png'} alt={`Advertisement Example`} onClick={() => openModal('/img/photo1.png')} />
                                     <div className={styles.buttonDiv}>
@@ -157,7 +157,7 @@ function GuestPage(props) {
                         <hr className={styles.divider}></hr>
                         <div className={styles.inlineBox}>
                             <div className={styles.smallBox}>
-                                <p className={styles.mainText2} onClick={() => { alert("로그인 후에 이용해주세요.") }} style={{ cursor: 'pointer' }}>공지사항 &nbsp;|&nbsp; 5</p>
+                                <p className={styles.mainText2} onClick={() => { alert("로그인 후에 이용해주세요.") }} style={{ cursor: 'pointer' }}>공지사항 &nbsp;|&nbsp; N</p>
                                 <ul className={styles.lists}>
                                     <li className={styles.listContent} onClick={() => { alert("로그인 후에 이용해주세요.") }}>
                                         <span style={{ fontWeight: "bold" }}>No.1  &emsp;</span>공지사항입니다.<span> &emsp;2024-05-10</span>
@@ -177,8 +177,8 @@ function GuestPage(props) {
                                 </ul>
                             </div>
                             <div className={styles.smallBox}>
-                                <p className={styles.mainText2} style={{ color: "red", margin: "1%" }}>답변 대기중인 질문 &nbsp;|&nbsp; 5</p>
-                                <p style={{ cursor: 'pointer', margin: "1%" }}>Q&A &nbsp;|&nbsp; 16</p>
+                                <p className={styles.mainText2} style={{ color: "red", margin: "1%" }}>답변 대기중인 질문 &nbsp;|&nbsp; N</p>
+                                <p style={{ cursor: 'pointer', margin: "1%" }} onClick={() => { alert("로그인 후에 이용해주세요.") }}>Q&A &nbsp;|&nbsp; N</p>
                                 <ul className={styles.lists}>
                                     <li className={styles.listContent} onClick={() => { alert("로그인 후에 이용해주세요.") }}><span style={{ fontWeight: "bold" }}>No.12  &nbsp;</span>질문입니다.<span> &emsp;2024-04-11</span></li>
                                     <li className={styles.listContent} onClick={() => { alert("로그인 후에 이용해주세요.") }}><span style={{ fontWeight: "bold" }}>No.13  &nbsp;</span>질문입니다.<span> &emsp;2024-04-29</span></li>
@@ -196,8 +196,8 @@ function GuestPage(props) {
                                 </div>
                             </div>
                             <div className={styles.smallBox}>
-                                <p className={styles.mainText2} style={{ color: "blue", margin: "1%" }}>답변 완료된 질문 &nbsp;|&nbsp; 11</p>
-                                <p style={{ cursor: 'pointer', margin: "1%" }}>Q&A &nbsp;|&nbsp; 16</p>
+                                <p className={styles.mainText2} style={{ color: "blue", margin: "1%" }}>답변 완료된 질문 &nbsp;|&nbsp; N</p>
+                                <p style={{ cursor: 'pointer', margin: "1%" }} onClick={() => { alert("로그인 후에 이용해주세요.") }}>Q&A &nbsp;|&nbsp; N</p>
                                 <ul className={styles.lists}>
                                     <li className={styles.listContent} onClick={() => { alert("로그인 후에 이용해주세요.") }}><span style={{ fontWeight: "bold" }}>No.07  &nbsp;</span>질문입니다.<span> &emsp;2024-04-01</span></li>
                                     <li className={styles.listContent} onClick={() => { alert("로그인 후에 이용해주세요.") }}><span style={{ fontWeight: "bold" }}>No.08  &nbsp;</span>질문입니다.<span> &emsp;2024-04-02</span></li>
@@ -216,14 +216,12 @@ function GuestPage(props) {
                     <hr className={styles.divider}></hr>
                     <div className={styles.inlineBox}>
                         <div className={styles.smallBox}>
-                            <p className={styles.mainText2} style={{ cursor: 'pointer' }}>AI 분류 모델</p>
-                            {/* <img className={styles.aiGraph} src={'/img/AIClassification.jpeg'} alt="분류 모델 그래프 예시 사진" onClick={() => openModal('/img/AIClassification.jpeg')} /> */}
-                            <p style={{ fontSize: '15px', margin: '5%' }}>로그인 후에 확인할 수 있습니다.</p>
+                            <p className={styles.mainText2} style={{ cursor: 'pointer' }} onClick={() => { alert("로그인 후에 이용해주세요.") }}>AI 분류 모델</p>
+                            <p style={{ fontSize: '15px', margin: '5%' }}>로그인 후에 확인하실 수 있습니다.</p>
                         </div>
                         <div className={styles.smallBox}>
-                            <p className={styles.mainText2} style={{ cursor: 'pointer' }}>AI 호전도 모델</p>
-                            {/* <img className={styles.aiGraph} src={'/img/AIDetection.jpeg'} alt="호전도 모델 그래프 예시 사진" onClick={() => openModal('/img/AIDetection.jpeg')} /> */}
-                            <p style={{ fontSize: '15px', margin: '5%' }}>로그인 후에 확인할 수 있습니다.</p>
+                            <p className={styles.mainText2} style={{ cursor: 'pointer' }} onClick={() => { alert("로그인 후에 이용해주세요.") }}>AI 호전도 모델</p>
+                            <p style={{ fontSize: '15px', margin: '5%' }}>로그인 후에 확인하실 수 있습니다.</p>
                         </div>
                     </div>
                 </div>
