@@ -78,60 +78,74 @@ function ManagerUpdatePage() {
         });
     };
 
-    // 수정 완료 버튼 누르면 관리자 정보 수정하는 함수
-    const onClickManagerUpdate = () => {
-        // root 계정인지 확인 또는 본인 계정
-        if (currentId === "root" || currentId === data.managerId) {
-            // 수정 사항이 있는지 확인
-            const nameRegex = /^[가-힣a-zA-Z]+$/;  // 이름에 특수 문자를 허용하지 않음
-            if (!form.managerName && !form.managerTel) {
-                alert("수정 사항이 없습니다.");
-            } else {
-                if (nameRegex.test(form.managerName)) {
-                    const requestData = {
-                        loginManagerId: currentId,
-                        managerId: data.managerId,
-                        name: form.managerName || data.name, // 수정한 부분 없으면 기존 값 불러옴
-                        tel: form.managerTel || data.tel, // 수정한 부분 없으면 기존 값 불러옴
-                    };
-                    // 수정 완료 실행 이중 확인
-                    const isConfirmed = window.confirm(`사용자 "${data.managerId}" 님의 정보를 수정하시겠습니까?`);
+ // 수정 완료 버튼 누르면 관리자 정보 수정하는 함수
+const onClickManagerUpdate = () => {
+    // root 계정인지 확인 또는 본인 계정
+    if (currentId === "root" || currentId === data.managerId) {
+        // 수정 사항이 있는지 확인
+        const nameRegex = /^[가-힣a-zA-Z]+$/;  // 이름에 특수 문자를 허용하지 않음
+        const telRegex = /^\d{11}$/;  // 전화번호 11자리
 
-                    if (isConfirmed) {
-                        // API URL 설정
-                        const apiUrl = 'http://52.79.237.164:3000/manager/update'
+        if (!form.managerName && !form.managerTel) {
+            alert("수정 사항이 없습니다.");
+            return;
+        }
 
-                        // axios를 이용하여 PUT 요청 보내기
-                        axios.put(apiUrl, requestData)
-                            .then(response => {
-                                // 요청이 성공한 경우 응답한 데이터 처리
-                                if (response.data.property === 200) { // 전송 성공 && 수정 완료
-                                    alert("수정되었습니다.");
-                                    navigate("/ManagerPage");
-                                } else if (response.data["property"] === 304) { // 전송 성공했으나 수정 불가 사유 메세지 띄우기
-                                    alert(response.data.message);
-                                    window.location.reload(); // 페이지 새로고침
-                                } else if (response.data["property"] === 1006) {
-                                    alert(response.data.message);
-                                    window.location.reload(); // 페이지 새로고침
-                                } else {
-                                    alert("다시 시도하세요.");
-                                    window.location.reload(); // 페이지 새로고침
-                                }
-                            })
-                            .catch(error => {
-                                // 요청이 실패한 경우 에러 처리
-                                console.error('전송 실패: ', error);
-                                alert('사용자 정보 수정 실패하였습니다. 관리자에게 문의하세요.');
-                            })
+        // 이름이 변경되었을 때만 유효성 검사
+        if (form.managerName && form.managerName !== data.name && !nameRegex.test(form.managerName)) {
+            alert("이름에는 한글 또는 영문자만 사용할 수 있습니다. (공백 문자 불가)");
+            window.location.reload();
+            return;
+        }
+
+        // 전화번호가 변경되었을 때만 유효성 검사
+        if (form.managerTel && form.managerTel !== data.tel && !telRegex.test(form.managerTel)) {
+            alert("전화번호는 11자리 숫자로 입력해야 합니다.");
+            window.location.reload();
+            return;
+        }
+
+        const requestData = {
+            loginManagerId: currentId,
+            managerId: data.managerId,
+            name: form.managerName || data.name, // 수정한 부분 없으면 기존 값 불러옴
+            tel: form.managerTel || data.tel, // 수정한 부분 없으면 기존 값 불러옴
+        };
+
+        // 수정 완료 실행 이중 확인
+        const isConfirmed = window.confirm(`사용자 "${data.managerId}" 님의 정보를 수정하시겠습니까?`);
+
+        if (isConfirmed) {
+            // API URL 설정
+            const apiUrl = 'http://52.79.237.164:3000/manager/update';
+
+            // axios를 이용하여 PUT 요청 보내기
+            axios.put(apiUrl, requestData)
+                .then(response => {
+                    // 요청이 성공한 경우 응답한 데이터 처리
+                    if (response.data.property === 200) { // 전송 성공 && 수정 완료
+                        alert("수정되었습니다.");
+                        navigate("/ManagerPage");
+                    } else if (response.data["property"] === 304) { // 전송 성공했으나 수정 불가 사유 메세지 띄우기
+                        alert(response.data.message);
+                        window.location.reload(); // 페이지 새로고침
+                    } else if (response.data["property"] === 1006) {
+                        alert(response.data.message);
+                        window.location.reload(); // 페이지 새로고침
+                    } else {
+                        alert("다시 시도하세요.");
+                        window.location.reload(); // 페이지 새로고침
                     }
-                } else {
-                    alert("이름에는 한글 또는 영문자만 사용할 수 있습니다. (공백 문자 불가)");
-                    window.location.reload(); // 페이지 새로고침
-                }
-            }
+                })
+                .catch(error => {
+                    // 요청이 실패한 경우 에러 처리
+                    console.error('전송 실패: ', error);
+                    alert('사용자 정보 수정 실패하였습니다. 관리자에게 문의하세요.');
+                });
         }
     }
+};
+
 
     // 삭제 버튼 누르면 관리자 삭제하는 함수
     const onClickDelete = () => {
