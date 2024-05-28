@@ -54,7 +54,7 @@ function MainPage(props) {
     }, []);
 
     useEffect(() => { // 반복 렌더링
-        if (advertisements  && advertisements.length > 1) {
+        if (advertisements && advertisements.length > 1) {
             startAutoSlide();
         }
     }, [advertisements]);
@@ -420,15 +420,19 @@ function MainPage(props) {
                                 <p className={styles.mainText2} style={{ color: "red", margin: "1%" }}>답변 대기중인 질문 &nbsp;|&nbsp; {unansweredCount}</p>
                                 <p onClick={() => navigate('/QnaManagePage')} style={{ cursor: 'pointer', margin: "1%" }}>Q&A &nbsp;|&nbsp; {qnaData.length}</p>
                                 <ul className={styles.lists}>
-                                    {qnaData.filter(qna => !qna.answer).slice(0, 5).map((qna) => (
-                                        <li className={styles.listContent} key={qna.questionId} onClick={() => navigate(`/QnaAnswerPage/${qna.questionId}`)}>
-                                            <span style={{ fontWeight: "bold" }}>No.{qna.questionId}  &nbsp;</span>
-                                            {qna.question.length > 8
-                                                ? `${qna.question.substring(0, 8)}...`
-                                                : (qna.question.includes('\n') ? qna.question.split('\n')[0] : qna.question)}
-                                            <span> &emsp;({qna.createday})</span>
-                                        </li>
-                                    ))}
+                                    {qnaData.filter(qna => !qna.answer).length > 0 ? (
+                                        qnaData.filter(qna => !qna.answer).slice(0, 5).map((qna) => (
+                                            <li className={styles.listContent} key={qna.questionId} onClick={() => navigate(`/QnaAnswerPage/${qna.questionId}`)}>
+                                                <span style={{ fontWeight: "bold" }}>No.{qna.questionId}  &nbsp;</span>
+                                                {qna.question.length > 8
+                                                    ? `${qna.question.substring(0, 8)}...`
+                                                    : (qna.question.includes('\n') ? qna.question.split('\n')[0] : qna.question)}
+                                                <span> &emsp;({qna.createday})</span>
+                                            </li>
+                                        ))
+                                    ) : (
+                                        <li className={styles.listContent} style={{fontStyle: 'italic'}}>답변 대기중인 질문이 없습니다</li>
+                                    )}
                                 </ul>
                             </div>
                         </div>
@@ -443,7 +447,9 @@ function MainPage(props) {
                                 <p className={styles.mainText2} style={{ color: "blue", margin: "1%" }}>답변 완료된 질문 &nbsp;|&nbsp; {qnaData.length - unansweredCount}</p>
                                 <p onClick={() => navigate('/QnaManagePage')} style={{ cursor: 'pointer', margin: "1%" }}>Q&A &nbsp;|&nbsp; {qnaData.length}</p>
                                 <ul className={styles.lists}>
-                                    {qnaData.filter(qna => qna.answer).slice(0, 5).map((qna) => (
+                                {qnaData.filter(qna => qna.answer).length > 0 ? (
+
+                                    qnaData.filter(qna => qna.answer).slice(0, 5).map((qna) => (
                                         <li className={styles.listContent} key={qna.questionId} onClick={() => navigate(`/QnaAnswerPage/${qna.questionId}`)}>
                                             <span style={{ fontWeight: "bold" }}>No.{qna.questionId}  &nbsp;</span>
                                             {qna.question.length > 8
@@ -451,7 +457,11 @@ function MainPage(props) {
                                                 : (qna.question.includes('\n') ? qna.question.split('\n')[0] : qna.question)}
                                             <span> &emsp;({qna.createday})</span>
                                         </li>
-                                    ))}
+                                    ))
+                                ) : (
+                                    <li className={styles.listContent} style={{fontStyle: 'italic'}}>답변 완료된 질문이 없습니다</li>
+                                )
+                                }
                                 </ul>
                             </div>
                         </div>
@@ -467,11 +477,13 @@ function MainPage(props) {
                     <div className={styles.inlineBox}>
                         <div className={styles.smallBox}>
                             <p className={styles.mainText2} onClick={() => navigate('/AIClassificationPage')} style={{ cursor: 'pointer' }}>AI 분류 모델</p>
-                            {AIGraph[0] && <img className={styles.aiGraph} src={`data:image/jpeg;base64,${AIGraph[0].photo}`} alt="분류 모델 그래프 사진" onClick={() => openModal(`data:image/jpeg;base64,${AIGraph[0].photo}`)} />}
+                            {AIGraph[0] ? <img className={styles.aiGraph} src={`data:image/jpeg;base64,${AIGraph[0].photo}`} alt="분류 모델 그래프 사진" onClick={() => openModal(`data:image/jpeg;base64,${AIGraph[0].photo}`)} />
+                            : <p> 분류 모델의 재학습 기록이 존재하지 않습니다. </p>}
                         </div>
                         <div className={styles.smallBox}>
                             <p className={styles.mainText2} onClick={() => navigate('/AIImprovementPage')} style={{ cursor: 'pointer' }}>AI 호전도 모델</p>
-                            {AIGraph[1] && <img className={styles.aiGraph} src={`data:image/jpeg;base64,${AIGraph[1].photo}`} alt="호전도 모델 그래프 사진" onClick={() => openModal(`data:image/jpeg;base64,${AIGraph[1].photo}`)} />}
+                            {AIGraph[1] ? <img className={styles.aiGraph} src={`data:image/jpeg;base64,${AIGraph[1].photo}`} alt="호전도 모델 그래프 사진" onClick={() => openModal(`data:image/jpeg;base64,${AIGraph[1].photo}`)} />
+                            : <p> 호전도 모델의 재학습 기록이 존재하지 않습니다. </p>}
                         </div>
                     </div>
                 </div>
