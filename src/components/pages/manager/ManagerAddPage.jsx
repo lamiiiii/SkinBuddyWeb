@@ -47,6 +47,7 @@ function ManagerAddPage() {
         // 정규 표현식을 사용하여 비밀번호의 유효성을 검사합니다.
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
         const nameRegex = /^[가-힣a-zA-Z]+$/;  // 이름에 특수 문자를 허용하지 않음
+        const telRegex = /^\d{11}$/;  // 전화번호 11자리
 
         if (form.newId.length < 6) {
             setButton(false);
@@ -72,6 +73,9 @@ function ManagerAddPage() {
         } else if (!form.newTel) {
             setButton(false);
             setNoticeMessage("전화번호를 입력해주세요.");
+        } else if (!telRegex.test(form.newTel)) {
+            setButton(false);
+            setNoticeMessage("전화번호는 11자리 숫자로 입력해야 합니다.");
         } else {
             setButton(true);
             setNoticeMessage("");
