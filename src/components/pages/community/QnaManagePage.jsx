@@ -85,6 +85,7 @@ function QnaManagePage() {
                         <tr>
                             <th className={styles.tableThNum}>목록</th>
                             <th className={styles.tableTh}>내용</th>
+                            <th className={styles.tableTh}>작성자</th>
                             <th className={styles.tableTh}>등록일</th>
                             <th className={styles.tableTh}>답변여부</th>
                         </tr>
@@ -93,9 +94,10 @@ function QnaManagePage() {
                         {currentItems.length > 0 ? (
                             currentItems.map((item, index) => (
                                 <tr className={styles.tableTr} key={index} onClick={() => navigate(`/QnaAnswerPage/${item.questionId}`)}>
-                                    <td className={styles.tableTdNum}>{item.questionId}</td>
+                                    <td className={styles.tableTdNum}>{firstItemIndex + index + 1}</td>
                                     {/* QnA 내용 중에서 \n으로 나눠서 \n 앞부분만 목록에 띄움 */}
                                     <td className={styles.tableTd}>{contentCut(item.question)}</td>
+                                    <td className={styles.tableTd}>{item.userId}</td>
                                     <td className={styles.tableTd}>{item.createday}</td>
                                     <td className={item.answer ? styles.tableTdB : styles.tableTdR}>{item.answer ? "답변 완료" : "답변 대기"}</td>
                                 </tr>

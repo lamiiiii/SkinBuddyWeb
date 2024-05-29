@@ -87,7 +87,7 @@ function NoticeManagePage() {
                         {currentItems.length > 0 ? (
                             currentItems.map((item, index) => (
                                 <tr className={styles.tableTr} key={index} onClick={() => navigate(`/NoticeUpdatePage/${item.noticeId}`)}>
-                                    <td className={styles.tableTdNum}>{item.noticeId}</td>
+                                    <td className={styles.tableTdNum}>{firstItemIndex + index + 1}</td>
                                     {/* 공지사항 내용 중에서 :로 나눠서 : 앞부분만 목록에 띄움 */}
                                     <td className={styles.tableTd}>{contentCut(item.content)}</td>
                                     <td className={styles.tableTd}>{item.reviceDay}</td>

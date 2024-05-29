@@ -23,7 +23,7 @@ function Navbar({ selectedPage }) {
     const handleAppDownload = () => {
         const isConfirmed = window.confirm("SkinBuddy 앱을 다운받으시겠습니까?");
         if(isConfirmed) {
-            window.location.href = "https://expo.dev/artifacts/eas/iivJ6gTL3g3FznWLahQiKC.apk";
+            window.location.href = "https://expo.dev/artifacts/eas/guCxuQxfHu3254ByABFY4B.apk";
         }
     };
 

@@ -112,8 +112,10 @@ function QnaAnswerPage() {
                 <p className={styles.mainText} onClick={() => window.location.reload()}>Q&A 상세 내용</p>
                 <div className={styles.contentBox}>
                     <div className={styles.qnaContentBox}>
-                        <p className={styles.sideText}>글 번호</p>
+                        <p className={styles.sideText}>질문 아이디</p>
                         <p className={styles.qnaText}>{data.questionId}</p>
+                        <p className={styles.miniText}>작성자</p>
+                        <p className={styles.qnaText}>{data.userId}</p>
                         <p className={styles.miniText}>내용</p>
                         <textarea className={styles.textareaBox} value={data.question}></textarea>
                     </div>

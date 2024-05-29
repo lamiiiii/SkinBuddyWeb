@@ -98,7 +98,7 @@ function UserManagePage() {
                     <tbody>
                         {currentItems.length > 0 ? currentItems.map((item, index) => (
                             <tr className={styles.tableTr} key={index} onClick={() => navigate(`/UserUpdatePage/${item.userId}`)}>
-                                <td className={styles.tableTdNum}>{index + 1}</td>
+                                <td className={styles.tableTdNum}>{firstItemIndex + index + 1}</td>
                                 <td className={styles.tableTd}>{item.nickname ? item.nickname : '정보 없음'}</td>
                                 <td className={styles.tableTd}>{item.userId ? item.userId : '정보 없음'}</td>
                                 <td className={styles.tableTd}>{item.tel ? item.tel : '정보 없음'}</td>

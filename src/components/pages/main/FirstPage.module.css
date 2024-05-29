@@ -78,16 +78,34 @@
 
 .appImage {
     /* 앱 이미지 스타일 */
+    width: calc(27%);
+    height: auto;
+    margin: 3%;
+    opacity: 0; /* 초기 상태에서 투명하게 설정 */
+    box-shadow: 2px 8px 10px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+    border-radius: 15px;
+
+}
+
+.appImage2 {
+    /* 앱 이미지 스타일 */
     width: calc(18%);
     height: auto;
     margin: 3%;
     opacity: 0; /* 초기 상태에서 투명하게 설정 */
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
-    border-radius: 40px;
+    box-shadow: 2px 8px 10px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+    border-radius: 15px;
 
 }
 
-.appImage1, .appImage2, .appImage3, .appImage4 {
+.appImage1, .appImage2 {
+    /* 각 앱 이미지 스타일 */
+    width: calc(27%);
+    height: auto;
+    margin: 3%;
+}
+
+.appImage3, .appImage4, .appImage5, .appImage6 {
     /* 각 앱 이미지 스타일 */
     width: calc(18%);
     height: auto;
