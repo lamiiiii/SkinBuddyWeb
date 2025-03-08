@@ -86,11 +86,11 @@
 ## ⚙️ 개발 환경
 
 ### Frontend Stack
-- React 18.2.0
-- axios 1.6.8
-- npm 10.9.1
-- chart.js 4.4.2
-- styled-components 6.1.8
+![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react&logoColor=white&style=for-the-badge)
+![axios](https://img.shields.io/badge/axios-1.6.8-671DDF?logo=axios&logoColor=white&style=for-the-badge)
+![npm](https://img.shields.io/badge/npm-10.9.1-CB3837?logo=npm&logoColor=white&style=for-the-badge)
+![chart.js](https://img.shields.io/badge/Chart.js-4.4.2-FF6384?logo=chartdotjs&logoColor=white&style=for-the-badge)
+![styled-components](https://img.shields.io/badge/styled--components-6.1.8-DB7093?logo=styled-components&logoColor=white&style=for-the-badge)
 
 ### Node.js 버전
 - Node.js 버전: v20.12.0
