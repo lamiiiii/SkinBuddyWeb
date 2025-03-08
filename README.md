@@ -1,4 +1,4 @@
-# SkinBuddyWeb Admin
+# SkinBuddyWeb 관리자
 
 ## 📌 서비스 개요  
 **SkinBuddy**는 AI 기술을 활용하여 사용자 맞춤형 피부 진단 및 개선 솔루션을 제공하는 미용 서비스입니다.  
